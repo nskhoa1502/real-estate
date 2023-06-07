@@ -1,8 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 
-const Button = ({ text, textColor, bgColor, Icons, order }) => {
+const Button = ({ text, textColor, bgColor, Icons, order, onClick }) => {
+  console.log("Re-render");
   return (
     <button
+      onClick={onClick}
       type="button"
       className={`py-2 px-1 ${textColor} ${bgColor} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
     >
@@ -13,4 +15,5 @@ const Button = ({ text, textColor, bgColor, Icons, order }) => {
   );
 };
 
-export default Button;
+// Only re-render when props changed
+export default memo(Button);

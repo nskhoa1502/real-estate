@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useCallback } from "react";
 import logo from "../../assets/logoWithoutBackground.png";
 import { Button } from "../../UI";
 import icons from "../../utils/icons";
+import { useNavigate } from "react-router-dom";
+import { path } from "../../utils/path";
 
 const { AiOutlinePlusCircle, BiUserPlus, BiExit, AiOutlineHeart } = icons;
 
 const Header = () => {
+  const navigate = useNavigate();
+  const loginNavigation = useCallback(() => {
+    navigate(path.LOGIN);
+  }, [navigate]);
+
   return (
     <div className="w-1100 flex items-center justify-between bg-red-200">
       <img
@@ -25,12 +32,14 @@ const Header = () => {
           textColor="text-black"
           Icons={BiUserPlus}
           order="before"
+          onClick={loginNavigation}
         />
         <Button
           text={"Đăng Ký"}
           textColor="text-black"
           Icons={BiExit}
           order="before"
+          onClick={loginNavigation}
         />
         <Button
           text={"Đăng tin mới"}

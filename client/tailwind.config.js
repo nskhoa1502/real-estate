@@ -11,6 +11,12 @@ module.exports = {
         primaryBlue: `#1266dd`,
         primaryRed: `#f73859`,
       },
+      maxWidth: {
+        600: "600px",
+      },
+      cursor: {
+        pointer: "pointer",
+      },
     },
   },
   plugins: [],

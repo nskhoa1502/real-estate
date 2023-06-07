@@ -1,12 +1,22 @@
 import React, { memo } from "react";
 
-const Button = ({ text, textColor, bgColor, Icons, order, onClick }) => {
+const Button = ({
+  text,
+  textColor,
+  bgColor,
+  Icons,
+  order,
+  onClick,
+  fullWidth,
+}) => {
   console.log("Re-render");
   return (
     <button
       onClick={onClick}
       type="button"
-      className={`py-2 px-1 ${textColor} ${bgColor} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
+      className={`py-2 px-1 ${textColor} ${bgColor} ${
+        fullWidth && "w-full"
+      } outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
     >
       {order === "before" && <span> {Icons && <Icons />}</span>}
       <span className="mx-1">{text}</span>

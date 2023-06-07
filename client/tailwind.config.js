@@ -6,6 +6,11 @@ module.exports = {
       width: {
         1100: "1100px",
       },
+      backgroundColor: {
+        primaryWhite: `#F5F5F5`,
+        primaryBlue: `#1266dd`,
+        primaryRed: `#f73859`,
+      },
     },
   },
   plugins: [],

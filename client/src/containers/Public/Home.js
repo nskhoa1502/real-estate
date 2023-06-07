@@ -1,7 +1,11 @@
 import React from "react";
-
+import Header from "./Header";
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className="w-1100 m-auto h-full border border-red-500">
+      <Header />
+    </div>
+  );
 };
 
 export default Home;

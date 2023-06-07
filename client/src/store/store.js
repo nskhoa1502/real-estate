@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import { authReducer } from "../slices/authSlice";
 import { userReducer } from "../slices/userSlice";
 import {
@@ -32,7 +33,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(thunk),
 });
 
 export const persistor = persistStore(store);

@@ -1,14 +1,28 @@
 import express from "express";
+require("dotenv").config();
+import initRoutes from "./src/routes";
+import cors from "cors";
+require("./src/config/connectDatabase");
 
 const app = express();
 
-// Error handling
-app.use("/", (err, req, res, next) => {
-  const status = err.status || 500;
-  const message = err.message || "Internal server error";
-  const stack = err.stack;
+// middlewares
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: ["POST", "GET", "PUT", "DELETE"],
+  })
+);
 
-  res.status(status).json({
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Error handling
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "Something went wrong";
+  const stack = err.stack;
+  return res.status(status).json({
     success: false,
     status: status,
     message: message,
@@ -16,6 +30,11 @@ app.use("/", (err, req, res, next) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log("App is running at port 5000");
+// initroutes
+initRoutes(app);
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+  console.log(`App is running at port ${port}`);
 });

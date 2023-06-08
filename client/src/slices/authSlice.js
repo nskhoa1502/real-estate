@@ -30,6 +30,17 @@ export const login = createAsyncThunk(
     }
   }
 );
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiLogin(payload);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -49,7 +60,7 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.error = action.payload;
-        state.message = null;
+        state.message = "Đăng nhập thất bại - Lỗi ";
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoggedIn = true;
@@ -60,10 +71,20 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
         state.message = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.isLoggedIn = false;
+        state.error = null;
+        state.message = "Đăng xuất thành công";
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.isLoggedIn = false;
+        state.error = action.payload;
+        state.message = "Đăng xuất thất bại";
       });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const {} = authSlice.actions;
 
 export default authSlice.reducer;

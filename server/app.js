@@ -17,11 +17,15 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// initroutes
+initRoutes(app);
+
 // Error handling
 app.use((err, req, res, next) => {
+  console.log("Error:", err);
   const status = err.status || 500;
   const message = err.message || "Something went wrong";
-  const stack = err.stack;
+  const stack = err.stack || "";
   return res.status(status).json({
     success: false,
     status: status,
@@ -29,9 +33,6 @@ app.use((err, req, res, next) => {
     stack: stack,
   });
 });
-
-// initroutes
-initRoutes(app);
 
 const port = process.env.PORT || 5000;
 

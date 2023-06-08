@@ -24,7 +24,7 @@ export const registerService = async ({ phone, password, name }) => {
       },
     });
 
-    // If new user is created =>
+    // If new user is created => Sign token
     const token =
       response[1] &&
       jwt.sign(
@@ -33,9 +33,38 @@ export const registerService = async ({ phone, password, name }) => {
         { expiresIn: "2d" }
       );
 
-    if (!token) return createError(500, "User already exists");
+    if (!token) return { message: "User already exists" };
     return { token: token, message: "Register succesfully" };
   } catch (err) {
     throw createError(500, "Failed at register service");
+  }
+};
+
+export const loginService = async ({ phone, password }) => {
+  try {
+    const response = await db.User.findOne({
+      where: { phone: phone },
+      raw: true,
+    });
+
+    if (!response) return { message: "User not found" };
+
+    const isValidPassword = bcrypt.compareSync(password, response.password);
+
+    if (!isValidPassword)
+      return {
+        status: 404,
+        message: "Invalid phone or password",
+      };
+
+    const token = jwt.sign(
+      { id: response.id, phone: response.phone },
+      process.env.JWT_SECRET,
+      { expiresIn: "2d" }
+    );
+
+    return { token: token, message: "Login successfully" };
+  } catch (err) {
+    throw createError(500, "Failed at Login service");
   }
 };

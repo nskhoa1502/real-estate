@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-1100 flex items-center justify-between bg-red-200">
+    <div className="w-3/5 flex items-center justify-between ">
       <Link to={"/"}>
         <img
           src={logo}

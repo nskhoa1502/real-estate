@@ -14,8 +14,8 @@ function App() {
   return (
     <div className="w-screen h-screen bg-primaryWhite">
       <Routes>
-        <Route path={path.HOME} element={<Home />}>
-          <Route path={(path = `*`)} element={<HomePage />} />
+        <Route path={path.HOME} element={<HomePage />}>
+          <Route path="*" element={<Home />} />
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.SIGNUP} element={<Login register={true} />} />
           <Route path={path.CHO_THUE_CAN_HO} element={<RentalApartment />} />

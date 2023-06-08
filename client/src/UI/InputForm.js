@@ -7,6 +7,7 @@ const InputForm = ({
   id,
   setInvalidFields,
   invalidFields,
+  isPassword,
 }) => {
   const handleChange = (e) => {
     setValue((prevState) => ({
@@ -20,7 +21,7 @@ const InputForm = ({
         {label}
       </label>
       <input
-        type="text"
+        type={isPassword ? "password" : "text"}
         id={id}
         className="outline-none bg-[#e8f0fe] p-2 rounded-sm w-full "
         value={value}

@@ -5,7 +5,7 @@ import icons from "../../utils/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { path } from "../../utils/path";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../slices/authSlice";
+import { logout, resetPopup } from "../../slices/authSlice";
 
 const { AiOutlinePlusCircle, BiUserPlus, BiExit, AiOutlineHeart } = icons;
 
@@ -17,8 +17,14 @@ const Header = () => {
   const registerNavigation = useCallback(() => {
     navigate(path.SIGNUP, { state: { register: true } });
   }, [navigate]);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, message } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    dispatch(logout());
+
+    dispatch(resetPopup());
+  };
 
   return (
     <div className="w-1100 flex items-center justify-between bg-red-200">
@@ -68,7 +74,7 @@ const Header = () => {
               textColor="text-black"
               Icons={BiUserPlus}
               order="before"
-              onClick={() => dispatch(logout())}
+              onClick={handleLogout}
             />
           </div>
         )}

@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { InputForm, Button } from "../../UI";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { login, register } from "../../slices/authSlice";
+import { login, register, resetPopup } from "../../slices/authSlice";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [isRegister, setIsRegister] = useState(location.state?.register);
   const [invalidFields, setInvalidFields] = useState([]);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, message, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     phone: "",
@@ -23,7 +24,27 @@ const Login = () => {
 
   useEffect(() => {
     isLoggedIn && navigate("/");
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
+
+  useEffect(() => {
+    error &&
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+        onClose: dispatch(resetPopup()),
+      });
+
+    message &&
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: message,
+        showConfirmButton: true,
+        timer: 2000,
+        onClose: dispatch(resetPopup()),
+      });
+  }, [error, message, dispatch]);
 
   const handleSubmit = () => {
     const { phone, password, name } = payload;
@@ -126,6 +147,7 @@ const Login = () => {
           id="password"
           setInvalidFields={setInvalidFields}
           invalidFields={invalidFields}
+          isPassword={true}
         />
 
         <Button

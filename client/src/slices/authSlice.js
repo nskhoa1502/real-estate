@@ -52,6 +52,10 @@ const authSlice = createSlice({
       state.error = null;
       state.message = "Đăng xuất thành công";
     },
+    resetPopup: (state) => {
+      state.message = null;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -62,8 +66,8 @@ const authSlice = createSlice({
         state.message = "Đăng ký thành công";
       })
       .addCase(register.rejected, (state, action) => {
-        state.error = action.payload;
-        state.message = "Đăng nhập thất bại - Lỗi ";
+        state.error = "Đăng ký thất bại";
+        state.message = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoggedIn = true;
@@ -72,7 +76,7 @@ const authSlice = createSlice({
         state.message = "Đăng nhập thành công";
       })
       .addCase(login.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = "Đăng nhập thất bại";
         state.message = null;
       });
     // .addCase(logout.fulfilled, (state) => {
@@ -88,6 +92,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, resetPopup } = authSlice.actions;
 
 export default authSlice.reducer;

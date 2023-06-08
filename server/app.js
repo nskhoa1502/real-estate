@@ -2,6 +2,7 @@ import express from "express";
 require("dotenv").config();
 import initRoutes from "./src/routes";
 import cors from "cors";
+
 require("./src/config/connectDatabase");
 
 const app = express();

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import logo from "../../assets/logoWithoutBackground.png";
 import { Button } from "../../UI";
 import icons from "../../utils/icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { path } from "../../utils/path";
 
 const { AiOutlinePlusCircle, BiUserPlus, BiExit, AiOutlineHeart } = icons;
@@ -10,16 +10,21 @@ const { AiOutlinePlusCircle, BiUserPlus, BiExit, AiOutlineHeart } = icons;
 const Header = () => {
   const navigate = useNavigate();
   const loginNavigation = useCallback(() => {
-    navigate(path.LOGIN);
+    navigate(path.LOGIN, { state: { register: false } });
+  }, [navigate]);
+  const registerNavigation = useCallback(() => {
+    navigate(path.SIGNUP, { state: { register: true } });
   }, [navigate]);
 
   return (
     <div className="w-1100 flex items-center justify-between bg-red-200">
-      <img
-        src={logo}
-        alt="logo"
-        className="w-[240px] h-[70px] object-contain"
-      />
+      <Link to={"/"}>
+        <img
+          src={logo}
+          alt="logo"
+          className="w-[240px] h-[70px] object-contain"
+        />
+      </Link>
       <div className="flex items-center text-base">
         <Button
           text={"Yêu thích"}
@@ -39,7 +44,7 @@ const Header = () => {
           textColor="text-black"
           Icons={BiExit}
           order="before"
-          onClick={loginNavigation}
+          onClick={registerNavigation}
         />
         <Button
           text={"Đăng tin mới"}

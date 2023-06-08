@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path={path.LOGIN} element={<Login />} />
+          <Route path={path.SIGNUP} element={<Login register={true} />} />
         </Route>
       </Routes>
     </div>

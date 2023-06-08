@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import logo from "../../assets/logoWithoutBackground.png";
 import { Button } from "../../UI";
-import icons from "../../utils/icons";
+import icons from "../../utils/icon/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { path } from "../../utils/path";
+import { path } from "../../utils/path/path";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, resetPopup } from "../../slices/authSlice";
 

@@ -17,7 +17,7 @@ const Header = () => {
   const registerNavigation = useCallback(() => {
     navigate(path.SIGNUP, { state: { register: true } });
   }, [navigate]);
-  const { isLoggedIn, message } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {

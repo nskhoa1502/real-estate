@@ -11,9 +11,6 @@ const hashPassword = (password) =>
 export const registerService = async ({ phone, password, name }) => {
   const hashedPassword = hashPassword(password);
   try {
-    // Find or create will return a array
-    // 1. [userData, true] ==> new user has been created
-    // 2. [userData, false] ==> user has already existed
     const response = await db.User.findOrCreate({
       where: { phone: phone },
       defaults: {
@@ -24,7 +21,6 @@ export const registerService = async ({ phone, password, name }) => {
       },
     });
 
-    // If new user is created => Sign token
     const token =
       response[1] &&
       jwt.sign(
@@ -33,8 +29,8 @@ export const registerService = async ({ phone, password, name }) => {
         { expiresIn: "2d" }
       );
 
-    if (!token) return { message: "User already exists" };
-    return { token: token, message: "Register succesfully" };
+    if (!token) return { status: 400, message: "User already exists" };
+    return { status: 200, token: token, message: "Register successfully" };
   } catch (err) {
     throw createError(500, "Failed at register service");
   }
@@ -47,13 +43,13 @@ export const loginService = async ({ phone, password }) => {
       raw: true,
     });
 
-    if (!response) return { message: "User not found" };
+    if (!response) return { status: 404, message: "Invalid phone or password" };
 
     const isValidPassword = bcrypt.compareSync(password, response.password);
 
     if (!isValidPassword)
       return {
-        status: 404,
+        status: 401,
         message: "Invalid phone or password",
       };
 
@@ -63,7 +59,7 @@ export const loginService = async ({ phone, password }) => {
       { expiresIn: "2d" }
     );
 
-    return { token: token, message: "Login successfully" };
+    return { status: 200, token: token, message: "Login successfully" };
   } catch (err) {
     throw createError(500, "Failed at Login service");
   }

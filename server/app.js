@@ -22,7 +22,7 @@ initRoutes(app);
 
 // Error handling
 app.use((err, req, res, next) => {
-  console.log("Error:", err);
+  // console.log("Error:", err);
   const status = err.status || 500;
   const message = err.message || "Something went wrong";
   const stack = err.stack || "";

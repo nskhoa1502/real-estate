@@ -1,10 +1,27 @@
-import axios from "axios";
+import axiosConfig from "../axiosConfig";
 
-// export const fetchUser = () => {
-//   return axios
-//     .get("/api/user")
-//     .then((response) => response.data)
-//     .catch((error) => {
-//       throw error;
-//     });
-// };
+export const apiRegister = async (payload) => {
+  try {
+    const response = await axiosConfig({
+      method: "post",
+      url: "/api/v1/auth/register",
+      data: payload,
+    });
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const apiLogin = async (payload) => {
+  try {
+    const response = await axiosConfig({
+      method: "post",
+      url: "/api/v1/auth/login",
+      data: payload,
+    });
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};

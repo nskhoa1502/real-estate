@@ -1,6 +1,12 @@
 import React, { memo } from "react";
 
-const InputForm = ({ label }) => {
+const InputForm = ({ label, value, setValue, id }) => {
+  const handleChange = (e) => {
+    setValue((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
   return (
     <div>
       <label htmlFor="phone" className="text-xs">
@@ -8,8 +14,10 @@ const InputForm = ({ label }) => {
       </label>
       <input
         type="text"
-        id="phone"
+        id={id}
         className="outline-none bg-[#e8f0fe] p-2 rounded-sm w-full "
+        value={value}
+        onChange={handleChange}
       />
     </div>
   );

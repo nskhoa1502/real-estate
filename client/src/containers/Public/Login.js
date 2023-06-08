@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { InputForm, Button } from "../../UI";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { login, register } from "../../slices/authSlice";
 
 const Login = () => {
@@ -9,7 +9,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isRegister, setIsRegister] = useState(location.state?.register);
   const [invalidFields, setInvalidFields] = useState([]);
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const [payload, setPayload] = useState({
     phone: "",
     password: "",
@@ -19,6 +20,10 @@ const Login = () => {
   useEffect(() => {
     setIsRegister(location.state?.register);
   }, [location.state?.register]);
+
+  useEffect(() => {
+    isLoggedIn && navigate("/");
+  }, [isLoggedIn]);
 
   const handleSubmit = () => {
     const { phone, password, name } = payload;

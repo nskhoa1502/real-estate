@@ -30,24 +30,27 @@ export const login = createAsyncThunk(
     }
   }
 );
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const response = await apiLogin(payload);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
+// export const logout = createAsyncThunk(
+//   "auth/logout",
+//   async (payload, { rejectWithValue }) => {
+//     try {
+//       const response = await apiLogin(payload);
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
-      // Handle logout action
+      state.isLoggedIn = false;
+      state.token = null;
+      state.error = null;
+      state.message = "Đăng xuất thành công";
     },
   },
   extraReducers: (builder) => {
@@ -71,20 +74,20 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
         state.message = null;
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.isLoggedIn = false;
-        state.error = null;
-        state.message = "Đăng xuất thành công";
-      })
-      .addCase(logout.rejected, (state, action) => {
-        state.isLoggedIn = false;
-        state.error = action.payload;
-        state.message = "Đăng xuất thất bại";
       });
+    // .addCase(logout.fulfilled, (state) => {
+    //   state.isLoggedIn = false;
+    //   state.error = null;
+    //   state.message = "Đăng xuất thành công";
+    // })
+    // .addCase(logout.rejected, (state, action) => {
+    //   state.isLoggedIn = false;
+    //   state.error = action.payload;
+    //   state.message = "Đăng xuất thất bại";
+    // });
   },
 });
 
-export const {} = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../../UI";
 import Item from "./Item";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPosts } from "../../../slices/postSlice";
 
 const List = () => {
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, []);
+  console.log(posts);
+
   return (
     <div className="w-full p-2 bg-white shadow-md rounded-md">
       <div className="flex justify-between items-center">
@@ -15,7 +25,21 @@ const List = () => {
         <Button bgColor={`bg-gray-200`} text={"Mới nhất"} />
       </div>
       <div className="items">
-        <Item />
+        {posts?.length > 0 &&
+          posts.map((item) => {
+            return (
+              <Item
+                key={item?.id}
+                address={item?.address}
+                attributes={item?.attributes}
+                description={item?.description}
+                star={+item?.star}
+                title={item?.title}
+                user={item?.user}
+                imagesa={item?.images}
+              />
+            );
+          })}
       </div>
     </div>
   );

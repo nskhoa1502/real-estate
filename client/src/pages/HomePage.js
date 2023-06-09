@@ -2,9 +2,8 @@ import React from "react";
 import Header from "../components/Public/HeaderContainer/Header";
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Public/HeaderContainer/Navigation";
-import { Province, ProvinceBtn, Search } from "../components/Public";
-import { location } from "../utils/constant/constant";
-import { categoryFeatured } from "../utils/constant/constant";
+import { Search } from "../components/Public";
+
 // import { Search } from "../components/Public";
 const HomePage = () => {
   return (

@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import authReducer from "../slices/authSlice";
 import userReducer from "../slices/userSlice";
+import postReducer from "../slices/postSlice";
 import {
   persistStore,
   persistReducer,
@@ -22,7 +23,11 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
-const rootReducer = combineReducers({ auth: authReducer, user: userReducer });
+const rootReducer = combineReducers({
+  auth: authReducer,
+  user: userReducer,
+  post: postReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

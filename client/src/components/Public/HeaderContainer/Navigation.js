@@ -22,7 +22,6 @@ const Navigation = () => {
       try {
         const response = await apiGetCategories();
         setcategories(response.data);
-        console.log(response.data);
         return response;
       } catch (err) {
         console.error(err);

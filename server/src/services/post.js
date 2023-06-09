@@ -20,8 +20,9 @@ export const getPostsService = async () => {
         },
       ],
     });
+    const limitedResponse = response.slice(0, 3); // Limit the response to 20 items
     return {
-      response: response,
+      response: limitedResponse,
       message: "Get posts successfully",
     };
   } catch (err) {

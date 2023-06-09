@@ -16,8 +16,18 @@ const {
   BsFillBookmarkStarFill,
 } = icons;
 
-const Item = () => {
+const Item = ({
+  imagesa,
+  address,
+  attributes,
+  description,
+  star,
+  title,
+  user,
+}) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
+
+  console.log(imagesa.image[0]);
   return (
     <div className="flex items justify-between border-t border-orange-600 p-4">
       <div className="w-2/5">
@@ -43,7 +53,7 @@ const Item = () => {
             className="w-[140px] h-[120px] object-cover"
           />
           <span className="bg-overlay-50  text-white px-2 rounded-md absolute bottom-1 left-1">
-            4 ảnh
+            {`${images.length} ảnh`}
           </span>
           <span
             className="absolute bottom-1 right-2 text-red-500 "
@@ -67,21 +77,21 @@ const Item = () => {
               <AiFillStar className="star-item" size={26} color="yellow" />
               <AiFillStar className="star-item" size={26} color="yellow" />
               <AiFillStar className="star-item" size={26} color="yellow" />
-              CHO THUÊ CĂN HỘ HOẶC VĂN PHÒNG LÀM VIỆC
+              {title}
             </div>
             <div className="w-[10%] flex justify-end">
               <BsFillBookmarkStarFill size={24} color="orange" />
             </div>
           </div>
           <div className="flex justify-between items-center mb-5">
-            <span className="font-bold text-green-600">3.3 triệu/tháng</span>
-            <span>27m2</span>
-            <span>Quận Bình tân, Hồ Chí Minh</span>
+            <span className="font-bold text-green-600">
+              {attributes?.price}
+            </span>
+            <span>{attributes?.acreage}</span>
+            <span>{address}</span>
           </div>
-          <p className="text-grey-500">
-            Giá Phòng từ 1800k (hiện vẫn còn phòng 1800k ) đến xem đảm bảo ưng
-            ý, cam kết hình đúng với thực tếPhòng mới sửa chữa 7/2022 , địa chỉ
-            48/13 Lương…
+          <p className="text-grey-500 w-full heigh-[100px] text-ellipsis overflow-hidden">
+            {description}
           </p>
           <div className="flex items-center justify-between my-5">
             <div className="flex items-center justify-between gap-2">
@@ -90,14 +100,14 @@ const Item = () => {
                 alt="avatar"
                 className="w-[30px] h-[30px] rounded-full object-cover"
               />
-              <p>Nguyễn Văn A</p>
+              <p>{user?.name}</p>
             </div>
             <div className="flex justify-between gap-3 text-sm ">
               <button
                 type="button"
                 className="text-white bg-primaryBlue rounded-md px-1 cursor-pointer "
               >
-                Gọi 12345566765
+                {`Gọi ${user?.phone}`}
               </button>
               <button
                 type="button"

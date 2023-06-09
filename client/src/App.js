@@ -16,6 +16,7 @@ function App() {
       <Routes>
         <Route path={path.HOME} element={<HomePage />}>
           <Route path="*" element={<Home />} />
+          <Route path={path.HOME__PAGE} element={<Home />} />
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.SIGNUP} element={<Login register={true} />} />
           <Route path={path.CHO_THUE_CAN_HO} element={<RentalApartment />} />

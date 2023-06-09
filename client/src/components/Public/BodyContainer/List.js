@@ -2,16 +2,15 @@ import React, { useEffect } from "react";
 import { Button } from "../../../UI";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, getPostsLimit } from "../../../slices/postSlice";
+import { getPostsLimit } from "../../../slices/postSlice";
 
 const List = () => {
   const dispatch = useDispatch();
-  const { posts, count } = useSelector((state) => state.post);
+  const { posts } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch(getPostsLimit());
   }, [dispatch]);
-  console.log(count);
 
   return (
     <div className="w-full p-2 bg-white shadow-md rounded-md px-6">

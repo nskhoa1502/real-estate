@@ -15,3 +15,16 @@ export function truncateString(str, maxLength) {
     return str.slice(0, maxLength) + "...";
   }
 }
+
+export function convertPageNumbertoArr(count, length) {
+  let max = Math.floor(count / length);
+  let arrNumber = [];
+  for (let i = 1; i <= max; i++) {
+    arrNumber.push(i);
+  }
+
+  if (arrNumber.length > 4) {
+    const filteredNumber = arrNumber.filter((number) => number < 5);
+    return filteredNumber;
+  } else return arrNumber;
+}

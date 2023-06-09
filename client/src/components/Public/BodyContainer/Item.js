@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import icons from "../../../utils/icon/icons";
 
 const images = [
@@ -8,13 +8,20 @@ const images = [
   "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/04/05/z4238505179289-b10b006898b78f297c6bc0e344571970_1680647149.jpg",
 ];
 
-const { CiSearch, AiFillStar, AiFillHeart, BsFillBookmarkStarFill } = icons;
+const {
+  CiSearch,
+  AiFillStar,
+  AiOutlineHeart,
+  AiFillHeart,
+  BsFillBookmarkStarFill,
+} = icons;
 
 const Item = () => {
+  const [isHoverHeart, setIsHoverHeart] = useState(false);
   return (
     <div className="flex items justify-between border-t border-orange-600 p-4">
       <div className="w-2/5">
-        <div className="flex flex-wrap gap-[2px]">
+        <div className="flex flex-wrap gap-[2px] relative cursor-pointer">
           <img
             src={images[0]}
             alt="previos"
@@ -35,6 +42,20 @@ const Item = () => {
             alt="previos"
             className="w-[140px] h-[120px] object-cover"
           />
+          <span className="bg-overlay-50  text-white px-2 rounded-md absolute bottom-1 left-1">
+            4 ảnh
+          </span>
+          <span
+            className="absolute bottom-1 right-2 text-red-500 "
+            onMouseEnter={() => setIsHoverHeart(true)}
+            onMouseOut={() => setIsHoverHeart(false)}
+          >
+            {isHoverHeart ? (
+              <AiFillHeart size={24} />
+            ) : (
+              <AiOutlineHeart size={24} />
+            )}
+          </span>
         </div>
       </div>
       <div className="w-3/5">

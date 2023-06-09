@@ -17,6 +17,7 @@ require("dotenv").config;
 
 // Create a function that generate a certain value based on the value input
 export const generateCode = (value) => {
+  if (!value) return null;
   let output = "";
   value = value
     .normalize("NFD")

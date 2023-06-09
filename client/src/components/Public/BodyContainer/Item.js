@@ -22,6 +22,8 @@ const Item = ({
     images.length > 0 &&
     images.filter((img, index) => indexes.some((i) => i === index));
 
+  const addressArr = address.split(",");
+
   return (
     <div className="flex items justify-between border-t border-orange-600 p-6">
       <div className="w-2/5 flex justify-center items-center">
@@ -68,12 +70,14 @@ const Item = ({
               <BsFillBookmarkStarFill size={24} color="orange" />
             </div>
           </div>
-          <div className="flex justify-between items-center mb-5">
-            <span className="font-bold text-green-600">
+          <div className="flex justify-between items-center mb-5 gap-2">
+            <span className="flex-3 font-bold text-green-600 whitespace-nowrap text-ellipsis overflow-hidden">
               {attributes?.price}
             </span>
-            <span>{attributes?.acreage}</span>
-            <span>{address}</span>
+            <span className="flex-1">{attributes?.acreage}</span>
+            <span className="flex-3 whitespace-nowrap text-ellipsis overflow-hidden">{`${
+              addressArr[addressArr.length - 2]
+            }, ${addressArr[addressArr.length - 1]}`}</span>
           </div>
           <p className="text-grey-500 w-full heigh-[50px] text-ellipsis overflow-hidden">
             {truncateString(description, 2)}

@@ -1,23 +1,14 @@
 import React, { memo, useState } from "react";
 import icons from "../../../utils/icon/icons";
+import { truncateString } from "../../../utils/helper-function/convert";
 
-const images = [
-  "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/04/05/55637145-578245875989817-2843045484099010560-n_1680647150.jpg",
-  "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/04/05/z4238505177386-575ad5f9b15a5c77ccec70b00ed0d246_1680647148.jpg",
-  "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/04/05/z4238505178565-c387b8857cfee5a095ae7fc633069100_1680647148.jpg",
-  "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/04/05/z4238505179289-b10b006898b78f297c6bc0e344571970_1680647149.jpg",
-];
+const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
+  icons;
 
-const {
-  CiSearch,
-  AiFillStar,
-  AiOutlineHeart,
-  AiFillHeart,
-  BsFillBookmarkStarFill,
-} = icons;
+const indexes = [0, 1, 2, 3];
 
 const Item = ({
-  imagesa,
+  images,
   address,
   attributes,
   description,
@@ -27,36 +18,30 @@ const Item = ({
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
 
-  console.log(imagesa.image[0]);
+  const filteredImages =
+    images.length > 0 &&
+    images.filter((img, index) => indexes.some((i) => i === index));
+
   return (
-    <div className="flex items justify-between border-t border-orange-600 p-4">
-      <div className="w-2/5">
-        <div className="flex flex-wrap gap-[2px] relative cursor-pointer">
-          <img
-            src={images[0]}
-            alt="previos"
-            className="w-[140px] h-[120px] object-cover"
-          />
-          <img
-            src={images[1]}
-            alt="previos"
-            className="w-[140px] h-[120px] object-cover"
-          />
-          <img
-            src={images[2]}
-            alt="previos"
-            className="w-[140px] h-[120px] object-cover"
-          />
-          <img
-            src={images[3]}
-            alt="previos"
-            className="w-[140px] h-[120px] object-cover"
-          />
+    <div className="flex items justify-between border-t border-orange-600 p-6">
+      <div className="w-2/5 flex justify-center items-center">
+        <div className="flex flex-wrap gap-[2px] relative cursor-pointer ">
+          {filteredImages &&
+            filteredImages?.map((image, i) => (
+              <React.Fragment key={i}>
+                <img
+                  src={image}
+                  alt={`Ảnh ${i + 1}`}
+                  className="w-[150px] h-[130px] object-cover"
+                />
+              </React.Fragment>
+            ))}
+
           <span className="bg-overlay-50  text-white px-2 rounded-md absolute bottom-1 left-1">
             {`${images.length} ảnh`}
           </span>
           <span
-            className="absolute bottom-1 right-2 text-red-500 "
+            className="absolute top-1 left-2 text-red-500 "
             onMouseEnter={() => setIsHoverHeart(true)}
             onMouseOut={() => setIsHoverHeart(false)}
           >
@@ -77,7 +62,7 @@ const Item = ({
               <AiFillStar className="star-item" size={26} color="yellow" />
               <AiFillStar className="star-item" size={26} color="yellow" />
               <AiFillStar className="star-item" size={26} color="yellow" />
-              {title}
+              <span className="text-lg font-bold text-red-500"> {title}</span>
             </div>
             <div className="w-[10%] flex justify-end">
               <BsFillBookmarkStarFill size={24} color="orange" />
@@ -90,8 +75,8 @@ const Item = ({
             <span>{attributes?.acreage}</span>
             <span>{address}</span>
           </div>
-          <p className="text-grey-500 w-full heigh-[100px] text-ellipsis overflow-hidden">
-            {description}
+          <p className="text-grey-500 w-full heigh-[50px] text-ellipsis overflow-hidden">
+            {truncateString(description, 2)}
           </p>
           <div className="flex items-center justify-between my-5">
             <div className="flex items-center justify-between gap-2">

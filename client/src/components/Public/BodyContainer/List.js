@@ -11,10 +11,9 @@ const List = () => {
   useEffect(() => {
     dispatch(getAllPosts());
   }, []);
-  console.log(posts);
 
   return (
-    <div className="w-full p-2 bg-white shadow-md rounded-md">
+    <div className="w-full p-2 bg-white shadow-md rounded-md px-6">
       <div className="flex justify-between items-center">
         <h4 className="text-xl font-semibold my-3">Danh sách tin đăng</h4>
         <span>Cập nhật: 12:05 25/08/2022</span>
@@ -32,11 +31,11 @@ const List = () => {
                 key={item?.id}
                 address={item?.address}
                 attributes={item?.attributes}
-                description={item?.description}
+                description={JSON.parse(item?.description)}
                 star={+item?.star}
                 title={item?.title}
                 user={item?.user}
-                imagesa={item?.images}
+                images={JSON.parse(item?.images?.image)}
               />
             );
           })}

@@ -9,7 +9,6 @@ const Button = ({
   onClick,
   fullWidth,
 }) => {
-  console.log("Re-render");
   return (
     <button
       onClick={onClick}

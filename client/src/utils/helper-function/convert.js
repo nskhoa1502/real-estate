@@ -7,3 +7,11 @@ export function formatVietnameseText(text) {
 
   return formatted;
 }
+
+export function truncateString(str, maxLength) {
+  if (str.length <= maxLength) {
+    return str;
+  } else {
+    return str.slice(0, maxLength) + "...";
+  }
+}

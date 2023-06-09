@@ -12,7 +12,7 @@ const { CiSearch, AiFillStar, AiFillHeart, BsFillBookmarkStarFill } = icons;
 
 const Item = () => {
   return (
-    <div className="flex items justify-between ">
+    <div className="flex items justify-between border-t border-orange-600 p-4">
       <div className="w-2/5">
         <div className="flex flex-wrap gap-[2px]">
           <img
@@ -41,20 +41,53 @@ const Item = () => {
         <div>
           <div className="flex items-start gap-4">
             <div>
-              <AiFillStar className="star-item" size={20} color="yellow" />
-              <AiFillStar className="star-item" size={20} color="yellow" />
-              <AiFillStar className="star-item" size={20} color="yellow" />
-              <AiFillStar className="star-item" size={20} color="yellow" />
-              <AiFillStar className="star-item" size={20} color="yellow" />
+              <AiFillStar className="star-item" size={26} color="yellow" />
+              <AiFillStar className="star-item" size={26} color="yellow" />
+              <AiFillStar className="star-item" size={26} color="yellow" />
+              <AiFillStar className="star-item" size={26} color="yellow" />
+              <AiFillStar className="star-item" size={26} color="yellow" />
               CHO THUÊ CĂN HỘ HOẶC VĂN PHÒNG LÀM VIỆC
             </div>
-            <div className="">
-              <BsFillBookmarkStarFill />
+            <div className="w-[10%] flex justify-end">
+              <BsFillBookmarkStarFill size={24} color="orange" />
+            </div>
+          </div>
+          <div className="flex justify-between items-center mb-5">
+            <span className="font-bold text-green-600">3.3 triệu/tháng</span>
+            <span>27m2</span>
+            <span>Quận Bình tân, Hồ Chí Minh</span>
+          </div>
+          <p className="text-grey-500">
+            Giá Phòng từ 1800k (hiện vẫn còn phòng 1800k ) đến xem đảm bảo ưng
+            ý, cam kết hình đúng với thực tếPhòng mới sửa chữa 7/2022 , địa chỉ
+            48/13 Lương…
+          </p>
+          <div className="flex items-center justify-between my-5">
+            <div className="flex items-center justify-between gap-2">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRHtC9h0KhtCIFwRj4LsiPAyFKw9vAD0gAq7w4QLf7VQ&s"
+                alt="avatar"
+                className="w-[30px] h-[30px] rounded-full object-cover"
+              />
+              <p>Nguyễn Văn A</p>
+            </div>
+            <div className="flex justify-between gap-3 text-sm ">
+              <button
+                type="button"
+                className="text-white bg-primaryBlue rounded-md px-1 cursor-pointer "
+              >
+                Gọi 12345566765
+              </button>
+              <button
+                type="button"
+                className="text-blue-700 border border-blue-700  rounded-md px-1 hover:text-white hover:bg-primaryBlue cursor-pointer"
+              >
+                Nhắn Zalo
+              </button>
             </div>
           </div>
         </div>
       </div>
-      ;
     </div>
   );
 };

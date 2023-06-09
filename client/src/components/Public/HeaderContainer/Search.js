@@ -1,6 +1,6 @@
 import React from "react";
-import { SearchItem } from "../../UI";
-import icons from "../../utils/icon/icons";
+import { SearchItem } from "../../../UI";
+import icons from "../../../utils/icon/icons";
 
 const {
   BsChevronRight,
@@ -13,7 +13,7 @@ const {
 
 const Search = () => {
   return (
-    <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-1100 my-2">
+    <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-4/5 my-2 ">
       <SearchItem
         text="Phòng trọ, nhà trọ"
         IconBefore={<LuHotel />}

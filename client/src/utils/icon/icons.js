@@ -1,6 +1,11 @@
-import { AiOutlinePlusCircle, AiOutlineHeart } from "react-icons/ai";
+import {
+  AiFillStar,
+  AiOutlinePlusCircle,
+  AiOutlineHeart,
+  AiFillHeart,
+} from "react-icons/ai";
 import { BiExit, BiUserPlus } from "react-icons/bi";
-import { BsChevronRight } from "react-icons/bs";
+import { BsChevronRight, BsFillBookmarkStarFill } from "react-icons/bs";
 import { GrLocation } from "react-icons/gr";
 import { RiCrop2Line } from "react-icons/ri";
 import { TbReportMoney } from "react-icons/tb";
@@ -18,6 +23,9 @@ const icons = {
   TbReportMoney,
   LuHotel,
   CiSearch,
+  AiFillStar,
+  AiFillHeart,
+  BsFillBookmarkStarFill,
 };
 
 export default icons;

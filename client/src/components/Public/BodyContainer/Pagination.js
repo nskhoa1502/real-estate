@@ -9,15 +9,15 @@ const { AiOutlineDoubleRight } = icons;
 const Pagination = ({ number }) => {
   const { count, posts } = useSelector((state) => state.post);
   const [arrPage, setArrPage] = useState([]);
-  const [currentPage, setCurrentPage] = useState(number);
+
+  const postPerPage = +posts?.length || 5;
+  const maxPage = Math.ceil(+count / postPerPage);
 
   useEffect(() => {
-    const tempArr = extractPageArr(+currentPage, +count, +posts?.length);
-    setArrPage(tempArr);
+    const tempArr = extractPageArr(+number, +count, +posts?.length);
     console.log(tempArr);
-  }, [number, count, posts, currentPage]);
-
-  //   console.log(+count / +posts?.length);
+    setArrPage(tempArr);
+  }, [number, count, posts]);
 
   return (
     <div className="flex items-center justify-center gap-2 py-5">
@@ -31,13 +31,13 @@ const Pagination = ({ number }) => {
           />
         ))}
 
-      {+currentPage + 3 < 80 && (
+      {+number + 3 < maxPage ? (
         <PageNumber
           number={<AiOutlineDoubleRight size={16} />}
           type="end"
-          endpage={Math.ceil(+count / +posts?.length)}
+          endpage={maxPage}
         />
-      )}
+      ) : null}
     </div>
   );
 };

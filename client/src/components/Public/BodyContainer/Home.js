@@ -15,7 +15,7 @@ const Home = () => {
       <Province id={id} title={HOME_TITLE} description={HOME_DESCRIPTION} />
       <div className="w-full flex gap-3">
         <div className="w-[70%]">
-          <List />
+          <List pageNumber={pageNumber} />
           <Pagination key={pageNumber} number={pageNumber} />
           <div className="h-[500px]"></div>
         </div>

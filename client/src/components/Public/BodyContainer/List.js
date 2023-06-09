@@ -1,19 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "../../../UI";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "../../../slices/postSlice";
 
-const List = () => {
+const List = ({ pageNumber }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
+  const listRef = useRef();
 
   useEffect(() => {
-    dispatch(getPostsLimit());
-  }, [dispatch]);
+    dispatch(getPostsLimit(+pageNumber));
+  }, [pageNumber, dispatch]);
+
+  useEffect(() => {
+    listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [posts]);
 
   return (
-    <div className="w-full p-2 bg-white shadow-md rounded-md px-6">
+    <div
+      ref={listRef}
+      className="w-full p-2 bg-white shadow-md rounded-md px-6"
+    >
       <div className="flex justify-between items-center">
         <h4 className="text-xl font-semibold my-3">Danh sách tin đăng</h4>
         <span>Cập nhật: 12:05 25/08/2022</span>

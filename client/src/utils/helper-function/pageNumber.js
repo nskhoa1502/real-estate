@@ -1,12 +1,18 @@
 export const extractPageArr = (currentPage, count, length) => {
   const initPage = 1;
-  const maxPage = Math.ceil(count / length);
+  const postPerPage = length ? length : 5;
+  const maxPage = Math.ceil(count / postPerPage);
 
   let arr = [];
-  const startPage = currentPage - 3 > 1 ? currentPage - 3 : 1;
+  let startPage = currentPage - 3 > 1 ? currentPage - 3 : 1;
 
-  const endPage = currentPage + 3 < maxPage ? currentPage + 3 : maxPage;
+  let endPage = currentPage + 3 < maxPage ? currentPage + 3 : maxPage;
 
+  if (currentPage >= maxPage) {
+    endPage = maxPage;
+    console.log(`endpage`, endPage);
+    console.log(`maxPage`, maxPage);
+  }
   for (let i = startPage; i <= endPage; i++) {
     arr.push(i);
   }
@@ -18,6 +24,7 @@ export const extractPageArr = (currentPage, count, length) => {
   if (endPage < maxPage - 1) {
     arr.push("...");
   }
+
   console.log(`Page ${currentPage}: `, arr);
   return arr;
 };

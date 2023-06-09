@@ -1,29 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PageNumber } from "../../../UI";
 import { useSelector } from "react-redux";
-import { convertPageNumbertoArr } from "../../../utils/helper-function/convert";
 import icons from "../../../utils/icon/icons";
+import { extractPageArr } from "../../../utils/helper-function/pageNumber";
 
 const { AiOutlineDoubleRight } = icons;
 
 const Pagination = ({ number }) => {
   const { count, posts } = useSelector((state) => state.post);
+  const [arrPage, setArrPage] = useState([]);
+  const [currentPage, setCurrentPage] = useState(number);
 
-  const pageNumberArr = convertPageNumbertoArr(count, posts?.length);
-  console.log(pageNumberArr);
+  useEffect(() => {
+    const tempArr = extractPageArr(+currentPage, +count, +posts?.length);
+    console.log(tempArr);
+    setArrPage(tempArr);
+  }, [number, count, posts, currentPage]);
+
+  //   const pageNumberArr = convertPageNumbertoArr(+count, +posts?.length);
+  //   console.log(pageNumberArr);
   return (
     <div className="flex items-center justify-center gap-2 py-5">
-      {pageNumberArr?.length > 0 &&
-        pageNumberArr?.map((pageNumber) => (
-          <PageNumber
-            key={pageNumber}
-            number={pageNumber}
-            currentPage={number}
-          />
+      {arrPage?.length > 0 &&
+        arrPage?.map((pageNumber, index) => (
+          <PageNumber key={index} number={pageNumber} currentPage={number} />
         ))}
 
-      <PageNumber number={"..."} />
-      <PageNumber number={<AiOutlineDoubleRight size={16} />} />
+      {+currentPage + 3 < 80 && (
+        <PageNumber number={<AiOutlineDoubleRight size={16} type="end" />} />
+      )}
     </div>
   );
 };

@@ -18,7 +18,6 @@ export const apiGetPostsLimit = async (page) => {
       method: "get",
       url: `/api/v1/post/limit?page=${page || 1}`,
     });
-    console.log(response.data);
     return response.data;
   } catch (err) {
     throw err;

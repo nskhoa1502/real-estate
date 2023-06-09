@@ -13,21 +13,30 @@ const Pagination = ({ number }) => {
 
   useEffect(() => {
     const tempArr = extractPageArr(+currentPage, +count, +posts?.length);
-    console.log(tempArr);
     setArrPage(tempArr);
+    console.log(tempArr);
   }, [number, count, posts, currentPage]);
 
-  //   const pageNumberArr = convertPageNumbertoArr(+count, +posts?.length);
-  //   console.log(pageNumberArr);
+  //   console.log(+count / +posts?.length);
+
   return (
     <div className="flex items-center justify-center gap-2 py-5">
       {arrPage?.length > 0 &&
         arrPage?.map((pageNumber, index) => (
-          <PageNumber key={index} number={pageNumber} currentPage={number} />
+          <PageNumber
+            key={index}
+            number={pageNumber}
+            currentPage={number}
+            rangeStart={1}
+          />
         ))}
 
       {+currentPage + 3 < 80 && (
-        <PageNumber number={<AiOutlineDoubleRight size={16} type="end" />} />
+        <PageNumber
+          number={<AiOutlineDoubleRight size={16} />}
+          type="end"
+          endpage={Math.ceil(+count / +posts?.length)}
+        />
       )}
     </div>
   );

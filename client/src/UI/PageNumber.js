@@ -5,25 +5,44 @@ const notActive = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 
 
 const active = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 bg-[#e13427]  text-white rounded-md cursor-pointer`;
 
-const PageNumber = ({ number, currentPage }) => {
+const PageNumber = ({ number, currentPage, type, endpage }) => {
   const navigate = useNavigate();
 
   const handleChangePage = () => {
-    navigate({
-      pathname: "/",
-      search: createSearchParams({
-        page: number,
-      }).toString(),
-    });
+    if (typeof number === "number") {
+      navigate({
+        pathname: "/",
+        search: createSearchParams({
+          page: number,
+        }).toString(),
+      });
+    }
+    if (type === "end") {
+      navigate({
+        pathname: "/",
+        search: createSearchParams({
+          page: endpage,
+        }).toString(),
+      });
+    }
   };
-  return (
-    <div
-      className={+number === +currentPage ? active : notActive}
-      onClick={handleChangePage}
-    >
-      {number}
-    </div>
-  );
+
+  if (typeof number === "number") {
+    return (
+      <div
+        className={+number === +currentPage ? active : notActive}
+        onClick={handleChangePage}
+      >
+        {number}
+      </div>
+    );
+  } else {
+    return (
+      <div className={notActive} onClick={handleChangePage}>
+        {number}
+      </div>
+    );
+  }
 };
 
 export default memo(PageNumber);

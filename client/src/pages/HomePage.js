@@ -12,7 +12,6 @@ const HomePage = () => {
       <Navigation />
       <Search />
 
-      {/* <Search /> */}
       <div className="w-4/5 flex flex-col items-start justify-start">
         <Outlet />
       </div>

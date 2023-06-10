@@ -3,7 +3,6 @@ import thunk from "redux-thunk";
 import authReducer from "../slices/authSlice";
 import userReducer from "../slices/userSlice";
 import postReducer from "../slices/postSlice";
-import categoryReducer from "../slices/categorySlice";
 import appReducer from "../slices/appSlice";
 import {
   persistStore,
@@ -30,7 +29,6 @@ const rootReducer = combineReducers({
   user: userReducer,
   post: postReducer,
   app: appReducer,
-  category: categoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

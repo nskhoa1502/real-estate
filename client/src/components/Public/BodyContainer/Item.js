@@ -11,6 +11,8 @@ const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
 
 const indexes = [0, 1, 2, 3];
 
+
+// ===========================
 const Item = ({
   images,
   address,

@@ -33,9 +33,10 @@ export const getPostsService = async () => {
 
 export const getPostsLimitService = async (page) => {
   try {
+    const offset = page === 1 ? 0 : page - 1;
     const response = await db.Post.findAndCountAll({
       raw: true,
-      offset: page * +process.env.LIMIT || 0,
+      offset: offset * +process.env.LIMIT || 0,
       limit: +process.env.LIMIT,
 
       attributes: [`id`, `title`, `star`, `address`, `description`],

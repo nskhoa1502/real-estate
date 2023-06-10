@@ -15,7 +15,6 @@ const Pagination = ({ number }) => {
 
   useEffect(() => {
     const tempArr = extractPageArr(+number, +count, +posts?.length);
-    console.log(tempArr);
     setArrPage(tempArr);
   }, [number, count, posts]);
 

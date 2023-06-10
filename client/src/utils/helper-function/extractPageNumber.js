@@ -10,8 +10,8 @@ export const extractPageArr = (currentPage, count, length) => {
 
   if (currentPage >= maxPage) {
     endPage = maxPage;
-    console.log(`endpage`, endPage);
-    console.log(`maxPage`, maxPage);
+    // console.log(`endpage`, endPage);
+    // console.log(`maxPage`, maxPage);
   }
   for (let i = startPage; i <= endPage; i++) {
     arr.push(i);

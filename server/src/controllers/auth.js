@@ -2,7 +2,7 @@ import { createError } from "../helpers/error.js";
 import * as authService from "../services/auth";
 
 export const register = async (req, res, next) => {
-  console.log("Gọi route ở register");
+  // console.log("Gọi route ở register");
   const { name, phone, password } = req.body;
   try {
     if (!name || !phone || !password)
@@ -17,7 +17,7 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  console.log("Gọi route ở Login");
+  // console.log("Gọi route ở Login");
   const { phone, password } = req.body;
   console.log(phone, password);
   try {

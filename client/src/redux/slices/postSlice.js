@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { apiGetPostsLimit } from "../services/postService";
+import { apiGetPostsLimit } from "../../services/postService";
 
 const initialState = {
   posts: [],

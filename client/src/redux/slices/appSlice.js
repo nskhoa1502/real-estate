@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { apiGetPrices, apiGetAreas } from "../services/appService";
+import { apiGetPrices, apiGetAreas } from "../../services/appService";
 
 const initialState = {
   prices: [],

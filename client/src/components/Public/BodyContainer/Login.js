@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { InputForm, Button } from "../../../UI";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { login, register, resetPopup } from "../../../slices/authSlice";
+import { login, register, resetPopup } from "../../../redux/slices/authSlice";
 import Swal from "sweetalert2";
 
 const Login = () => {

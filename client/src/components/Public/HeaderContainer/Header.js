@@ -5,7 +5,7 @@ import icons from "../../../utils/icon/icons";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { path } from "../../../utils/path/path";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, resetPopup } from "../../../slices/authSlice";
+import { logout, resetPopup } from "../../../redux/slices/authSlice";
 
 const { AiOutlinePlusCircle, BiUserPlus, BiExit, AiOutlineHeart } = icons;
 

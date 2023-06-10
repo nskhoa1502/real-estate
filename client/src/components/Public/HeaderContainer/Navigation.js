@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { formatVietnameseText } from "../../../utils/helper-function/convert";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../../slices/categorySlice";
+import { getCategories } from "../../../redux/slices/categorySlice";
 // const nav = [
 //   { name: "Trang Chủ", path: "/" },
 //   { name: "Cho thuê phòng trọ", path: "/cho-thue-phong-tro" },

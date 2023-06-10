@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "../../../UI";
 import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostsLimit } from "../../../slices/postSlice";
+import { getPostsLimit } from "../../../redux/slices/postSlice";
 
 const List = ({ pageNumber }) => {
   const dispatch = useDispatch();

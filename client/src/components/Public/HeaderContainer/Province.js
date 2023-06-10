@@ -4,7 +4,7 @@ import ProvinceBtn from "./ProvinceBtn";
 
 const Province = ({ title, description }) => {
   return (
-    <div className="w-1100 ">
+    <div className="w-full ">
       <div className="mb-5 font">
         <h1 className="text-[28px] font-bold">{title}</h1>
         <p className="text-md text-gray-700">{description}</p>

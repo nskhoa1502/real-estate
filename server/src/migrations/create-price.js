@@ -14,9 +14,7 @@ module.exports = {
       value: {
         type: Sequelize.STRING,
       },
-      productId: {
-        type: Sequelize.STRING,
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

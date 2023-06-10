@@ -11,3 +11,13 @@ export const insert = async (req, res, next) => {
     next(err);
   }
 };
+export const insertOne = async (req, res, next) => {
+  try {
+    const response = await insertService.insertOneService();
+    console.log(response);
+
+    return res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+};

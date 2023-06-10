@@ -7,19 +7,19 @@ import { getPostsLimit } from "../../../slices/postSlice";
 const List = ({ pageNumber }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
-  const listRef = useRef();
+  // const listRef = useRef();
 
   useEffect(() => {
     dispatch(getPostsLimit(+pageNumber));
   }, [pageNumber, dispatch]);
 
-  useEffect(() => {
-    listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [posts]);
+  // useEffect(() => {
+  //   listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  // }, [posts]);
 
   return (
     <div
-      ref={listRef}
+      // ref={listRef}
       className="w-full p-2 bg-white shadow-md rounded-md px-6"
     >
       <div className="flex justify-between items-center">

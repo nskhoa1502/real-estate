@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import logo from "../../../assets/logoWithoutBackground.png";
 import { Button } from "../../../UI";
 import icons from "../../../utils/icon/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { path } from "../../../utils/path/path";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, resetPopup } from "../../../slices/authSlice";
@@ -17,8 +17,16 @@ const Header = () => {
   const registerNavigation = useCallback(() => {
     navigate(path.SIGNUP, { state: { register: true } });
   }, [navigate]);
+  const headerRef = useRef();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [searchParam] = useSearchParams();
+
+  const currentPage = searchParam.get("page");
+
+  useEffect(() => {
+    headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [currentPage]);
 
   const handleLogout = async () => {
     dispatch(logout());
@@ -27,7 +35,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-4/5 flex items-center justify-between ">
+    <div ref={headerRef} className="w-4/5 flex items-center justify-between ">
       <Link to={"/"}>
         <img
           src={logo}

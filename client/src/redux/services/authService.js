@@ -1,4 +1,4 @@
-import axiosConfig from "../axiosConfig";
+import axiosConfig from "../../axiosConfig";
 
 export const apiRegister = async (payload) => {
   try {

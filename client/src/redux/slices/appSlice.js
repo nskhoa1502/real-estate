@@ -3,7 +3,7 @@ import {
   apiGetPrices,
   apiGetAreas,
   apiGetCategories,
-} from "../../services/appService";
+} from "../services/appService";
 
 const initialState = {
   prices: [],

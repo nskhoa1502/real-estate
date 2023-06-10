@@ -10,10 +10,14 @@ export const getPosts = async (req, res, next) => {
   }
 };
 export const getPostsLimit = async (req, res, next) => {
-  const page = +req.query.page || 0;
+  const { page, ...query } = req.query;
+  const pageNumber = +page || 0;
 
   try {
-    const { response, message } = await service.getPostsLimitService(page);
+    const { response, message } = await service.getPostsLimitService(
+      pageNumber,
+      query
+    );
     console.log(message);
     return res.status(200).json(response);
   } catch (err) {

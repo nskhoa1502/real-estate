@@ -31,12 +31,14 @@ export const getPostsService = async () => {
   }
 };
 
-export const getPostsLimitService = async (page) => {
+export const getPostsLimitService = async (pageNumber, query) => {
   try {
-    const offset = page === 1 ? 0 : page - 1;
+    const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
+    // console.log(query);
 
     const response = await db.Post.findAndCountAll({
+      where: query,
       raw: true,
       attributes: ["id", "title", "star", "address", "description"],
       nest: true,

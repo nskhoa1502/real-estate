@@ -13,6 +13,9 @@ const Home = () => {
   const { prices, areas } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
+  console.log(prices, areas);
+  console.log(params);
+
   // console.log(areas);
   useEffect(() => {
     dispatch(getPrices());
@@ -41,11 +44,13 @@ const Home = () => {
             isDouble={true}
             content={prices}
             title={`Xem theo giá`}
+            type="priceCode"
           />
           <ItemSidebar
             isDouble={true}
             content={areas}
             title={`Xem theo diện tích`}
+            type="areaCode"
           />
         </div>
       </div>

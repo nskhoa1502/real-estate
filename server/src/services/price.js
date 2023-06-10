@@ -13,3 +13,6 @@ export const getPricesService = async () => {
     throw err;
   }
 };
+
+
+// GET price via condition

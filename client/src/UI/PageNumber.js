@@ -5,7 +5,7 @@ const notActive = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 
 
 const active = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 bg-[#e13427]  text-white rounded-md cursor-pointer`;
 
-const PageNumber = ({ number, currentPage, type, endpage }) => {
+const PageNumber = ({ number, currentPage, type, endpage,filter }) => {
   const navigate = useNavigate();
 
   const handleChangePage = () => {
@@ -14,6 +14,7 @@ const PageNumber = ({ number, currentPage, type, endpage }) => {
         pathname: "/",
         search: createSearchParams({
           page: number,
+          
         }).toString(),
       });
     }

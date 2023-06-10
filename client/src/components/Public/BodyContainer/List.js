@@ -3,15 +3,20 @@ import { Button } from "../../../UI";
 import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "../../../redux/slices/postSlice";
+import { useSearchParams } from "react-router-dom";
 
 const List = ({ pageNumber }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
+  const [searchParams] = useSearchParams();
   // const listRef = useRef();
 
+  let page = searchParams.get("page");
+  console.log(page);
+
   useEffect(() => {
-    dispatch(getPostsLimit(+pageNumber));
-  }, [pageNumber, dispatch]);
+    dispatch(getPostsLimit({ page: +pageNumber, priceCode: "3T7KT" }));
+  }, [pageNumber, dispatch, searchParams]);
 
   // useEffect(() => {
   //   listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });

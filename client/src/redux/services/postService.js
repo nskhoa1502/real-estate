@@ -12,12 +12,14 @@ import axiosConfig from "../../axiosConfig";
 //     throw err;
 //   }
 // };
-export const apiGetPostsLimit = async (page) => {
+export const apiGetPostsLimit = async (query) => {
   try {
     const response = await axiosConfig({
       method: "get",
-      url: `/api/v1/post/limit?page=${page || 1}`,
+      url: `/api/v1/post/limit`,
+      params: query,
     });
+    // console.log(query);
     // console.log(response.data);
     return response.data;
   } catch (err) {

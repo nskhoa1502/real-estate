@@ -34,12 +34,11 @@ export const getPostsService = async () => {
 export const getPostsLimitService = async (page) => {
   try {
     const offset = page === 1 ? 0 : page - 1;
+    const limit = +process.env.LIMIT;
+
     const response = await db.Post.findAndCountAll({
       raw: true,
-      offset: offset * +process.env.LIMIT || 0,
-      limit: +process.env.LIMIT,
-
-      attributes: [`id`, `title`, `star`, `address`, `description`],
+      attributes: ["id", "title", "star", "address", "description"],
       nest: true,
       include: [
         { model: db.Image, as: "images", attributes: ["image"] },
@@ -54,10 +53,13 @@ export const getPostsLimitService = async (page) => {
           attributes: ["name", "zalo", "phone"],
         },
       ],
+      order: [["star", "DESC"]], // Sort by star property in descending order
+      offset: offset * limit,
+      limit: limit,
     });
-    // const limitedResponse = response.slice(0, 10); // Limit the response to 20 items
+
     return {
-      response: response,
+      response: response.rows,
       message: "Get posts successfully",
     };
   } catch (err) {

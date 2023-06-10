@@ -8,7 +8,7 @@ import chothuephongtro from "../data/cho-thue-phong-tro.json";
 import chothuecanho from "../data/cho-thue-can-ho.json";
 import chothuematbang from "../data/cho-thue-mat-bang.json";
 import { generateCode } from "../utils/generateCode";
-import { categories } from "../constant/constant";
+import { categories } from "../utils/constant/constant";
 import { dataPrice, dataArea } from "../utils/data";
 import { extractArea, extractPrice } from "../utils/common";
 

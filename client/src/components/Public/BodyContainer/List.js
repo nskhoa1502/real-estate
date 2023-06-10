@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button } from "../../../UI";
-import Item from "./Item";
+import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "../../../slices/postSlice";
 

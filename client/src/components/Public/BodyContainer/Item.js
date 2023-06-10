@@ -4,7 +4,7 @@ import {
   formatVietnameseText,
   truncateString,
 } from "../../../utils/helper-function/convert";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
   icons;
@@ -22,7 +22,6 @@ const Item = ({
   id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
-  const navigate = useNavigate();
 
   const filteredImages =
     images.length > 0 &&

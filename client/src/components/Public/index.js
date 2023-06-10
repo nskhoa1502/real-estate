@@ -8,3 +8,4 @@ export { default as Province } from "./HeaderContainer/Province";
 export { default as List } from "./BodyContainer/List";
 export { default as Item } from "./BodyContainer/Item";
 export { default as Pagination } from "./BodyContainer/Pagination";
+export { default as ItemSidebar } from "./SidebarContainer/ItemSidebar";

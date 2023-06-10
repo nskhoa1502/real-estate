@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { apiGetCategories } from "../../../services/categoryService";
 import { formatVietnameseText } from "../../../utils/helper-function/convert";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../../slices/categorySlice";
 
 // const nav = [
 //   { name: "Trang Chủ", path: "/" },
@@ -16,19 +17,12 @@ const active =
   "hover:bg-primaryRed px-4 bg-primaryRed inline-block h-full flex items-center justify-center";
 
 const Navigation = () => {
-  const [categories, setcategories] = useState([]);
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
+  console.log(categories);
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await apiGetCategories();
-        setcategories(response.data);
-        return response;
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchCategories();
-  }, []);
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <div className="w-full h-[40px] bg-primaryBlue text-white flex justify-center items-center">

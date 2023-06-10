@@ -5,7 +5,7 @@ export const getPricesService = async () => {
   try {
     const response = await db.Price.findAll({
       raw: true,
-      attributes: [`code`, `value`],
+      attributes: [`code`, `value`, `order`],
     });
 
     return { response: response, message: "Fetch prices success" };

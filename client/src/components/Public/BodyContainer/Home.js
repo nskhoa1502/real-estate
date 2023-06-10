@@ -3,20 +3,22 @@ import { categoryFeatured } from "../../../utils/constant/constant";
 import { useSearchParams } from "react-router-dom";
 import { ItemSidebar, Province, List, Pagination } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import { getPrices } from "../../../slices/appSlice";
+import { getAreas, getPrices } from "../../../slices/appSlice";
+import { getCategories } from "../../../slices/categorySlice";
 
 const Home = () => {
   const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured[0];
   const [params] = useSearchParams();
   const pageNumber = params.get("page") || 1;
   const { categories } = useSelector((state) => state.category);
-  const { prices } = useSelector((state) => state.app);
+  const { prices, areas } = useSelector((state) => state.app);
   const dispatch = useDispatch();
-  // console.log(categories);
-  // console.log(prices);
 
+  // console.log(areas);
   useEffect(() => {
     dispatch(getPrices());
+    dispatch(getAreas());
+    dispatch(getCategories());
   }, []);
 
   return (
@@ -30,8 +32,16 @@ const Home = () => {
         </div>
         <div className="w-[30%] border border-green-600 flex flex-col gap-4 justify-start items-center">
           <ItemSidebar content={categories} title={`Danh sách cho thuê`} />
-          <ItemSidebar content={prices} title={`Xem theo giá`} />
-          <ItemSidebar content={categories} title={`Xem theo diện tích`} />
+          <ItemSidebar
+            isDouble={true}
+            content={prices}
+            title={`Xem theo giá`}
+          />
+          <ItemSidebar
+            isDouble={true}
+            content={areas}
+            title={`Xem theo diện tích`}
+          />
         </div>
       </div>
     </div>

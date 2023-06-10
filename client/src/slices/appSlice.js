@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { apiGetPrices } from "../services/appService";
+import { apiGetPrices, apiGetAreas } from "../services/appService";
 
 const initialState = {
   prices: [],
+  areas: [],
   message: "",
 };
 
@@ -12,7 +13,20 @@ export const getPrices = createAsyncThunk(
     try {
       const response = await apiGetPrices(payload);
       // console.log(response);
-      return response.data;
+      return response.data.sort((a, b) => +a.order - +b.order);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getAreas = createAsyncThunk(
+  "area/all",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiGetAreas(payload);
+      // console.log(response);
+      return response.data.sort((a, b) => +a.order - +b.order);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -25,13 +39,13 @@ const appSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getPrices.fulfilled, (state, action) => {
-        state.prices = action.payload;
-        state.message = "Get prices successfully";
+      .addCase(getAreas.fulfilled, (state, action) => {
+        state.areas = action.payload;
+        state.message = "Get areas successfully";
       })
-      .addCase(getPrices.rejected, (state, action) => {
-        state.prices = [];
-        state.message = "Get prices failed";
+      .addCase(getAreas.rejected, (state, action) => {
+        state.areas = [];
+        state.message = "Get areas failed";
       });
   },
 });

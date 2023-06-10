@@ -25,6 +25,6 @@ export const extractPageArr = (currentPage, count, length) => {
     arr.push("...");
   }
 
-  console.log(`Page ${currentPage}: `, arr);
+  // console.log(`Page ${currentPage}: `, arr);
   return arr;
 };

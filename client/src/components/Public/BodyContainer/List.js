@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../../UI";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,6 +37,7 @@ const List = ({ pageNumber }) => {
             return (
               <Item
                 key={item?.id}
+                id={item?.id}
                 address={item?.address}
                 attributes={item?.attributes}
                 description={JSON.parse(item?.description)}

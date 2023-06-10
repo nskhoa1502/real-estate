@@ -3,6 +3,7 @@ import { path } from "./utils/path/path";
 import { Home, Login } from "./components/Public";
 
 import {
+  DetailPage,
   HomePage,
   RentalApartment,
   RentalHouse,
@@ -23,6 +24,7 @@ function App() {
           <Route path={path.CHO_THUE_MAT_BANG} element={<RentalSpace />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<RentalRoom />} />
           <Route path={path.NHA_CHO_THUE} element={<RentalHouse />} />
+          <Route path={path.CHI_TIET__TITLE__POSTID} element={<DetailPage />} />
         </Route>
       </Routes>
     </div>

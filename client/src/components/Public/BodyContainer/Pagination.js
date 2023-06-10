@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PageNumber } from "../../../UI";
 import { useSelector } from "react-redux";
 import icons from "../../../utils/icon/icons";
-import { extractPageArr } from "../../../utils/helper-function/pageNumber";
+import { extractPageArr } from "../../../utils/helper-function/extractPageNumber";
 
 const { AiOutlineDoubleRight } = icons;
 

@@ -1,9 +1,12 @@
 export function formatVietnameseText(text) {
-  // Normalised the character
+  // Normalise the characters and remove diacritics
   const normalized = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+  // Replace forward slashes ("/") with hyphens ("-")
+  const replaced = normalized.replace(/\//g, "-");
+
   // Convert to lowercase and replace spaces with hyphens
-  const formatted = normalized.toLowerCase().replace(/\s+/g, "-");
+  const formatted = replaced.toLowerCase().replace(/\s+/g, "-");
 
   return formatted;
 }

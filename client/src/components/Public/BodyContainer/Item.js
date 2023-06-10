@@ -1,6 +1,10 @@
 import React, { memo, useState } from "react";
 import icons from "../../../utils/icon/icons";
-import { truncateString } from "../../../utils/helper-function/convert";
+import {
+  formatVietnameseText,
+  truncateString,
+} from "../../../utils/helper-function/convert";
+import { useNavigate, Link } from "react-router-dom";
 
 const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
   icons;
@@ -15,8 +19,10 @@ const Item = ({
   star,
   title,
   user,
+  id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
+  const navigate = useNavigate();
 
   const filteredImages =
     images.length > 0 &&
@@ -24,9 +30,21 @@ const Item = ({
 
   const addressArr = address.split(",");
 
+  const handleStar = (star) => {
+    let stars = [];
+    for (let i = 1; i <= +star; i++) {
+      stars.push(<AiFillStar className="star-item" size={26} color="yellow" />);
+    }
+
+    return stars;
+  };
+
   return (
     <div className="flex items justify-between border-t border-orange-600 p-6">
-      <div className="w-2/5 flex justify-center items-center">
+      <Link
+        to={`chi-tiet/${formatVietnameseText(title)}/${id}`}
+        className="w-2/5 flex justify-center items-center"
+      >
         <div className="flex flex-wrap gap-[2px] relative cursor-pointer ">
           {filteredImages &&
             filteredImages?.map((image, i) => (
@@ -54,16 +72,15 @@ const Item = ({
             )}
           </span>
         </div>
-      </div>
+      </Link>
       <div className="w-3/5">
         <div>
           <div className="flex items-start gap-4">
             <div>
-              <AiFillStar className="star-item" size={26} color="yellow" />
-              <AiFillStar className="star-item" size={26} color="yellow" />
-              <AiFillStar className="star-item" size={26} color="yellow" />
-              <AiFillStar className="star-item" size={26} color="yellow" />
-              <AiFillStar className="star-item" size={26} color="yellow" />
+              {handleStar(+star)?.length > 0 &&
+                handleStar(+star).map((star, number) => {
+                  return <React.Fragment key={number}>{star}</React.Fragment>;
+                })}
               <span className="text-lg font-bold text-red-500"> {title}</span>
             </div>
             <div className="w-[10%] flex justify-end">

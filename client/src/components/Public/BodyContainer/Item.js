@@ -96,7 +96,7 @@ const Item = ({
             }, ${addressArr[addressArr.length - 1]}`}</span>
           </div>
           <p className="text-grey-500 w-full heigh-[50px] text-ellipsis overflow-hidden">
-            {truncateString(description, 2)}
+            {truncateString(description, 2) || null}
           </p>
           <div className="flex items-center justify-between my-5">
             <div className="flex items-center justify-between gap-2">

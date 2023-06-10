@@ -2,6 +2,17 @@ import express from "express";
 require("dotenv").config();
 import initRoutes from "./src/routes";
 import cors from "cors";
+// import { dataPrice } from "./src/utils/data";
+// import { dataArea } from "./src/utils/data";
+import { getNumberFromString } from "./src/utils/common";
+import chothuephongtro from "./src/data/cho-thue-can-ho.json";
+
+// console.log(chothuephongtro[1]);
+
+// console.log(getNumberFromString(`123123hdfasdfa`));
+
+// console.log(dataPrice);
+// console.log(dataArea);
 
 require("./src/config/connectDatabase");
 

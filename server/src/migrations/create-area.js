@@ -6,6 +6,10 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+      },
+      order: {
         type: Sequelize.STRING,
       },
       code: {

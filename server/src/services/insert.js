@@ -225,18 +225,18 @@ export const insertOneService = async () => {
 
 export const createPricesAndAreas = () => {
   try {
-    dataPrice.forEach(async (item) => {
+    dataPrice.forEach(async (item, index) => {
       await db.Price.create({
-        id: uuidv4(),
         code: item.code,
         value: item.value,
+        order: index + 1,
       });
     });
-    dataArea.forEach(async (item) => {
+    dataArea.forEach(async (item, index) => {
       await db.Area.create({
-        id: uuidv4(),
         code: item.code,
         value: item.value,
+        order: index + 1,
       });
     });
 

@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { formatVietnameseText } from "../../../utils/helper-function/convert";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../slices/categorySlice";
-
 // const nav = [
 //   { name: "Trang Chủ", path: "/" },
 //   { name: "Cho thuê phòng trọ", path: "/cho-thue-phong-tro" },
@@ -19,7 +18,7 @@ const active =
 const Navigation = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  console.log(categories);
+  // console.log(categories);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);

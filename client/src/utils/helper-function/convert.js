@@ -31,3 +31,17 @@ export function convertPageNumbertoArr(count, length) {
     return filteredNumber;
   } else return arrNumber;
 }
+
+export const formatContent = (content) => {
+  const oddEl = content?.filter((item, index) => index % 2 !== 0);
+  const evenEl = content?.filter((item, index) => index % 2 === 0);
+
+  const formatCont = evenEl?.map((item, index) => {
+    return {
+      left: item,
+      right: oddEl?.map((item2, index2) => item2)[index],
+    };
+  });
+
+  return formatCont;
+};

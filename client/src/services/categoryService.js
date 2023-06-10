@@ -6,6 +6,7 @@ export const apiGetCategories = async (payload) => {
       method: "get",
       url: "/api/v1/category/all",
     });
+    // console.log(response);
     return response;
   } catch (err) {
     throw err;

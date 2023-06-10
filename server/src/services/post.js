@@ -59,7 +59,7 @@ export const getPostsLimitService = async (page) => {
     });
 
     return {
-      response: response.rows,
+      response: response,
       message: "Get posts successfully",
     };
   } catch (err) {

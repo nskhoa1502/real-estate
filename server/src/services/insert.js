@@ -222,3 +222,26 @@ export const insertOneService = async () => {
     throw err;
   }
 };
+
+export const createPricesAndAreas = () => {
+  try {
+    dataPrice.forEach(async (item) => {
+      await db.Price.create({
+        id: uuidv4(),
+        code: item.code,
+        value: item.value,
+      });
+    });
+    dataArea.forEach(async (item) => {
+      await db.Area.create({
+        id: uuidv4(),
+        code: item.code,
+        value: item.value,
+      });
+    });
+
+    return "Insert price successfull";
+  } catch (err) {
+    throw err;
+  }
+};

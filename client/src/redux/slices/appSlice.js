@@ -98,7 +98,7 @@ const appSlice = createSlice({
         state.message = "Get categories failed";
       })
       .addCase(getProvinces.fulfilled, (state, action) => {
-        state.provinces = action.payload;
+        state.provinces = action.payload.response;
         state.message = "Get provinces successfully";
       })
       .addCase(getProvinces.rejected, (state, action) => {

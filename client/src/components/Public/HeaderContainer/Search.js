@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SearchItem } from "../../../UI";
 import icons from "../../../utils/icon/icons";
 import SearchModal from "../../../UI/SearchModal";
+import { useSelector } from "react-redux";
 
 const {
   BsChevronRight,
@@ -14,16 +15,21 @@ const {
 
 const Search = () => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const [content, setContent] = useState(false);
+  const [content, setContent] = useState([]);
+  const [name, setName] = useState("");
+  const { provinces, areas, prices, categories } = useSelector(
+    (state) => state.app
+  );
 
-  const handleShowModal = (content) => {
-    setIsShowModal(true);
+  const handleShowModal = (content, name) => {
     setContent(content);
+    setName(name);
+    setIsShowModal(true);
   };
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
       <span
-        onClick={() => handleShowModal("Phòng trọ, nhà trọ")}
+        onClick={() => handleShowModal(categories, `category`)}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -33,7 +39,7 @@ const Search = () => {
         />
       </span>
       <span
-        onClick={() => handleShowModal("Toàn quốc")}
+        onClick={() => handleShowModal(provinces, `province`)}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -43,7 +49,7 @@ const Search = () => {
         />
       </span>
       <span
-        onClick={() => handleShowModal("Chọn giá")}
+        onClick={() => handleShowModal(prices, `price`)}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -54,7 +60,7 @@ const Search = () => {
       </span>
 
       <span
-        onClick={() => handleShowModal("Chọn diện tích")}
+        onClick={() => handleShowModal(areas, `area`)}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -71,7 +77,11 @@ const Search = () => {
         <CiSearch size={20} /> Tìm kiếm
       </button>
       {isShowModal && (
-        <SearchModal content={content} setIsShowModal={setIsShowModal} />
+        <SearchModal
+          content={content}
+          setIsShowModal={setIsShowModal}
+          name={name}
+        />
       )}
     </div>
   );

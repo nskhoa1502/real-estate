@@ -14,7 +14,7 @@ import { formatVietnameseText } from "../utils/helper-function/convert";
 
 const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured[3];
 
-const RentalApartment = () => {
+const CategoryPage = () => {
   const { prices, areas, categories } = useSelector((state) => state.app);
   const { totalPage, postPerPage, count } = useSelector((state) => state.post);
   const [params] = useSearchParams();
@@ -77,4 +77,4 @@ const RentalApartment = () => {
   );
 };
 
-export default RentalApartment;
+export default CategoryPage;

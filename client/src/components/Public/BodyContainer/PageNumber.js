@@ -1,5 +1,4 @@
 import React, { useCallback, memo } from "react";
-import { useDispatch } from "react-redux";
 import {
   createSearchParams,
   useLocation,
@@ -12,7 +11,6 @@ const active = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 bg-
 
 const PageNumber = ({ number, currentPage, type, endpage, category }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const location = useLocation();
 
   const [params] = useSearchParams();

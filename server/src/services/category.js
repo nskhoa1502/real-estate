@@ -5,7 +5,7 @@ export const getCategoriesService = async () => {
   try {
     const response = await db.Category.findAll({
       raw: true,
-      attributes: [`code`, `value`],
+      // attributes: [`code`, `value`],
     });
 
     return { response: response, message: "Fetch categories success" };

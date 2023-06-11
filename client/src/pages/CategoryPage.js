@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { categoryFeatured } from "../utils/constant/constant";
 import {
   ItemSidebar,
   List,
@@ -11,8 +10,6 @@ import {
 import { useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { formatVietnameseText } from "../utils/helper-function/convert";
-
-const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured[3];
 
 const CategoryPage = () => {
   const { prices, areas, categories } = useSelector((state) => state.app);
@@ -35,7 +32,11 @@ const CategoryPage = () => {
   return (
     // ===================== FEATURED PROVINCES ====================
     <div className="my-3 w-full flex flex-col gap-5 items-center">
-      <Province id={id} title={HOME_TITLE} description={HOME_DESCRIPTION} />
+      <Province
+        id={category?.code}
+        title={category?.header}
+        description={category?.subheader}
+      />
 
       {/* ============= BODY ================ */}
       <div className="w-full flex gap-3">

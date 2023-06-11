@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SearchItem } from "../../../UI";
 import icons from "../../../utils/icon/icons";
-import SearchModal from "../../../UI/SearchModal";
+import SearchModal from "./SearchModal";
 import { useSelector } from "react-redux";
 
 const {

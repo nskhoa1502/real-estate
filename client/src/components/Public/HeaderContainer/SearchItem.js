@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import SearchModal from "../../../UI/SearchModal";
+import SearchModal from "./SearchModal";
 
 const SearchItem = ({ IconBefore, IconAfter, text, bold }) => {
   return (

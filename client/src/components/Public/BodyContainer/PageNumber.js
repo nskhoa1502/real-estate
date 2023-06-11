@@ -6,7 +6,6 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { queryFilter } from "../../../redux/slices/filterSlice";
 
 const notActive = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 bg-white hover:bg-gray-200 hover:text-black rounded-md cursor-pointer`;
 const active = `w-[46px] h-[48px] flex justify-center items-center py-3 px-2 bg-[#e13427]  text-white rounded-md cursor-pointer`;
@@ -43,17 +42,6 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
     if (type === "end") {
       navigateToPage(endpage);
       return;
-    }
-
-    if (areaCode || priceCode) {
-      dispatch(
-        queryFilter({
-          areaCode,
-          priceCode,
-          page: number,
-          categoryCode: category?.code,
-        })
-      );
     }
 
     if (typeof number === "number") {

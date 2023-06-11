@@ -21,8 +21,6 @@ const ItemSidebar = ({ title, content, isDouble, type, category }) => {
       params.categoryCode = category.code;
     }
 
-    // dispatch(queryFilter(query));
-
     navigate({
       pathname: location.pathname,
       search: createSearchParams(params).toString(),

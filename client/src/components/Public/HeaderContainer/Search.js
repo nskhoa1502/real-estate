@@ -13,7 +13,7 @@ const {
 
 const Search = () => {
   return (
-    <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-4/5 my-2 ">
+    <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
       <SearchItem
         text="Phòng trọ, nhà trọ"
         IconBefore={<LuHotel />}

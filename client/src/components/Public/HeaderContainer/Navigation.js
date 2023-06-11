@@ -27,7 +27,7 @@ const Navigation = () => {
 
   return (
     <div className="w-full h-[40px] bg-primaryBlue text-white flex justify-center items-center">
-      <div className="w-4/5 flex justify-start items-center text-sm font-medium h-full">
+      <div className="w-3/5 flex justify-start items-center text-sm font-medium h-full">
         {/* {nav?.length > 0 &&
           nav.map((item, i) => {
             return (

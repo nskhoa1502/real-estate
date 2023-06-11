@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Public/HeaderContainer/Header";
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Public/HeaderContainer/Navigation";
-import { Search } from "../components/Public";
+import { Contact, Info, Search } from "../components/Public";
 
 // import { Search } from "../components/Public";
 const HomePage = () => {
@@ -11,9 +11,12 @@ const HomePage = () => {
       <Header />
       <Navigation />
       <Search />
-
-      <div className="w-4/5 flex flex-col items-start justify-start">
+      <div className="w-3/5 flex flex-col items-start justify-start">
         <Outlet />
+      </div>
+      <div className=" w-3/5 flex flex-col gap-5">
+        <Info />
+        <Contact />
       </div>
     </div>
   );

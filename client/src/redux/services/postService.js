@@ -39,3 +39,16 @@ export const apiGetPostsFilter = async (query) => {
     throw err;
   }
 };
+export const apiGetNewPosts = async () => {
+  try {
+    const response = await axiosConfig({
+      method: "get",
+      url: `/api/v1/post/new-post`,
+    });
+    console.log(response.data);
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

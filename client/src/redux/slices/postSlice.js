@@ -1,11 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { apiGetPostsFilter, apiGetPostsLimit } from "../services/postService";
+import {
+  apiGetNewPosts,
+  apiGetPostsFilter,
+  apiGetPostsLimit,
+} from "../services/postService";
 
 const initialState = {
   posts: [],
   count: 0,
   totalPage: 0,
   postPerPage: process.env.REACT_APP_LIMIT_POST,
+  newPosts: [],
   error: null,
   message: "",
 };
@@ -26,6 +31,17 @@ export const getPostsLimit = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await apiGetPostsLimit(payload);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getNewPosts = createAsyncThunk(
+  "post/new-post",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiGetNewPosts(payload);
       return response;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -72,6 +88,19 @@ const postSlice = createSlice({
         state.posts = [];
         state.count = 0;
         state.totalPage = 0;
+        state.error = action.payload;
+        state.message = null;
+      })
+      .addCase(getNewPosts.fulfilled, (state, action) => {
+        // state.posts = action.payload.rows;
+        // state.count = action.payload.count;
+        // state.totalPage = Math.ceil(+action.payload.count / state.postPerPage);
+        // state.error = null;
+        state.newPosts = action.payload;
+        state.message = "Get new posts successfully";
+      })
+      .addCase(getNewPosts.rejected, (state, action) => {
+        state.getNewPosts = [];
         state.error = action.payload;
         state.message = null;
       })

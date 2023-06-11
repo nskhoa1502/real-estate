@@ -39,3 +39,13 @@ export const getPostsFilterLimit = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getNewPosts = async (req, res, next) => {
+  try {
+    const { response, message } = await service.getNewPostService();
+    console.log(message);
+    return res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+};

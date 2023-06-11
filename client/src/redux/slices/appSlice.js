@@ -3,14 +3,10 @@ import {
   apiGetPrices,
   apiGetAreas,
   apiGetCategories,
+  apiGetProvinces,
 } from "../services/appService";
 
-const initialState = {
-  prices: [],
-  categories: [],
-  areas: [],
-  message: "",
-};
+//Refactor later
 
 export const getPrices = createAsyncThunk(
   "price/all",
@@ -50,6 +46,26 @@ export const getCategories = createAsyncThunk(
     }
   }
 );
+export const getProvinces = createAsyncThunk(
+  "province/all",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiGetProvinces(payload);
+      //   console.log(response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+const initialState = {
+  provinces: [],
+  prices: [],
+  categories: [],
+  areas: [],
+  message: "",
+};
 
 const appSlice = createSlice({
   name: "app",
@@ -80,6 +96,14 @@ const appSlice = createSlice({
       .addCase(getCategories.rejected, (state, action) => {
         state.categories = [];
         state.message = "Get categories failed";
+      })
+      .addCase(getProvinces.fulfilled, (state, action) => {
+        state.provinces = action.payload;
+        state.message = "Get provinces successfully";
+      })
+      .addCase(getProvinces.rejected, (state, action) => {
+        state.provinces = [];
+        state.message = "Get provinces failed";
       });
   },
 });

@@ -38,3 +38,15 @@ export const apiGetCategories = async (payload) => {
     throw err;
   }
 };
+export const apiGetProvinces = async (payload) => {
+  try {
+    const response = await axiosConfig({
+      method: "get",
+      url: "/api/v1/province/all",
+    });
+    // console.log(response);
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};

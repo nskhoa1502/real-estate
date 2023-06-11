@@ -13,15 +13,16 @@ import { dataPrice, dataArea } from "../utils/data";
 import { extractArea, extractPrice } from "../utils/common";
 
 const dataBodies = [
-  { data: nhachothue, fileName: "nha-cho-thue" },
-  { data: chothuephongtro, fileName: "cho-thue-phong-tro" },
-  { data: chothuecanho, fileName: "cho-thue-can-ho" },
-  { data: chothuematbang, fileName: "cho-thue-mat-bang" },
+  { data: nhachothue, fileName: "nha-cho-thue", code: "NCT" },
+  { data: chothuephongtro, fileName: "cho-thue-phong-tro", code: "CTPT" },
+  { data: chothuecanho, fileName: "cho-thue-can-ho", code: "CTCH" },
+  { data: chothuematbang, fileName: "cho-thue-mat-bang", code: "CTMB" },
 ];
 
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12));
 
+// Optional, can just simply inject databody.code
 const generateCategoryCode = (fileName) => {
   return fileName
     .split("-")
@@ -32,7 +33,12 @@ const generateCategoryCode = (fileName) => {
 export const insertService = async () => {
   try {
     for (const dataBody of dataBodies) {
+      // Option 1:
       const categoryCode = generateCategoryCode(dataBody.fileName);
+
+      // Option 2:
+      // const categoryCode = databody.code
+
       for (const page of dataBody.data) {
         for (const item of page.body) {
           let labelCode = generateCode(item?.header?.class?.classType).trim();

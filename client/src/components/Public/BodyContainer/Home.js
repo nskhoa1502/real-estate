@@ -3,7 +3,11 @@ import { categoryFeatured } from "../../../utils/constant/constant";
 import { useSearchParams } from "react-router-dom";
 import { ItemSidebar, Province, List, Pagination, RelatedPost } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import { getAreas, getPrices } from "../../../redux/slices/appSlice";
+import {
+  getAreas,
+  getPrices,
+  getProvinces,
+} from "../../../redux/slices/appSlice";
 import { getCategories } from "../../../redux/slices/appSlice";
 const Home = () => {
   const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured;
@@ -21,6 +25,7 @@ const Home = () => {
     dispatch(getPrices());
     dispatch(getAreas());
     dispatch(getCategories());
+    dispatch(getProvinces());
   }, [dispatch]);
 
   return (

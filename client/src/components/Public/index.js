@@ -9,5 +9,7 @@ export { default as List } from "./BodyContainer/List";
 export { default as Item } from "./BodyContainer/Item";
 export { default as Pagination } from "./BodyContainer/Pagination";
 export { default as ItemSidebar } from "./SidebarContainer/ItemSidebar";
+export { default as RelatedPost } from "./SidebarContainer/RelatedPost";
+export { default as RelatedItem } from "./SidebarContainer/RelatedItem";
 export { default as Info } from "./FooterContainer/Info";
 export { default as Contact } from "./FooterContainer/Contact";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { categoryFeatured } from "../../../utils/constant/constant";
 import { useSearchParams } from "react-router-dom";
-import { ItemSidebar, Province, List, Pagination } from "../index";
+import { ItemSidebar, Province, List, Pagination, RelatedPost } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { getAreas, getPrices } from "../../../redux/slices/appSlice";
 import { getCategories } from "../../../redux/slices/appSlice";
@@ -58,6 +58,7 @@ const Home = () => {
             title={`Xem theo diện tích`}
             type="areaCode"
           />
+          <RelatedPost />
         </div>
       </div>
     </div>

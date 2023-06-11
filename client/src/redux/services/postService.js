@@ -32,7 +32,8 @@ export const apiGetPostsFilter = async (query) => {
       url: `/api/v1/post/filter`,
       params: query, // priceCode && areaCode && page
     });
-    console.log(response.data);
+    // console.log(response.data);
+    // console.log(query);
 
     return response.data;
   } catch (err) {
@@ -45,7 +46,7 @@ export const apiGetNewPosts = async () => {
       method: "get",
       url: `/api/v1/post/new-post`,
     });
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data;
   } catch (err) {

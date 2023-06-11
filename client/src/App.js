@@ -21,9 +21,9 @@ function App() {
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.SIGNUP} element={<Login register={true} />} />
           <Route path={path.CHO_THUE_CAN_HO} element={<RentalApartment />} />
-          <Route path={path.CHO_THUE_MAT_BANG} element={<RentalSpace />} />
-          <Route path={path.CHO_THUE_PHONG_TRO} element={<RentalRoom />} />
-          <Route path={path.NHA_CHO_THUE} element={<RentalHouse />} />
+          <Route path={path.CHO_THUE_MAT_BANG} element={<RentalApartment />} />
+          <Route path={path.CHO_THUE_PHONG_TRO} element={<RentalApartment />} />
+          <Route path={path.NHA_CHO_THUE} element={<RentalApartment />} />
           <Route path={path.CHI_TIET__TITLE__POSTID} element={<DetailPage />} />
         </Route>
       </Routes>

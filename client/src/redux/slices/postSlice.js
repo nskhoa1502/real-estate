@@ -100,7 +100,7 @@ const postSlice = createSlice({
         state.message = "Get new posts successfully";
       })
       .addCase(getNewPosts.rejected, (state, action) => {
-        state.getNewPosts = [];
+        state.newPosts = [];
         state.error = action.payload;
         state.message = null;
       })

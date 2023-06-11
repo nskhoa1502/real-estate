@@ -11,7 +11,6 @@ const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
 
 const indexes = [0, 1, 2, 3];
 
-
 // ===========================
 const Item = ({
   images,
@@ -41,28 +40,28 @@ const Item = ({
   };
 
   return (
-    <div className="flex items justify-between border-t border-orange-600 p-6">
+    <div className="flex items justify-between border-t border-orange-600 ">
       <Link
         to={`chi-tiet/${formatVietnameseText(title)}/${id}`}
         className="w-2/5 flex justify-center items-center"
       >
-        <div className="flex flex-wrap gap-[2px] relative cursor-pointer ">
+        <div className="flex flex-wrap gap-[2px] relative cursor-pointer py-6">
           {filteredImages &&
             filteredImages?.map((image, i) => (
               <React.Fragment key={i}>
                 <img
                   src={image}
                   alt={`Ảnh ${i + 1}`}
-                  className="w-[150px] h-[130px] object-cover"
+                  className="w-[120px] h-[120px] object-cover"
                 />
               </React.Fragment>
             ))}
 
-          <span className="bg-overlay-50  text-white px-2 rounded-md absolute bottom-1 left-1">
+          <span className="bg-overlay-50  text-white px-2 rounded-md absolute bottom-8 left-1">
             {`${images.length} ảnh`}
           </span>
           <span
-            className="absolute top-1 left-2 text-red-500 "
+            className="absolute top-8 left-2 text-red-500 "
             onMouseEnter={() => setIsHoverHeart(true)}
             onMouseOut={() => setIsHoverHeart(false)}
           >
@@ -74,7 +73,7 @@ const Item = ({
           </span>
         </div>
       </Link>
-      <div className="w-3/5">
+      <div className="w-3/5 pb-5 pt-10 ">
         <div>
           <div className="flex items-start gap-4">
             <div>

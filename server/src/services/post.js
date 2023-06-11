@@ -93,6 +93,7 @@ export const getPostsFilterService = async (pageNumber, query) => {
         },
       ],
       order: [["star", "DESC"]], // Sort by star property in descending order
+      offset: offset * limit,
 
       limit: limit,
     });

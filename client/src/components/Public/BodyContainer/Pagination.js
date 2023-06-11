@@ -5,7 +5,7 @@ import { extractPageArr } from "../../../utils/helper-function/extractPageNumber
 
 const { AiOutlineDoubleRight } = icons;
 
-const Pagination = ({ number, totalPage, postPerPage, count }) => {
+const Pagination = ({ number, totalPage, postPerPage, count, category }) => {
   const [arrPage, setArrPage] = useState([]);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ const Pagination = ({ number, totalPage, postPerPage, count }) => {
             number={pageNumber}
             currentPage={number}
             rangeStart={1}
+            category={category}
           />
         ))}
 
@@ -30,6 +31,7 @@ const Pagination = ({ number, totalPage, postPerPage, count }) => {
           number={<AiOutlineDoubleRight size={16} />}
           type="end"
           endpage={totalPage}
+          category={category}
         />
       ) : null}
     </div>

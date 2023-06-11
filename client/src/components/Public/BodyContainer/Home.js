@@ -9,6 +9,7 @@ const Home = () => {
   const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured[0];
   const [params] = useSearchParams();
   const pageNumber = params.get("page") || 1;
+
   const { categories } = useSelector((state) => state.app);
   const { prices, areas } = useSelector((state) => state.app);
   const { totalPage, postPerPage, count } = useSelector((state) => state.post);

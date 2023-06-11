@@ -4,19 +4,32 @@ import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "../../../redux/slices/postSlice";
 import { getPostsFilter } from "../../../redux/slices/postSlice";
+import { useSearchParams } from "react-router-dom";
 
-const List = ({ pageNumber }) => {
+const List = ({ categoryCode }) => {
   const dispatch = useDispatch();
-  const { areaCode, priceCode, page } = useSelector((state) => state.filter);
   const { posts } = useSelector((state) => state.post);
+  const [params] = useSearchParams();
 
+  const pageNumber = params.get("page") || 1;
+  const areaCode = params.get("areaCode") || null;
+  const priceCode = params.get("priceCode") || null;
+
+  // console.log(`page `, pageNumber);
+  // console.log(`area code `, areaCode);
+  // console.log(`price code `, priceCode);
+  // console.log(`category code `, categoryCode);
+
+  // console.log(posts);
   useEffect(() => {
-    if (areaCode || priceCode) {
-      dispatch(getPostsFilter({ areaCode, priceCode, page }));
+    if (categoryCode || areaCode || priceCode) {
+      dispatch(
+        getPostsFilter({ page: +pageNumber, areaCode, priceCode, categoryCode })
+      );
     } else {
       dispatch(getPostsLimit(pageNumber));
     }
-  }, [areaCode, priceCode, page]);
+  }, [areaCode, priceCode, pageNumber, categoryCode, dispatch]);
 
   return (
     <div className="w-full p-2 bg-white shadow-md rounded-md px-6">

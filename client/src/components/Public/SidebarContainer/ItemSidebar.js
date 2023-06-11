@@ -13,21 +13,22 @@ import { queryFilter } from "../../../redux/slices/filterSlice";
 
 const { GrNext } = icons;
 
-const ItemSidebar = ({ title, content, isDouble, type }) => {
+const ItemSidebar = ({ title, content, isDouble, type, category }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleFilterPosts = (code) => {
-    const query = { page: 1, [type]: code };
-    dispatch(queryFilter(query));
+    const params = { page: 1, [type]: code };
+    if (category?.code) {
+      params.categoryCode = category.code;
+    }
+
+    // dispatch(queryFilter(query));
 
     navigate({
       pathname: location.pathname,
-      search: createSearchParams({
-        page: 1,
-        [type]: code,
-      }).toString(),
+      search: createSearchParams(params).toString(),
     });
   };
 

@@ -8,10 +8,9 @@ import {
   RelatedPost,
 } from "../components/Public";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { formatVietnameseText } from "../utils/helper-function/convert";
-import { queryFilter } from "../redux/slices/filterSlice";
 
 const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured[3];
 
@@ -20,15 +19,7 @@ const RentalApartment = () => {
   const { totalPage, postPerPage, count } = useSelector((state) => state.post);
   const [params] = useSearchParams();
   const pageNumber = params.get("page") || 1;
-  // const areaCode = params.get("areaCode") || null;
-  // const priceCode = params.get("priceCode") || null;
-  // const categoryCode = params.get("category_code") || null;
-
-  // console.log(`area code `, areaCode);
-  // console.log(`price code `, priceCode);
-  // console.log(`category code `, categoryCode);
   const [category, setCategory] = useState({});
-  const dispatch = useDispatch();
 
   const location = useLocation();
 
@@ -39,8 +30,7 @@ const RentalApartment = () => {
     );
 
     setCategory(categoryObj);
-    // dispatch(queryFilter({ categoryCode: category.code }));
-  }, [location]);
+  }, [location, categories]);
 
   return (
     // ===================== FEATURED PROVINCES ====================

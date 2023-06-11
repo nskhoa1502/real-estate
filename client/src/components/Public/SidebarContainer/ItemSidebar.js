@@ -8,13 +8,10 @@ import {
   useLocation,
   createSearchParams,
 } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { queryFilter } from "../../../redux/slices/filterSlice";
 
 const { GrNext } = icons;
 
 const ItemSidebar = ({ title, content, isDouble, type, category }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 

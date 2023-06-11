@@ -14,7 +14,10 @@ const Contact = () => {
       <div className="flex items-center justify-around w-full">
         {text.contacts.map((item, index) => {
           return (
-            <div className="flex flex-col items-center justify-center">
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center"
+            >
               <span className="text-orange-700 font-bold">{item.text}</span>
               <span className="text-blue-700 text-xl font-bold">
                 {item.phone}

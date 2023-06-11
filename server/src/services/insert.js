@@ -35,7 +35,7 @@ export const insertService = async () => {
       const categoryCode = generateCategoryCode(dataBody.fileName);
       for (const page of dataBody.data) {
         for (const item of page.body) {
-          let labelCode = generateCode(item?.header?.class?.classType);
+          let labelCode = generateCode(item?.header?.class?.classType).trim();
           let postId = uuidv4();
           let attributesId = uuidv4();
           let userId = uuidv4();
@@ -43,6 +43,9 @@ export const insertService = async () => {
           let overviewId = uuidv4();
           let currentArea = extractArea(item?.header?.attributes?.acreage);
           let currentPrice = extractPrice(item?.header?.attributes?.price);
+          let provinceCode = generateCode(
+            item?.header?.address?.split(",").slice(-1)[0]
+          ).trim();
           await db.Post.create({
             id: postId,
             title: item?.header?.title,
@@ -61,6 +64,7 @@ export const insertService = async () => {
             priceCode: dataPrice.find(
               (price) => price.max >= currentPrice && price.min <= currentPrice
             )?.code,
+            provinceCode,
           });
 
           await db.Attribute.create({
@@ -69,6 +73,14 @@ export const insertService = async () => {
             acreage: item?.header?.attributes?.acreage,
             published: item?.header?.attributes?.published,
             hashtag: item?.header?.attributes?.hashtag,
+          });
+
+          await db.Province.findOrCreate({
+            where: { code: provinceCode },
+            defaults: {
+              code: provinceCode,
+              value: item?.header?.address?.split(",").slice(-1)[0],
+            },
           });
 
           await db.Image.create({

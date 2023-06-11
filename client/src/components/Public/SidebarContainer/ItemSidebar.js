@@ -9,7 +9,7 @@ import {
   createSearchParams,
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getPostsLimit } from "../../../redux/slices/postSlice";
+import { queryFilter } from "../../../redux/slices/filterSlice";
 
 const { GrNext } = icons;
 
@@ -20,13 +20,13 @@ const ItemSidebar = ({ title, content, isDouble, type }) => {
 
   const handleFilterPosts = (code) => {
     const query = { page: 1, [type]: code };
-    dispatch(getPostsLimit(query));
+    dispatch(queryFilter(query));
 
     navigate({
       pathname: location.pathname,
       search: createSearchParams({
         page: 1,
-        type: code,
+        [type]: code,
       }).toString(),
     });
   };

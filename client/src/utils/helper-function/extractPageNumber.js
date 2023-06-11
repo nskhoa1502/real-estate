@@ -2,6 +2,8 @@ export const extractPageArr = (currentPage, count, length) => {
   const initPage = 1;
   const postPerPage = length ? length : 5;
   const maxPage = Math.ceil(count / postPerPage);
+  // console.log(`function total posts: `, postPerPage);
+  // console.log(`function max page `, maxPage);
 
   let arr = [];
   let startPage = currentPage - 3 > 1 ? currentPage - 3 : 1;

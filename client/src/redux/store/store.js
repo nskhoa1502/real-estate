@@ -4,6 +4,7 @@ import authReducer from "../slices/authSlice";
 import userReducer from "../slices/userSlice";
 import postReducer from "../slices/postSlice";
 import appReducer from "../slices/appSlice";
+import filterReducer from "../slices/filterSlice";
 import {
   persistStore,
   persistReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   post: postReducer,
   app: appReducer,
+  filter: filterReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -11,10 +11,9 @@ const Home = () => {
   const pageNumber = params.get("page") || 1;
   const { categories } = useSelector((state) => state.app);
   const { prices, areas } = useSelector((state) => state.app);
-  const dispatch = useDispatch();
+  const { totalPage, postPerPage, count } = useSelector((state) => state.post);
 
-  console.log(prices, areas);
-  console.log(params);
+  const dispatch = useDispatch();
 
   // console.log(areas);
   useEffect(() => {
@@ -33,7 +32,15 @@ const Home = () => {
         {/* =========== LEFT BODY ============= */}
         <div className="w-[70%]">
           <List pageNumber={pageNumber} />
-          <Pagination key={pageNumber} number={pageNumber} />
+          <Pagination
+            key={pageNumber}
+            number={pageNumber}
+            prices={prices}
+            areas={areas}
+            totalPage={totalPage}
+            postPerPage={postPerPage}
+            count={count}
+          />
           <div className="h-[500px]"></div>
         </div>
 

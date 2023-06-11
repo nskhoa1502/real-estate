@@ -1,33 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { PageNumber } from "../../../UI";
-import { useSelector } from "react-redux";
 import icons from "../../../utils/icon/icons";
 import { extractPageArr } from "../../../utils/helper-function/extractPageNumber";
-import { createSearchParams, useNavigate } from "react-router-dom";
 
 const { AiOutlineDoubleRight } = icons;
 
-const Pagination = ({ number }) => {
-  const { count, posts } = useSelector((state) => state.post);
+const Pagination = ({ number, totalPage, postPerPage, count }) => {
   const [arrPage, setArrPage] = useState([]);
-  const navigate = useNavigate();
-
-  const postPerPage = +posts?.length || 5;
-  const maxPage = Math.ceil(+count / postPerPage);
 
   useEffect(() => {
-    const tempArr = extractPageArr(+number, +count, +posts?.length);
+    const tempArr = extractPageArr(+number, +count, postPerPage);
     setArrPage(tempArr);
-  }, [number, count, posts]);
-
-  const handleChangePage = () => {
-    navigate({
-      pathname: "/",
-      search: createSearchParams({
-        page: number,
-      }).toString(),
-    });
-  };
+  }, [number, count, postPerPage]);
 
   return (
     <div className="flex items-center justify-center gap-2 py-5">
@@ -41,11 +25,11 @@ const Pagination = ({ number }) => {
           />
         ))}
 
-      {+number + 3 < maxPage ? (
+      {+number + 3 < totalPage ? (
         <PageNumber
           number={<AiOutlineDoubleRight size={16} />}
           type="end"
-          endpage={maxPage}
+          endpage={totalPage}
         />
       ) : null}
     </div>

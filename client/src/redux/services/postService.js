@@ -12,15 +12,28 @@ import axiosConfig from "../../axiosConfig";
 //     throw err;
 //   }
 // };
-export const apiGetPostsLimit = async (query) => {
+export const apiGetPostsLimit = async (page) => {
   try {
     const response = await axiosConfig({
       method: "get",
-      url: `/api/v1/post/limit`,
-      params: query,
+      url: `/api/v1/post/limit?page=${page}`,
     });
     // console.log(query);
     // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+export const apiGetPostsFilter = async (query) => {
+  try {
+    const response = await axiosConfig({
+      method: "get",
+      url: `/api/v1/post/filter`,
+      params: query, // priceCode && areaCode && page
+    });
+    console.log(response.data);
+
     return response.data;
   } catch (err) {
     throw err;

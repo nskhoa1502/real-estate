@@ -7,4 +7,6 @@ router.get("/all", postController.getPosts);
 
 router.get("/limit", postController.getPostsLimit);
 
+router.get("/filter", postController.getPostsFilterLimit);
+
 export default router;

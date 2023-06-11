@@ -9,7 +9,7 @@ const RelatedPost = () => {
 
   useEffect(() => {
     dispatch(getNewPosts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-full bg-white rounded-md shadow-md p-4">
@@ -20,7 +20,6 @@ const RelatedPost = () => {
             return (
               <RelatedItem
                 key={item?.id}
-                img={``}
                 title={item.title}
                 price={item?.attributes?.price}
                 createdAt={item?.createdAt}

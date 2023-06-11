@@ -13,9 +13,7 @@ const List = ({ pageNumber }) => {
   useEffect(() => {
     if (areaCode || priceCode) {
       dispatch(getPostsFilter({ areaCode, priceCode, page }));
-      console.log("re-called");
     } else {
-      console.log("called in else block");
       dispatch(getPostsLimit(pageNumber));
     }
   }, [areaCode, priceCode, page]);

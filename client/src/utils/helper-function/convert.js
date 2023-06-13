@@ -45,3 +45,52 @@ export const formatContent = (content) => {
 
   return formatCont;
 };
+
+export const mapPercentagesToPrice = (
+  input,
+  targetRangeStart,
+  targetRangeEnd,
+  targetIncrement = 1
+) => {
+  // Calculate the percentage value
+  const percentage = input / 100;
+  // console.log(`percentage `, percentage);
+
+  // Calculate the size of the target range
+  const targetRangeSize = targetRangeEnd - targetRangeStart;
+  // console.log(`Range `, targetRangeSize);
+
+  // Map the percentage to the target range
+  let mappedValue = percentage * targetRangeSize;
+  // console.log(`map value with incremental of 1 `, mappedValue);
+
+  // Round the mapped value to the nearest increment
+  mappedValue = Math.round(mappedValue / targetIncrement) * targetIncrement;
+  // console.log(
+  //   // `adjust map value due to incremental size of ${targetIncrement} `,
+  //   mappedValue
+  // );
+
+  return mappedValue;
+};
+
+export const mapPriceToPercentage = (
+  input,
+  targetRangeStart,
+  targetRangeEnd,
+  targetIncrement = 1
+) => {
+  // Calculate the size of the target range
+  const targetRangeSize = targetRangeEnd - targetRangeStart;
+
+  // Calculate the ratio of the input value within the target range
+  const ratio = input / targetRangeSize;
+
+  // Calculate the percentage value
+  let percentage = ratio * 100;
+
+  // Round the percentage to the nearest increment
+  percentage = Math.round(percentage / targetIncrement) * targetIncrement;
+
+  return percentage;
+};

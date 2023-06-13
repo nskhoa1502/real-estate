@@ -46,7 +46,7 @@ export const formatContent = (content) => {
   return formatCont;
 };
 
-export const mapPercentagesToPrice = (
+export const mapPercentagesToRange = (
   input,
   targetRangeStart,
   targetRangeEnd,
@@ -74,7 +74,7 @@ export const mapPercentagesToPrice = (
   return mappedValue;
 };
 
-export const mapPriceToPercentage = (
+export const mapRangeToPercentage = (
   input,
   targetRangeStart,
   targetRangeEnd,

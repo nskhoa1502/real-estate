@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import icons from "../../../utils/icon/icons";
 import {
-  mapPercentagesToPrice,
-  mapPriceToPercentage,
+  mapPercentagesToRange,
+  mapRangeToPercentage,
 } from "../../../utils/helper-function/convert";
 import { extractNumbers } from "../../../utils/helper-function/extractNumbers";
 
@@ -11,6 +11,7 @@ const { GrLinkPrevious } = icons;
 const SearchModal = ({ setIsShowModal, content, name }) => {
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
+  console.log(name);
 
   useEffect(() => {
     const activeTrackEl = document.querySelector("#track-active");
@@ -54,14 +55,14 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
   const handleButtonFilter = (valueString) => {
     const filterValueArr = extractNumbers(valueString);
     console.log(filterValueArr);
-    console.log(mapPriceToPercentage(filterValueArr[0], 0, 15, 0.5));
+    console.log(mapRangeToPercentage(filterValueArr[0], 0, 15, 0.5));
 
     // Filter min,max
     if (filterValueArr.length === 1) {
       // Filter for price : min = 1, max = 15 triệu
       if (filterValueArr[0] === 1) {
         setPercent1(0);
-        setPercent2(mapPriceToPercentage(1, 0, 15, 0.5));
+        setPercent2(mapRangeToPercentage(1, 0, 15, 0.5));
       }
       if (filterValueArr[0] === 15) {
         setPercent1(100);
@@ -71,7 +72,7 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
       // Filter for area : min = 20 , max = 90
       if (filterValueArr[0] === 20) {
         setPercent1(0);
-        setPercent2(mapPriceToPercentage(20, 20, 90, 5));
+        setPercent2(mapRangeToPercentage(20, 0, 90, 5));
       }
       if (filterValueArr[0] === 90) {
         setPercent1(100);
@@ -82,15 +83,29 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
     if (filterValueArr.length === 2) {
       // Filter for price
       if (filterValueArr[0] <= 15 && filterValueArr[1] <= 15) {
-        setPercent1(mapPriceToPercentage(filterValueArr[0], 0, 15, 0.5));
-        setPercent2(mapPriceToPercentage(filterValueArr[1], 0, 15, 0.5));
+        setPercent1(mapRangeToPercentage(filterValueArr[0], 0, 15, 0.5));
+        setPercent2(mapRangeToPercentage(filterValueArr[1], 0, 15, 0.5));
       }
 
       // Filter for area
       if (filterValueArr[0] >= 20 && filterValueArr[1] >= 20) {
-        setPercent1(mapPriceToPercentage(filterValueArr[0], 20, 90, 5));
-        setPercent2(mapPriceToPercentage(filterValueArr[1], 20, 90, 5));
+        setPercent1(mapRangeToPercentage(filterValueArr[0], 0, 90, 5));
+        setPercent2(mapRangeToPercentage(filterValueArr[1], 0, 90, 5));
+        console.log(percent1);
+        console.log(percent2);
       }
+    }
+  };
+
+  const handleFilterSubmit = () => {
+    if (name === "price") {
+      console.log(`start price`, mapPercentagesToRange(percent1, 0, 15, 0.5));
+      console.log(`end price`, mapPercentagesToRange(percent2, 0, 15, 0.5));
+    }
+
+    if (name === "area") {
+      console.log(`start area`, mapPercentagesToRange(percent1, 0, 90, 5));
+      console.log(`end area`, mapPercentagesToRange(percent2, 0, 90, 5));
     }
   };
 
@@ -106,7 +121,7 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
           e.stopPropagation();
           setIsShowModal(true);
         }}
-        className="w-1/3 bg-white rounded-md border "
+        className="w-1/2 bg-white rounded-md border "
       >
         <div className="h-[45px] border-b border-gray-200">
           <span className="h-[45px] flex items-center px-4 ">
@@ -146,20 +161,39 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
         {(name === "price" || name === "area") && (
           <>
             <div className="px-8 py-20">
-              <div className="flex flex-col items-center justify-center relative">
+              <div className="flex flex-col items-center justify-center relative ">
                 <div className="z-30 absolute top-[-40px] font-bold text-xl text-orange-600">
                   {/* Từ 0 - 15 triệu + */}
-                  {mapPercentagesToPrice(percent1, 0, 15, 0.5) ===
-                    mapPercentagesToPrice(100, 0, 15, 0.5) &&
-                  mapPercentagesToPrice(percent2, 0, 15, 0.5) ===
-                    mapPercentagesToPrice(100, 0, 15, 0.5)
-                    ? `Trên ${mapPercentagesToPrice(100, 0, 15, 0.5)}+ triệu`
-                    : `Từ ${mapPercentagesToPrice(
+
+                  {name === "area"
+                    ? mapPercentagesToRange(percent1, 0, 90, 5) ===
+                        mapPercentagesToRange(100, 0, 90, 5) &&
+                      mapPercentagesToRange(percent2, 0, 90, 5) ===
+                        mapPercentagesToRange(100, 0, 90, 5)
+                      ? `Trên ${mapPercentagesToRange(100, 0, 90, 5)}+ m2`
+                      : `Từ ${mapPercentagesToRange(
+                          percent1 <= percent2 ? percent1 : percent2,
+                          0,
+                          90,
+                          5
+                        )} đến ${mapPercentagesToRange(
+                          percent2 >= percent1 ? percent2 : percent1,
+                          0,
+                          90,
+                          5
+                        )}m^2`
+                    : name === "price" &&
+                      mapPercentagesToRange(percent1, 0, 15, 0.5) ===
+                        mapPercentagesToRange(100, 0, 15, 0.5) &&
+                      mapPercentagesToRange(percent2, 0, 15, 0.5) ===
+                        mapPercentagesToRange(100, 0, 15, 0.5)
+                    ? `Trên ${mapPercentagesToRange(100, 0, 15, 0.5)}+ triệu`
+                    : `Từ ${mapPercentagesToRange(
                         percent1 <= percent2 ? percent1 : percent2,
                         0,
                         15,
                         0.5
-                      )} đến ${mapPercentagesToPrice(
+                      )} đến ${mapPercentagesToRange(
                         percent2 >= percent1 ? percent2 : percent1,
                         0,
                         15,
@@ -211,7 +245,9 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
                     }}
                     className="mr-[-12px] cursor-pointer"
                   >
-                    15 triệu
+                    {name === "price"
+                      ? `${mapPercentagesToRange(100, 0, 15, 0.5)} triệu`
+                      : `${mapPercentagesToRange(100, 0, 90, 5)} m^2`}
                   </span>
                 </div>
               </div>
@@ -230,6 +266,13 @@ const SearchModal = ({ setIsShowModal, content, name }) => {
             </div>
           </>
         )}
+        <button
+          type="button"
+          className="w-full py-3 bg-orange-400 text-lg font-semi rounded-bl-md rounded-br-md hover:underline"
+          onClick={handleFilterSubmit}
+        >
+          Áp dụng
+        </button>
       </div>
     </div>
   );

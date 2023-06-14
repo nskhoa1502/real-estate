@@ -2,17 +2,29 @@ import React from "react";
 import { ItemSidebar, List, Pagination, RelatedPost } from "../../../Public";
 
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const SearchDetail = () => {
   const { prices, areas } = useSelector((state) => state.app);
   const { totalPage, postPerPage, count } = useSelector((state) => state.post);
   const [params] = useSearchParams();
   const pageNumber = params.get("page") || 1;
+  const { state } = useLocation();
+
+  console.log(state);
 
   return (
     // ===================== FEATURED PROVINCES ====================
     <div className="my-3 w-full flex flex-col gap-5 items-center">
+      <div className="mt-10 mb-5">
+        <h1 className="text-[1.5rem] font-bold">
+          {state?.titleSearch || "Kết quả tìm kiếm"}
+        </h1>
+        <p>
+          {state?.titleSearch} phòng mới xây, chính chủ gần chợ, trường học,
+          siêu thị, cửa hàng tiện lợi, khu an ninh.
+        </p>
+      </div>
       {/* ============= BODY ================ */}
       <div className="w-full flex gap-3">
         {/* =========== LEFT BODY ============= */}

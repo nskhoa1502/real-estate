@@ -49,7 +49,7 @@ const Search = () => {
   });
 
   // console.log(filterQueries);
-  // console.log(filterText);
+  console.log(filterText);
 
   // console.log(getCode(filterQueries?.priceCode, prices));
   // console.log(getCode(filterQueries?.areaCode, areas));
@@ -62,10 +62,21 @@ const Search = () => {
   };
 
   const handleSearch = () => {
-    navigate({
-      pathname: path.TIM_KIEM,
-      search: createSearchParams(filterQueries).toString(),
-    });
+    const titleSearch = `${
+      filterText.category || "Cho thuê phòng trọ, nhà trọ"
+    } tại ${
+      filterText.province ? `tỉnh ${filterText.province}` : `Toàn quốc`
+    } ${filterText.price ? `với giá ${filterText.price.toLowerCase()}` : ""} ${
+      filterText.area ? `với diện tích ${filterText.area.toLowerCase()}` : ""
+    }`;
+
+    navigate(
+      {
+        pathname: path.TIM_KIEM,
+        search: createSearchParams(filterQueries).toString(),
+      },
+      { state: { titleSearch: titleSearch } }
+    );
   };
 
   useEffect(() => {

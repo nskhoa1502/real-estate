@@ -5,6 +5,7 @@ import {
   mapRangeToPercentage,
 } from "../../../utils/helper-function/convert";
 import { extractNumbers } from "../../../utils/helper-function/extractNumbers";
+import { getCode } from "../../../utils/helper-function/getCode";
 
 const { GrLinkPrevious } = icons;
 
@@ -19,8 +20,8 @@ const SearchModal = ({
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
 
-  // console.log(content);
-  console.log(queries);
+  console.log(content);
+  // console.log(queries);
 
   useEffect(() => {
     const activeTrackEl = document.querySelector("#track-active");
@@ -178,7 +179,7 @@ const SearchModal = ({
     e.stopPropagation();
     setFilterQueries((prev) => ({
       ...prev,
-      [`${name}Code`]: value[`${name}Code`],
+      [`${name}Code`]: value[`${name}Code`]?.map((i) => i.code),
     }));
 
     setFilterText((prev) => ({
@@ -186,6 +187,7 @@ const SearchModal = ({
       [name]: value[`${name}`],
     }));
 
+    // console.log(value[`${name}Code`].map((i) => i.code));
     setIsShowModal(false);
   };
 
@@ -348,39 +350,35 @@ const SearchModal = ({
           <button
             type="button"
             className="w-full py-3 bg-orange-400 text-lg font-semi rounded-bl-md rounded-br-md hover:underline"
-            onClick={(e) =>
+            onClick={(e) => {
+              e.stopPropagation();
+
+              const rangeValue = [
+                mapPercentagesToRange(
+                  percent1,
+                  0,
+                  name === "price" ? 15 : 90,
+                  name === "price" ? 0.5 : 5
+                ),
+                mapPercentagesToRange(
+                  percent2,
+                  0,
+                  name === "price" ? 15 : 90,
+                  name === "price" ? 0.5 : 5
+                ),
+              ];
+
+              const codeValue = getCode(rangeValue, content);
+              const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
+                name === "price" ? "triệu" : "m"
+              }`;
+
               handlePriceAndAreaSubmit(e, {
-                [`${name}Code`]: {
-                  start:
-                    name === "price"
-                      ? mapPercentagesToRange(percent1, 0, 15, 0.5)
-                      : mapPercentagesToRange(percent1, 0, 90, 5),
-                  end:
-                    name === "price"
-                      ? mapPercentagesToRange(percent2, 0, 15, 0.5)
-                      : mapPercentagesToRange(percent2, 0, 90, 5),
-                },
-                [name]:
-                  name === "price"
-                    ? `Từ ${mapPercentagesToRange(
-                        percent1,
-                        0,
-                        15,
-                        0.5
-                      )} đến ${mapPercentagesToRange(
-                        percent2,
-                        0,
-                        15,
-                        0.5
-                      )} triệu`
-                    : `Từ ${mapPercentagesToRange(
-                        percent1,
-                        0,
-                        90,
-                        5
-                      )} đến ${mapPercentagesToRange(percent2, 0, 90, 5)}m`,
-              })
-            }
+                [`${name}Range`]: rangeValue,
+                [`${name}Code`]: codeValue,
+                [name]: textValue,
+              });
+            }}
           >
             Áp dụng
           </button>

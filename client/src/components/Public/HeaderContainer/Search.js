@@ -3,8 +3,6 @@ import { SearchItem } from "../../../UI";
 import icons from "../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostsFilter } from "../../../redux/slices/postSlice";
-import { getCode, transformObj } from "../../../utils/helper-function/getCode";
 
 const {
   BsChevronRight,
@@ -25,12 +23,11 @@ const Search = () => {
 
   // console.log(prices);
   // console.log(areas);
-  console.log(transformObj(prices));
+  // console.log(transformObj(prices));
   // console.log(transformObj(areas));
 
   // console.log(getCode([6.5, 14.5], prices));
-
-  console.log(getCode([35, 75], areas));
+  // console.log(getCode([35, 75], areas));
 
   const dispatch = useDispatch();
   const [filterText, setFilterText] = useState({
@@ -47,6 +44,11 @@ const Search = () => {
   // console.log(filterQueries);
   // console.log(filterText);
 
+  console.log(filterQueries);
+
+  // console.log(getCode(filterQueries?.priceCode, prices));
+  // console.log(getCode(filterQueries?.areaCode, areas));
+
   const handleShowModal = (content, name) => {
     setContent(content);
     setName(name);
@@ -54,7 +56,8 @@ const Search = () => {
   };
 
   const handleSearch = () => {
-    dispatch(getPostsFilter(filterQueries));
+    // dispatch(getPostsFilter(filterQueries));
+    console.log(filterQueries);
   };
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">

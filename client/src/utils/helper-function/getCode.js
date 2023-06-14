@@ -38,10 +38,12 @@ export const transformObj = (items) => {
 export const getCode = (arrMinMax, priceOrAreaArr) => {
   const transformedPriceOrArea = transformObj(priceOrAreaArr);
 
-  return transformedPriceOrArea.filter(
-    (item) =>
-      // Min condition:
-      (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) ||
-      (item.max >= arrMinMax[0] && item.max <= arrMinMax[1])
+  return (
+    transformedPriceOrArea?.filter(
+      (item) =>
+        // Min condition:
+        (item?.min >= arrMinMax[0] && item?.min <= arrMinMax[1]) ||
+        (item?.max >= arrMinMax[0] && item?.max <= arrMinMax[1])
+    ) || undefined
   );
 };

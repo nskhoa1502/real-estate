@@ -19,8 +19,8 @@ const SearchModal = ({
   arrMinMax,
   setArrMinMax,
 }) => {
-  const [percent1, setPercent1] = useState(0);
-  const [percent2, setPercent2] = useState(100);
+  const [percent1, setPercent1] = useState(arrMinMax[0] || 0);
+  const [percent2, setPercent2] = useState(arrMinMax[1] || 100);
 
   // console.log(arrMinMax[0]);
   // console.log(arrMinMax[1]);
@@ -159,6 +159,7 @@ const SearchModal = ({
       // [`${name}Rage`]: [percent1, percent2],
     }));
 
+    setArrMinMax([percent1, percent2]);
     setIsShowModal(false);
   };
 

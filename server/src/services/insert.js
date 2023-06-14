@@ -71,6 +71,8 @@ export const insertService = async () => {
               (price) => price.max >= currentPrice && price.min <= currentPrice
             )?.code,
             provinceCode,
+            priceNumber: currentPrice,
+            areaNumber: currentArea,
           });
 
           await db.Attribute.create({
@@ -136,6 +138,14 @@ export const insertService = async () => {
       }
     }
 
+    return "Insert data successfully";
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const createPricesAndAreas = async () => {
+  try {
     for (const category of categories) {
       await db.Category.create({
         code: category.code,
@@ -146,14 +156,6 @@ export const insertService = async () => {
         updatedAt: new Date(),
       });
     }
-    return "Insert data successfully";
-  } catch (err) {
-    throw err;
-  }
-};
-
-export const createPricesAndAreas = () => {
-  try {
     dataPrice.forEach(async (item, index) => {
       await db.Price.create({
         code: item.code,

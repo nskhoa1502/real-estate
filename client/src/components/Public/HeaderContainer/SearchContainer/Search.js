@@ -3,6 +3,7 @@ import SearchItem from "./SearchItem";
 import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
+import { getPostsFilter } from "../../../../redux/slices/postSlice";
 
 const {
   BsChevronRight,
@@ -58,7 +59,7 @@ const Search = () => {
   };
 
   const handleSearch = () => {
-    // dispatch(getPostsFilter(filterQueries));
+    dispatch(getPostsFilter(filterQueries));
     console.log(filterQueries);
   };
   return (

@@ -3,6 +3,9 @@ import SearchItem from "./SearchItem";
 import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
+// import { getPostsFilter } from "../../../../redux/slices/postSlice";
+import { useNavigate, createSearchParams } from "react-router-dom";
+import { path } from "../../../../utils/path/path";
 import { getPostsFilter } from "../../../../redux/slices/postSlice";
 
 const {
@@ -23,6 +26,7 @@ const Search = () => {
   );
   const [arrMinMax, setArrMinMax] = useState([]);
   const [defaultText, setDefaultText] = useState("");
+  const navigate = useNavigate();
   // const [arrMinMax, setArrMinMax] = useState([]);
 
   // console.log(prices);
@@ -48,8 +52,6 @@ const Search = () => {
   // console.log(filterQueries);
   // console.log(filterText);
 
-  console.log(filterQueries);
-
   // console.log(getCode(filterQueries?.priceCode, prices));
   // console.log(getCode(filterQueries?.areaCode, areas));
 
@@ -61,16 +63,18 @@ const Search = () => {
   };
 
   const handleSearch = () => {
-    dispatch(getPostsFilter(filterQueries));
+    // dispatch(getPostsFilter(filterQueries));
     console.log(filterQueries);
+    navigate({
+      pathname: path.TIM_KIEM,
+      search: createSearchParams(filterQueries).toString(),
+    });
   };
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
       {/* <SearchModalHeader setIsShowModal={setIsShowModal} /> */}
       <span
-        onClick={() =>
-          handleShowModal(categories, `category`, "Phòng trọ, nhà trọ")
-        }
+        onClick={() => handleShowModal(categories, `category`, "Tìm tất cả")}
         className="flex-1 cursor-pointer"
       >
         <SearchItem

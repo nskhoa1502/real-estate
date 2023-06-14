@@ -8,4 +8,5 @@ export const path = {
   NHA_CHO_THUE: "nha-cho-thue",
   CHO_THUE_PHONG_TRO: "cho-thue-phong-tro",
   CHI_TIET__TITLE__POSTID: "chi-tiet/:title/:postId",
+  TIM_KIEM: "tim-kiem",
 };

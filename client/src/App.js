@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { path } from "./utils/path/path";
-import { Home, Login } from "./components/Public";
+import { Home, Login, SearchDetail } from "./components/Public";
 
 import { DetailPage, HomePage, CategoryPage } from "./pages";
 
@@ -17,6 +17,7 @@ function App() {
           <Route path={path.CHO_THUE_MAT_BANG} element={<CategoryPage />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<CategoryPage />} />
           <Route path={path.NHA_CHO_THUE} element={<CategoryPage />} />
+          <Route path={path.TIM_KIEM} element={<SearchDetail />} />
           <Route path={path.CHI_TIET__TITLE__POSTID} element={<DetailPage />} />
         </Route>
       </Routes>

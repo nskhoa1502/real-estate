@@ -6,30 +6,54 @@ import { getPostsLimit } from "../../../redux/slices/postSlice";
 import { getPostsFilter } from "../../../redux/slices/postSlice";
 import { useSearchParams } from "react-router-dom";
 
-const List = ({ categoryCode }) => {
+const List = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
   const [params] = useSearchParams();
 
   const pageNumber = params.get("page") || 1;
-  const areaCode = params.get("areaCode") || null;
-  const priceCode = params.get("priceCode") || null;
+  const areaCode = params.getAll("areaCode") || [];
+  const priceCode = params.getAll("priceCode") || [];
+  const categoryCode = params.get("categoryCode") || null;
+  const provinceCode = params.get("provinceCode") || null;
 
-  // console.log(`page `, pageNumber);
-  // console.log(`area code `, areaCode);
-  // console.log(`price code `, priceCode);
-  // console.log(`category code `, categoryCode);
+  console.log(`page `, pageNumber);
+  console.log(`area code `, areaCode);
+  console.log(`price code `, priceCode);
+  console.log(`category code `, categoryCode);
+  console.log(`province code `, provinceCode);
 
-  // console.log(posts);
   useEffect(() => {
-    if (categoryCode || areaCode || priceCode) {
-      dispatch(
-        getPostsFilter({ page: +pageNumber, areaCode, priceCode, categoryCode })
-      );
+    let filterOptions = {
+      page: +pageNumber,
+      areaCode,
+      priceCode,
+    };
+    if (categoryCode !== "null") {
+      filterOptions.categoryCode = categoryCode;
+    }
+    if (provinceCode !== "null") {
+      filterOptions.provinceCode = provinceCode;
+    }
+    if (
+      categoryCode ||
+      areaCode.length > 0 ||
+      priceCode.length > 0 ||
+      provinceCode
+    ) {
+      console.log(filterOptions);
+      dispatch(getPostsFilter(filterOptions));
     } else {
       dispatch(getPostsLimit(pageNumber));
     }
-  }, [areaCode, priceCode, pageNumber, categoryCode, dispatch]);
+  }, [
+    JSON.stringify(areaCode),
+    JSON.stringify(priceCode),
+    pageNumber,
+    categoryCode,
+    dispatch,
+    provinceCode,
+  ]);
 
   return (
     <div className="w-full p-2 bg-white shadow-md rounded-md px-6">

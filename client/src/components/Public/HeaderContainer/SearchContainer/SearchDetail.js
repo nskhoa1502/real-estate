@@ -2,7 +2,7 @@ import React from "react";
 import { ItemSidebar, List, Pagination, RelatedPost } from "../../../Public";
 
 import { useSelector } from "react-redux";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const SearchDetail = () => {
   const { prices, areas } = useSelector((state) => state.app);

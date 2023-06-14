@@ -24,11 +24,11 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
     (page, additionalParams = {}) => {
       const params = {
         page,
-        ...((areaCode && areaCode.length > 0 && { areaCode: areaCode }) || {}),
+        ...((areaCode && areaCode.length > 0 && { areaCode: areaCode }) || []),
         ...((priceCode && priceCode.length > 0 && { priceCode: priceCode }) ||
-          {}),
-        ...((provinceCode && { provinceCode: provinceCode }) || {}),
-        ...((categoryCode && { categoryCode: categoryCode }) || {}),
+          []),
+        ...((provinceCode && { provinceCode: provinceCode }) || []),
+        ...((categoryCode && { categoryCode: categoryCode }) || []),
         ...additionalParams,
       };
 

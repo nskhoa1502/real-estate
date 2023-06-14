@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchItem from "./SearchItem";
 import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { getPostsFilter } from "../../../../redux/slices/postSlice";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
 import { path } from "../../../../utils/path/path";
-import { getPostsFilter } from "../../../../redux/slices/postSlice";
 
 const {
   BsChevronRight,
@@ -28,7 +27,7 @@ const Search = () => {
   const [defaultText, setDefaultText] = useState("");
   const navigate = useNavigate();
   // const [arrMinMax, setArrMinMax] = useState([]);
-
+  const location = useLocation();
   // console.log(prices);
   // console.log(areas);
   // console.log(transformObj(prices));
@@ -37,7 +36,6 @@ const Search = () => {
   // console.log(getCode([6.5, 14.5], prices));
   // console.log(getCode([35, 75], areas));
 
-  const dispatch = useDispatch();
   const [filterText, setFilterText] = useState({
     category: "",
     province: "",
@@ -63,13 +61,18 @@ const Search = () => {
   };
 
   const handleSearch = () => {
-    // dispatch(getPostsFilter(filterQueries));
-    console.log(filterQueries);
     navigate({
       pathname: path.TIM_KIEM,
       search: createSearchParams(filterQueries).toString(),
     });
   };
+
+  useEffect(() => {
+    setArrMinMax([]);
+    setFilterText({ category: "", province: "", area: "", price: "" });
+    setFilterQueries({ page: 1 });
+  }, [location.pathname]);
+
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
       {/* <SearchModalHeader setIsShowModal={setIsShowModal} /> */}

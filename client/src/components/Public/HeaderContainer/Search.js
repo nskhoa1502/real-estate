@@ -4,6 +4,7 @@ import icons from "../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsFilter } from "../../../redux/slices/postSlice";
+import { getCode } from "../../../utils/helper-function/getCode";
 
 const {
   BsChevronRight,
@@ -22,6 +23,11 @@ const Search = () => {
     (state) => state.app
   );
 
+  // console.log(prices);
+  console.log(getCode(prices));
+  console.log(getCode(areas));
+  // console.log(areas);
+
   const dispatch = useDispatch();
   const [filterText, setFilterText] = useState({
     category: "",
@@ -31,14 +37,10 @@ const Search = () => {
   });
 
   const [filterQueries, setFilterQueries] = useState({
-    categoryCode: "",
-    provinceCode: "",
-    areaCode: "",
-    priceCode: "",
     page: 1,
   });
 
-  console.log(filterQueries);
+  // console.log(filterQueries);
 
   const handleShowModal = (content, name) => {
     setContent(content);
@@ -70,6 +72,7 @@ const Search = () => {
           text="Toàn quốc"
           IconAfter={<BsChevronRight color="#9CA3AF" />}
           IconBefore={<GrLocation />}
+          bold={true}
           filterText={filterText.province}
         />
       </span>
@@ -111,6 +114,7 @@ const Search = () => {
           name={name}
           setFilterText={setFilterText}
           setFilterQueries={setFilterQueries}
+          queries={filterQueries}
         />
       )}
     </div>

@@ -14,11 +14,13 @@ const SearchModal = ({
   name,
   setFilterText,
   setFilterQueries,
+  queries,
 }) => {
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
 
-  console.log(content);
+  // console.log(content);
+  console.log(queries);
 
   useEffect(() => {
     const activeTrackEl = document.querySelector("#track-active");
@@ -111,65 +113,65 @@ const SearchModal = ({
       }));
     }
 
-    if (name === "price") {
-      const startPrice = mapPercentagesToRange(percent1, 0, 15, 0.5);
-      const endPrice = mapPercentagesToRange(percent2, 0, 15, 0.5);
-      let filterText;
+    // if (name === "price") {
+    //   const startPrice = mapPercentagesToRange(percent1, 0, 15, 0.5);
+    //   const endPrice = mapPercentagesToRange(percent2, 0, 15, 0.5);
+    //   let filterText;
 
-      if (startPrice === 0 && endPrice === 1) {
-        filterText = `Dưới ${endPrice} triệu`;
-        setFilterText((prev) => ({
-          ...prev,
-          [name]: filterText,
-        }));
-      } else {
-        filterText = `Từ ${startPrice} - ${endPrice} triệu`;
-        setFilterText((prev) => ({
-          ...prev,
-          [name]: `Từ ${startPrice} - ${endPrice} triệu`,
-        }));
-      }
+    //   if (startPrice === 0 && endPrice === 1) {
+    //     filterText = `Dưới ${endPrice} triệu`;
+    //     setFilterText((prev) => ({
+    //       ...prev,
+    //       [name]: filterText,
+    //     }));
+    //   } else {
+    //     filterText = `Từ ${startPrice} - ${endPrice} triệu`;
+    //     setFilterText((prev) => ({
+    //       ...prev,
+    //       [name]: `Từ ${startPrice} - ${endPrice} triệu`,
+    //     }));
+    //   }
 
-      const foundPrice = content?.find((item) => item.value === filterText);
-      // console.log(foundPrice);
+    //   const foundPrice = content?.find((item) => item.value === filterText);
+    //   // console.log(foundPrice);
 
-      setFilterQueries((prev) => ({
-        ...prev,
-        [queryKey]: foundPrice.code,
-      }));
-    }
+    //   setFilterQueries((prev) => ({
+    //     ...prev,
+    //     [queryKey]: foundPrice.code,
+    //   }));
+    // }
 
-    if (name === "area") {
-      const startArea = mapPercentagesToRange(percent1, 0, 90, 5);
-      const endArea = mapPercentagesToRange(percent2, 0, 90, 5);
-      let filterText;
-      if (startArea === 0 && endArea === 20) {
-        filterText = `Dưới ${endArea}m`;
-        setFilterText((prev) => ({
-          ...prev,
-          [name]: filterText,
-        }));
-      } else {
-        filterText = `Từ ${startArea} - ${endArea}m`;
-        setFilterText((prev) => ({
-          ...prev,
-          [name]: filterText,
-        }));
-      }
+    // if (name === "area") {
+    //   const startArea = mapPercentagesToRange(percent1, 0, 90, 5);
+    //   const endArea = mapPercentagesToRange(percent2, 0, 90, 5);
+    //   let filterText;
+    //   if (startArea === 0 && endArea === 20) {
+    //     filterText = `Dưới ${endArea}m`;
+    //     setFilterText((prev) => ({
+    //       ...prev,
+    //       [name]: filterText,
+    //     }));
+    //   } else {
+    //     filterText = `Từ ${startArea} - ${endArea}m`;
+    //     setFilterText((prev) => ({
+    //       ...prev,
+    //       [name]: filterText,
+    //     }));
+    //   }
 
-      const foundArea = content?.find((item) => item.value === filterText);
+    //   const foundArea = content?.find((item) => item.value === filterText);
 
-      // console.log(filterText);
-      // console.log(content[0].value);
-      console.log(foundArea);
+    //   // console.log(filterText);
+    //   // console.log(content[0].value);
+    //   console.log(foundArea);
 
-      setFilterQueries((prev) => ({
-        ...prev,
-        [queryKey]: foundArea.code,
-      }));
-    }
+    //   setFilterQueries((prev) => ({
+    //     ...prev,
+    //     [queryKey]: foundArea.code,
+    //   }));
+    // }
 
-    setIsShowModal(false);
+    // setIsShowModal(false);
   };
 
   return (
@@ -208,6 +210,9 @@ const SearchModal = ({
                     type="radio"
                     name={name}
                     value={item.code}
+                    checked={
+                      item.code === queries[`${name}Code`] ? true : false
+                    }
                     id={item.code}
                     onClick={(e) => handleFilterSubmit(e, item.value)}
                   />

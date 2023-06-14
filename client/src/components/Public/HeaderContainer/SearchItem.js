@@ -9,11 +9,12 @@ const SearchItem = ({ IconBefore, IconAfter, text, bold, filterText }) => {
           <span
             className={
               bold &&
-              "font-medium text-black text-ellipsis overflow-hidden whitespace-nowrap"
+              `font-medium text-black ${
+                filterText ? "font-medium text-black" : ""
+              }  text-ellipsis overflow-hidden whitespace-nowrap`
             }
           >
-            {" "}
-            {filterText ? filterText : text}
+            {filterText || text}
           </span>
         </div>
 

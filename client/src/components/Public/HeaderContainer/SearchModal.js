@@ -18,6 +18,8 @@ const SearchModal = ({
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
 
+  console.log(content);
+
   useEffect(() => {
     const activeTrackEl = document.querySelector("#track-active");
 
@@ -88,28 +90,80 @@ const SearchModal = ({
   const handleFilterSubmit = (e, value) => {
     e.stopPropagation();
 
+    const queryKey =
+      name === "category"
+        ? "categoryCode"
+        : name === "province"
+        ? "provinceCode"
+        : name === "price"
+        ? "priceCode"
+        : "areaCode";
+
     if (name === "category" || name === "province") {
       setFilterText((prev) => ({
         ...prev,
         [name]: value,
+      }));
+
+      setFilterQueries((prev) => ({
+        ...prev,
+        [queryKey]: e.target.value,
       }));
     }
 
     if (name === "price") {
       const startPrice = mapPercentagesToRange(percent1, 0, 15, 0.5);
       const endPrice = mapPercentagesToRange(percent2, 0, 15, 0.5);
-      setFilterText((prev) => ({
+      let filterText;
+
+      if (startPrice === 0 && endPrice === 1) {
+        filterText = `Dưới ${endPrice} triệu`;
+        setFilterText((prev) => ({
+          ...prev,
+          [name]: filterText,
+        }));
+      } else {
+        filterText = `Từ ${startPrice} - ${endPrice} triệu`;
+        setFilterText((prev) => ({
+          ...prev,
+          [name]: `Từ ${startPrice} - ${endPrice} triệu`,
+        }));
+      }
+
+      const foundPrice = content?.find((item) => item.value === filterText);
+      // console.log(foundPrice);
+
+      setFilterQueries((prev) => ({
         ...prev,
-        [name]: `Từ ${startPrice} - ${endPrice} triệu`,
+        [queryKey]: foundPrice.code,
       }));
     }
 
     if (name === "area") {
       const startArea = mapPercentagesToRange(percent1, 0, 90, 5);
       const endArea = mapPercentagesToRange(percent2, 0, 90, 5);
-      setFilterText((prev) => ({
+      let filterText;
+      if (startArea === "0" && endArea === "20") {
+        filterText = `Dưới ${endArea}m`;
+        setFilterText((prev) => ({
+          ...prev,
+          [name]: filterText,
+        }));
+      } else {
+        filterText = `Từ ${startArea} - ${endArea}m`;
+        setFilterText((prev) => ({
+          ...prev,
+          [name]: filterText,
+        }));
+      }
+
+      const foundArea = content?.find((item) => item.value === filterText);
+
+      // console.log(foundArea);
+
+      setFilterQueries((prev) => ({
         ...prev,
-        [name]: `Từ ${startArea} - ${endArea} m^2`,
+        [queryKey]: foundArea.code,
       }));
     }
 

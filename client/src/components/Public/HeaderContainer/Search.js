@@ -34,6 +34,8 @@ const Search = () => {
     priceCode: "",
   });
 
+  console.log(filterQueries);
+
   const handleShowModal = (content, name) => {
     setContent(content);
     setName(name);

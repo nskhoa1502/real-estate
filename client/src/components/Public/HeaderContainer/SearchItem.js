@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 
 const SearchItem = ({ IconBefore, IconAfter, text, bold, filterText }) => {
   return (

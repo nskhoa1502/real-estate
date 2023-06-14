@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import icons from "../../../utils/icon/icons";
 import {
   mapPercentagesToRange,
@@ -221,9 +221,9 @@ const SearchModal = ({
                         mapPercentagesToArea(100)
                       ? `Trên ${mapPercentagesToArea(100)}+ m2`
                       : `Từ ${mapPercentagesToArea(
-                          percent1 <= percent2 ? percent1 : percent2
+                          Math.min(percent1, percent2)
                         )} đến ${mapPercentagesToArea(
-                          percent2 >= percent1 ? percent2 : percent1
+                          Math.max(percent1, percent2)
                         )}m^2`
                     : name === "price"
                     ? mapPercentagesToPrice(percent1) ===
@@ -232,9 +232,9 @@ const SearchModal = ({
                         mapPercentagesToPrice(100)
                       ? `Trên ${mapPercentagesToPrice(100)}+ triệu`
                       : `Từ ${mapPercentagesToPrice(
-                          percent1 <= percent2 ? percent1 : percent2
+                          Math.min(percent1, percent2)
                         )} đến ${mapPercentagesToPrice(
-                          percent2 >= percent1 ? percent2 : percent1
+                          Math.max(percent1, percent2)
                         )} triệu`
                     : null}
                 </div>
@@ -342,4 +342,4 @@ const SearchModal = ({
   );
 };
 
-export default SearchModal;
+export default memo(SearchModal);

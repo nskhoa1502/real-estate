@@ -16,9 +16,16 @@ const SearchModal = ({
   setFilterText,
   setFilterQueries,
   queries,
+  arrMinMax,
+  setArrMinMax,
 }) => {
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
+
+  // console.log(arrMinMax[0]);
+  // console.log(arrMinMax[1]);
+  // const [percent1, setPercent1] = useState(0);
+  // const [percent2, setPercent2] = useState(100);
 
   const mapPercentagesToPrice = (value) => {
     return mapPercentagesToRange(value, 0, 15, 0.5);
@@ -96,8 +103,8 @@ const SearchModal = ({
       }
 
       if (filterValueArr[0] >= 20 && filterValueArr[1] >= 20) {
-        setPercent1(mapPriceToPercentage(filterValueArr[0]));
-        setPercent2(mapPriceToPercentage(filterValueArr[1]));
+        setPercent1(mapAreaToPercentage(filterValueArr[0]));
+        setPercent2(mapAreaToPercentage(filterValueArr[1]));
       }
     }
   };
@@ -149,6 +156,7 @@ const SearchModal = ({
     setFilterText((prev) => ({
       ...prev,
       [name]: textValue,
+      // [`${name}Rage`]: [percent1, percent2],
     }));
 
     setIsShowModal(false);

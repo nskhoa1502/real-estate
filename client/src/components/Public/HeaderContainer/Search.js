@@ -20,6 +20,8 @@ const Search = () => {
   const { provinces, areas, prices, categories } = useSelector(
     (state) => state.app
   );
+  // const [arrMinMax, setArrMinMax] = useState([]);
+  // const [arrMinMax, setArrMinMax] = useState([]);
 
   // console.log(prices);
   // console.log(areas);

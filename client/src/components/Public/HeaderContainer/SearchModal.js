@@ -20,9 +20,21 @@ const SearchModal = ({
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
 
-  console.log(content);
-  // console.log(queries);
+  const mapPercentagesToPrice = (value) => {
+    return mapPercentagesToRange(value, 0, 15, 0.5);
+  };
+  const mapPercentagesToArea = (value) => {
+    return mapPercentagesToRange(value, 0, 90, 5);
+  };
 
+  const mapPriceToPercentage = (value) => {
+    return mapRangeToPercentage(value, 0, 15, 0.5);
+  };
+
+  const mapAreaToPercentage = (value) => {
+    return mapRangeToPercentage(value, 0, 90, 5);
+  };
+  // console.log(mapPercentagesToPrice(percent2));
   useEffect(() => {
     const activeTrackEl = document.querySelector("#track-active");
 
@@ -60,7 +72,7 @@ const SearchModal = ({
     if (filterValueArr.length === 1) {
       if (filterValueArr[0] === 1) {
         setPercent1(0);
-        setPercent2(mapRangeToPercentage(1, 0, 15, 0.5));
+        setPercent2(mapPriceToPercentage(1));
       }
       if (filterValueArr[0] === 15) {
         setPercent1(100);
@@ -69,7 +81,7 @@ const SearchModal = ({
 
       if (filterValueArr[0] === 20) {
         setPercent1(0);
-        setPercent2(mapRangeToPercentage(20, 0, 90, 5));
+        setPercent2(mapAreaToPercentage(20));
       }
       if (filterValueArr[0] === 90) {
         setPercent1(100);
@@ -79,13 +91,13 @@ const SearchModal = ({
 
     if (filterValueArr.length === 2) {
       if (filterValueArr[0] <= 15 && filterValueArr[1] <= 15) {
-        setPercent1(mapRangeToPercentage(filterValueArr[0], 0, 15, 0.5));
-        setPercent2(mapRangeToPercentage(filterValueArr[1], 0, 15, 0.5));
+        setPercent1(mapPriceToPercentage(filterValueArr[0]));
+        setPercent2(mapPriceToPercentage(filterValueArr[1]));
       }
 
       if (filterValueArr[0] >= 20 && filterValueArr[1] >= 20) {
-        setPercent1(mapRangeToPercentage(filterValueArr[0], 0, 90, 5));
-        setPercent2(mapRangeToPercentage(filterValueArr[1], 0, 90, 5));
+        setPercent1(mapPriceToPercentage(filterValueArr[0]));
+        setPercent2(mapPriceToPercentage(filterValueArr[1]));
       }
     }
   };
@@ -114,65 +126,7 @@ const SearchModal = ({
       }));
     }
 
-    // if (name === "price") {
-    //   const startPrice = mapPercentagesToRange(percent1, 0, 15, 0.5);
-    //   const endPrice = mapPercentagesToRange(percent2, 0, 15, 0.5);
-    //   let filterText;
-
-    //   if (startPrice === 0 && endPrice === 1) {
-    //     filterText = `Dưới ${endPrice} triệu`;
-    //     setFilterText((prev) => ({
-    //       ...prev,
-    //       [name]: filterText,
-    //     }));
-    //   } else {
-    //     filterText = `Từ ${startPrice} - ${endPrice} triệu`;
-    //     setFilterText((prev) => ({
-    //       ...prev,
-    //       [name]: `Từ ${startPrice} - ${endPrice} triệu`,
-    //     }));
-    //   }
-
-    //   const foundPrice = content?.find((item) => item.value === filterText);
-    //   // console.log(foundPrice);
-
-    //   setFilterQueries((prev) => ({
-    //     ...prev,
-    //     [queryKey]: foundPrice.code,
-    //   }));
-    // }
-
-    // if (name === "area") {
-    //   const startArea = mapPercentagesToRange(percent1, 0, 90, 5);
-    //   const endArea = mapPercentagesToRange(percent2, 0, 90, 5);
-    //   let filterText;
-    //   if (startArea === 0 && endArea === 20) {
-    //     filterText = `Dưới ${endArea}m`;
-    //     setFilterText((prev) => ({
-    //       ...prev,
-    //       [name]: filterText,
-    //     }));
-    //   } else {
-    //     filterText = `Từ ${startArea} - ${endArea}m`;
-    //     setFilterText((prev) => ({
-    //       ...prev,
-    //       [name]: filterText,
-    //     }));
-    //   }
-
-    //   const foundArea = content?.find((item) => item.value === filterText);
-
-    //   // console.log(filterText);
-    //   // console.log(content[0].value);
-    //   console.log(foundArea);
-
-    //   setFilterQueries((prev) => ({
-    //     ...prev,
-    //     [queryKey]: foundArea.code,
-    //   }));
-    // }
-
-    // setIsShowModal(false);
+    setIsShowModal(false);
   };
 
   const handlePriceAndAreaSubmit = (e, value) => {
@@ -182,12 +136,21 @@ const SearchModal = ({
       [`${name}Code`]: value[`${name}Code`]?.map((i) => i.code),
     }));
 
+    let textValue;
+
+    if (name === "price" && percent1 === 100 && percent2 === 100) {
+      textValue = `Trên ${mapPercentagesToPrice(100)} triệu`;
+    } else if (name === "area" && percent1 === 100 && percent2 === 100) {
+      textValue = `Trên ${mapPercentagesToArea(100)}m`;
+    } else {
+      textValue = value[`${name}`];
+    }
+
     setFilterText((prev) => ({
       ...prev,
-      [name]: value[`${name}`],
+      [name]: textValue,
     }));
 
-    // console.log(value[`${name}Code`].map((i) => i.code));
     setIsShowModal(false);
   };
 
@@ -231,8 +194,9 @@ const SearchModal = ({
                       item.code === queries[`${name}Code`] ? true : false
                     }
                     id={item.code}
-                    onClick={(e) => handleCateAndProvSubmit(e, item.value)}
+                    onChange={(e) => handleCateAndProvSubmit(e, item.value)}
                   />
+
                   <label htmlFor={item.code}>{item.value}</label>
                 </span>
               ))}
@@ -245,38 +209,26 @@ const SearchModal = ({
               <div className="flex flex-col items-center justify-center relative">
                 <div className="z-30 absolute top-[-40px] font-bold text-xl text-orange-600">
                   {name === "area"
-                    ? mapPercentagesToRange(percent1, 0, 90, 5) ===
-                        mapPercentagesToRange(100, 0, 90, 5) &&
-                      mapPercentagesToRange(percent2, 0, 90, 5) ===
-                        mapPercentagesToRange(100, 0, 90, 5)
-                      ? `Trên ${mapPercentagesToRange(100, 0, 90, 5)}+ m2`
-                      : `Từ ${mapPercentagesToRange(
-                          percent1 <= percent2 ? percent1 : percent2,
-                          0,
-                          90,
-                          5
-                        )} đến ${mapPercentagesToRange(
-                          percent2 >= percent1 ? percent2 : percent1,
-                          0,
-                          90,
-                          5
+                    ? mapPercentagesToArea(percent1) ===
+                        mapPercentagesToArea(100) &&
+                      mapPercentagesToArea(percent2) ===
+                        mapPercentagesToArea(100)
+                      ? `Trên ${mapPercentagesToArea(100)}+ m2`
+                      : `Từ ${mapPercentagesToArea(
+                          percent1 <= percent2 ? percent1 : percent2
+                        )} đến ${mapPercentagesToArea(
+                          percent2 >= percent1 ? percent2 : percent1
                         )}m^2`
                     : name === "price"
-                    ? mapPercentagesToRange(percent1, 0, 15, 0.5) ===
-                        mapPercentagesToRange(100, 0, 15, 0.5) &&
-                      mapPercentagesToRange(percent2, 0, 15, 0.5) ===
-                        mapPercentagesToRange(100, 0, 15, 0.5)
-                      ? `Trên ${mapPercentagesToRange(100, 0, 15, 0.5)}+ triệu`
-                      : `Từ ${mapPercentagesToRange(
-                          percent1 <= percent2 ? percent1 : percent2,
-                          0,
-                          15,
-                          0.5
-                        )} đến ${mapPercentagesToRange(
-                          percent2 >= percent1 ? percent2 : percent1,
-                          0,
-                          15,
-                          0.5
+                    ? mapPercentagesToPrice(percent1) ===
+                        mapPercentagesToPrice(100) &&
+                      mapPercentagesToPrice(percent2) ===
+                        mapPercentagesToPrice(100)
+                      ? `Trên ${mapPercentagesToPrice(100)}+ triệu`
+                      : `Từ ${mapPercentagesToPrice(
+                          percent1 <= percent2 ? percent1 : percent2
+                        )} đến ${mapPercentagesToPrice(
+                          percent2 >= percent1 ? percent2 : percent1
                         )} triệu`
                     : null}
                 </div>
@@ -326,8 +278,8 @@ const SearchModal = ({
                     className="mr-[-12px] cursor-pointer"
                   >
                     {name === "price"
-                      ? `${mapPercentagesToRange(100, 0, 15, 0.5)} triệu`
-                      : `${mapPercentagesToRange(100, 0, 90, 5)} m^2`}
+                      ? `${mapPercentagesToPrice(100)} triệu`
+                      : `${mapPercentagesToArea(100)} m^2`}
                   </span>
                 </div>
               </div>
@@ -354,18 +306,12 @@ const SearchModal = ({
               e.stopPropagation();
 
               const rangeValue = [
-                mapPercentagesToRange(
-                  percent1,
-                  0,
-                  name === "price" ? 15 : 90,
-                  name === "price" ? 0.5 : 5
-                ),
-                mapPercentagesToRange(
-                  percent2,
-                  0,
-                  name === "price" ? 15 : 90,
-                  name === "price" ? 0.5 : 5
-                ),
+                name === "price"
+                  ? mapPercentagesToPrice(percent1)
+                  : mapPercentagesToArea(percent1),
+                name === "price"
+                  ? mapPercentagesToPrice(percent2)
+                  : mapPercentagesToArea(percent2),
               ];
 
               const codeValue = getCode(rangeValue, content);

@@ -141,7 +141,7 @@ const SearchModal = ({
     if (name === "price" && percent1 === 100 && percent2 === 100) {
       textValue = `Trên ${mapPercentagesToPrice(100)} triệu`;
     } else if (name === "area" && percent1 === 100 && percent2 === 100) {
-      textValue = `Trên ${mapPercentagesToArea(100)}m`;
+      textValue = `Trên ${mapPercentagesToArea(100)}m\u00B2`;
     } else {
       textValue = value[`${name}`];
     }
@@ -172,10 +172,10 @@ const SearchModal = ({
 
     const codeValue = getCode(rangeValue, content);
     const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
-      name === "price" ? "triệu" : "m"
+      name === "price" ? "triệu" : `m\u00B2`
     }`;
 
-    console.log(textValue);
+    // console.log(textValue);
 
     handlePriceAndAreaSubmit(e, {
       [`${name}Range`]: rangeValue,
@@ -233,12 +233,12 @@ const SearchModal = ({
                         mapPercentagesToArea(100) &&
                       mapPercentagesToArea(percent2) ===
                         mapPercentagesToArea(100)
-                      ? `Trên ${mapPercentagesToArea(100)}+ m2`
+                      ? `Trên ${mapPercentagesToArea(100)}m\u00B2+`
                       : `Từ ${mapPercentagesToArea(
                           Math.min(percent1, percent2)
                         )} đến ${mapPercentagesToArea(
                           Math.max(percent1, percent2)
-                        )}m^2`
+                        )}m\u00B2`
                     : name === "price"
                     ? mapPercentagesToPrice(percent1) ===
                         mapPercentagesToPrice(100) &&
@@ -299,7 +299,7 @@ const SearchModal = ({
                   >
                     {name === "price"
                       ? `${mapPercentagesToPrice(100)} triệu`
-                      : `${mapPercentagesToArea(100)} m^2`}
+                      : `${mapPercentagesToArea(100)} m\u00B2`}
                   </span>
                 </div>
               </div>

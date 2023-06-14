@@ -8,7 +8,13 @@ import { extractNumbers } from "../../../utils/helper-function/extractNumbers";
 
 const { GrLinkPrevious } = icons;
 
-const SearchModal = ({ setIsShowModal, content, name, setFilterText }) => {
+const SearchModal = ({
+  setIsShowModal,
+  content,
+  name,
+  setFilterText,
+  setFilterQueries,
+}) => {
   const [percent1, setPercent1] = useState(0);
   const [percent2, setPercent2] = useState(100);
 
@@ -79,8 +85,16 @@ const SearchModal = ({ setIsShowModal, content, name, setFilterText }) => {
     }
   };
 
-  const handleFilterSubmit = (e) => {
+  const handleFilterSubmit = (e, value) => {
     e.stopPropagation();
+
+    if (name === "category" || name === "province") {
+      setFilterText((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+
     if (name === "price") {
       const startPrice = mapPercentagesToRange(percent1, 0, 15, 0.5);
       const endPrice = mapPercentagesToRange(percent2, 0, 15, 0.5);
@@ -139,6 +153,7 @@ const SearchModal = ({ setIsShowModal, content, name, setFilterText }) => {
                     name={name}
                     value={item.code}
                     id={item.code}
+                    onClick={(e) => handleFilterSubmit(e, item.value)}
                   />
                   <label htmlFor={item.code}>{item.value}</label>
                 </span>

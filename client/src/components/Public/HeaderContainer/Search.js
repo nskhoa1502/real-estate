@@ -27,6 +27,13 @@ const Search = () => {
     price: "",
   });
 
+  const [filterQueries, setFilterQueries] = useState({
+    categoryCode: "",
+    provinceCode: "",
+    areaCode: "",
+    priceCode: "",
+  });
+
   const handleShowModal = (content, name) => {
     setContent(content);
     setName(name);
@@ -92,6 +99,7 @@ const Search = () => {
           setIsShowModal={setIsShowModal}
           name={name}
           setFilterText={setFilterText}
+          setFilterQueries={setFilterQueries}
         />
       )}
     </div>

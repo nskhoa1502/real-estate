@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { SearchItem } from "../../../UI";
 import icons from "../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostsFilter } from "../../../redux/slices/postSlice";
 
 const {
   BsChevronRight,
@@ -20,6 +21,8 @@ const Search = () => {
   const { provinces, areas, prices, categories } = useSelector(
     (state) => state.app
   );
+
+  const dispatch = useDispatch();
   const [filterText, setFilterText] = useState({
     category: "",
     province: "",
@@ -32,6 +35,7 @@ const Search = () => {
     provinceCode: "",
     areaCode: "",
     priceCode: "",
+    page: 1,
   });
 
   console.log(filterQueries);
@@ -40,6 +44,10 @@ const Search = () => {
     setContent(content);
     setName(name);
     setIsShowModal(true);
+  };
+
+  const handleSearch = () => {
+    dispatch(getPostsFilter(filterQueries));
   };
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
@@ -92,6 +100,7 @@ const Search = () => {
       <button
         type="button"
         className="outline-none py-2 px-4 flex-1 border bg-primaryBlue text-sm flex items-center justify-center gap-2 text-white font-medium"
+        onClick={handleSearch}
       >
         <CiSearch size={20} /> Tìm kiếm
       </button>

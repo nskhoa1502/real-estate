@@ -143,7 +143,7 @@ const SearchModal = ({
       const startArea = mapPercentagesToRange(percent1, 0, 90, 5);
       const endArea = mapPercentagesToRange(percent2, 0, 90, 5);
       let filterText;
-      if (startArea === "0" && endArea === "20") {
+      if (startArea === 0 && endArea === 20) {
         filterText = `Dưới ${endArea}m`;
         setFilterText((prev) => ({
           ...prev,
@@ -159,7 +159,9 @@ const SearchModal = ({
 
       const foundArea = content?.find((item) => item.value === filterText);
 
-      // console.log(foundArea);
+      // console.log(filterText);
+      // console.log(content[0].value);
+      console.log(foundArea);
 
       setFilterQueries((prev) => ({
         ...prev,

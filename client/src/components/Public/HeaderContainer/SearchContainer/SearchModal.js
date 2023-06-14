@@ -1,13 +1,11 @@
 import React, { useState, useEffect, memo } from "react";
-import icons from "../../../utils/icon/icons";
 import {
   mapPercentagesToRange,
   mapRangeToPercentage,
-} from "../../../utils/helper-function/convert";
-import { extractNumbers } from "../../../utils/helper-function/extractNumbers";
-import { getCode } from "../../../utils/helper-function/getCode";
-
-const { GrLinkPrevious } = icons;
+} from "../../../../utils/helper-function/convert";
+import { extractNumbers } from "../../../../utils/helper-function/extractNumbers";
+import { getCode } from "../../../../utils/helper-function/getCode";
+import SearchModalHeader from "./SearchModalHeader";
 
 const SearchModal = ({
   setIsShowModal,
@@ -172,17 +170,7 @@ const SearchModal = ({
         }}
         className="w-1/2 bg-white rounded-md border"
       >
-        <div className="h-[45px] border-b border-gray-200">
-          <span className="h-[45px] flex items-center px-4">
-            <GrLinkPrevious
-              size={24}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsShowModal(false);
-              }}
-            />
-          </span>
-        </div>
+        <SearchModalHeader setIsShowModal={setIsShowModal} />
 
         {(name === "category" || name === "province") && (
           <div className="p-4 flex flex-col">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { SearchItem } from "../../../UI";
-import icons from "../../../utils/icon/icons";
+import SearchItem from "./SearchItem";
+import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -63,6 +63,7 @@ const Search = () => {
   };
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
+      {/* <SearchModalHeader setIsShowModal={setIsShowModal} /> */}
       <span
         onClick={() => handleShowModal(categories, `category`)}
         className="flex-1 cursor-pointer"

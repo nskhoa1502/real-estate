@@ -19,12 +19,12 @@ export const dataPrice = prices.map((item) => {
 });
 
 const areas = [
-  { min: 0, max: 20, value: "Dưới 20m\u00B2" },
-  { min: 20, max: 30, value: "Từ 20 - 30m\u00B2" },
-  { min: 30, max: 50, value: "Từ 30 - 50m\u00B2" },
-  { min: 50, max: 70, value: "Từ 50 - 70m\u00B2" },
-  { min: 70, max: 90, value: "Từ 70 - 90m\u00B2" },
-  { min: 90, max: 999999, value: "Trên 90m\u00B2" },
+  { min: 0, max: 20, value: "Dưới 20m" },
+  { min: 20, max: 30, value: "Từ 20 - 30m" },
+  { min: 30, max: 50, value: "Từ 30 - 50m" },
+  { min: 50, max: 70, value: "Từ 50 - 70m" },
+  { min: 70, max: 90, value: "Từ 70 - 90m" },
+  { min: 90, max: 999999, value: "Trên 90m" },
 ];
 
 export const dataArea = areas.map((item) => {

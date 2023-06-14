@@ -16,6 +16,7 @@ const SearchModal = ({
   queries,
   arrMinMax,
   setArrMinMax,
+  defaultText,
 }) => {
   const [percent1, setPercent1] = useState(arrMinMax[0] || 0);
   const [percent2, setPercent2] = useState(arrMinMax[1] || 100);
@@ -122,7 +123,7 @@ const SearchModal = ({
 
       setFilterQueries((prev) => ({
         ...prev,
-        [queryKey]: e.target.value,
+        [queryKey]: e.target.value || null,
       }));
     }
 
@@ -194,12 +195,24 @@ const SearchModal = ({
           e.stopPropagation();
           setIsShowModal(true);
         }}
-        className="w-1/2 bg-white rounded-md border"
+        className="w-[700px] h-[500px] bg-white rounded-md border relative"
       >
         <SearchModalHeader setIsShowModal={setIsShowModal} />
 
         {(name === "category" || name === "province") && (
           <div className="p-4 flex flex-col">
+            <span className="py-2 flex gap-2 icon border-b border-gray-200">
+              <input
+                type="radio"
+                name={name}
+                value={undefined}
+                id="default"
+                checked={!queries[`${name}Code`] ? true : false}
+                onChange={(e) => handleCateAndProvSubmit(e)}
+              />
+
+              <label htmlFor="default">{defaultText}</label>
+            </span>
             {content?.length > 0 &&
               content?.map((item) => (
                 <span
@@ -321,7 +334,7 @@ const SearchModal = ({
         {(name === "price" || name === "area") && (
           <button
             type="button"
-            className="w-full py-3 bg-orange-400 text-lg font-semi rounded-bl-md rounded-br-md hover:underline"
+            className="w-full absolute bottom-0 py-3 bg-orange-400 text-lg font-semi rounded-bl-md rounded-br-md hover:underline"
             onClick={(e) => {
               handleSubmit(e);
             }}

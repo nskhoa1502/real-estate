@@ -22,6 +22,7 @@ const Search = () => {
     (state) => state.app
   );
   const [arrMinMax, setArrMinMax] = useState([]);
+  const [defaultText, setDefaultText] = useState("");
   // const [arrMinMax, setArrMinMax] = useState([]);
 
   // console.log(prices);
@@ -52,10 +53,11 @@ const Search = () => {
   // console.log(getCode(filterQueries?.priceCode, prices));
   // console.log(getCode(filterQueries?.areaCode, areas));
 
-  const handleShowModal = (content, name) => {
+  const handleShowModal = (content, name, defaultText) => {
     setContent(content);
     setName(name);
     setIsShowModal(true);
+    setDefaultText(defaultText);
   };
 
   const handleSearch = () => {
@@ -66,7 +68,9 @@ const Search = () => {
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
       {/* <SearchModalHeader setIsShowModal={setIsShowModal} /> */}
       <span
-        onClick={() => handleShowModal(categories, `category`)}
+        onClick={() =>
+          handleShowModal(categories, `category`, "Phòng trọ, nhà trọ")
+        }
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -77,7 +81,7 @@ const Search = () => {
         />
       </span>
       <span
-        onClick={() => handleShowModal(provinces, `province`)}
+        onClick={() => handleShowModal(provinces, `province`, "Toàn quốc")}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -89,7 +93,7 @@ const Search = () => {
         />
       </span>
       <span
-        onClick={() => handleShowModal(prices, `price`)}
+        onClick={() => handleShowModal(prices, `price`, "Chọn giá")}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -101,7 +105,7 @@ const Search = () => {
       </span>
 
       <span
-        onClick={() => handleShowModal(areas, `area`)}
+        onClick={() => handleShowModal(areas, `area`, "Chọn diện tích")}
         className="flex-1 cursor-pointer"
       >
         <SearchItem
@@ -129,6 +133,7 @@ const Search = () => {
           queries={filterQueries}
           arrMinMax={arrMinMax}
           setArrMinMax={setArrMinMax}
+          defaultText={defaultText}
         />
       )}
     </div>

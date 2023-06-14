@@ -164,7 +164,7 @@ export const createPricesAndAreas = () => {
     dataArea.forEach(async (item, index) => {
       await db.Area.create({
         code: item.code,
-        value: item.value,
+        value: item.value + `\u00B2`,
         order: index + 1,
       });
     });

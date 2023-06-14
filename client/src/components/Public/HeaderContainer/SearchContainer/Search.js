@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SearchItem from "./SearchItem";
 import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
@@ -28,6 +28,7 @@ const Search = () => {
   const navigate = useNavigate();
   // const [arrMinMax, setArrMinMax] = useState([]);
   const location = useLocation();
+  const prevPathRef = useRef();
   // console.log(prices);
   // console.log(areas);
   // console.log(transformObj(prices));
@@ -68,9 +69,19 @@ const Search = () => {
   };
 
   useEffect(() => {
-    setArrMinMax([]);
-    setFilterText({ category: "", province: "", area: "", price: "" });
-    setFilterQueries({ page: 1 });
+    // console.log("Current path: ", location.pathname);
+    // console.log("Previous path: ", prevPathRef.current);
+    // console.log(path.TIM_KIEM);
+    if (
+      location.pathname !== `/${path.TIM_KIEM}` &&
+      prevPathRef.current === `/${path.TIM_KIEM}`
+    ) {
+      console.log("Resetting filters...");
+      setArrMinMax([]);
+      setFilterText({ category: "", province: "", area: "", price: "" });
+      setFilterQueries({ page: 1 });
+    }
+    prevPathRef.current = location.pathname;
   }, [location.pathname]);
 
   return (

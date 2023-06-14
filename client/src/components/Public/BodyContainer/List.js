@@ -17,11 +17,11 @@ const List = () => {
   const categoryCode = params.get("categoryCode") || null;
   const provinceCode = params.get("provinceCode") || null;
 
-  console.log(`page `, pageNumber);
-  console.log(`area code `, areaCode);
-  console.log(`price code `, priceCode);
-  console.log(`category code `, categoryCode);
-  console.log(`province code `, provinceCode);
+  // console.log(`page `, pageNumber);
+  // console.log(`area code `, areaCode);
+  // console.log(`price code `, priceCode);
+  // console.log(`category code `, categoryCode);
+  // console.log(`province code `, provinceCode);
 
   useEffect(() => {
     let filterOptions = {

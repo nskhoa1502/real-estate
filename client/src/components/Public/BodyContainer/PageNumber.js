@@ -15,16 +15,20 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
 
   const [params] = useSearchParams();
 
-  const areaCode = params.get("areaCode") || null;
-  const priceCode = params.get("priceCode") || null;
+  const areaCode = params.getAll("areaCode");
+  const priceCode = params.getAll("priceCode");
+  const provinceCode = params.get("provinceCode");
+  const categoryCode = params.get("categoryCode");
 
   const navigateToPage = useCallback(
     (page, additionalParams = {}) => {
       const params = {
         page,
-        ...((areaCode && { areaCode: areaCode }) || {}),
-        ...((priceCode && { priceCode: priceCode }) || {}),
-        ...((category?.code && { categoryCode: category?.code }) || {}),
+        ...((areaCode && areaCode.length > 0 && { areaCode: areaCode }) || {}),
+        ...((priceCode && priceCode.length > 0 && { priceCode: priceCode }) ||
+          {}),
+        ...((provinceCode && { provinceCode: provinceCode }) || {}),
+        ...((categoryCode && { categoryCode: categoryCode }) || {}),
         ...additionalParams,
       };
 
@@ -33,7 +37,14 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
         search: createSearchParams(params).toString(),
       });
     },
-    [navigate, areaCode, priceCode, category, location.pathname]
+    [
+      navigate,
+      areaCode,
+      priceCode,
+      provinceCode,
+      categoryCode,
+      location.pathname,
+    ]
   );
 
   const handleClick = () => {

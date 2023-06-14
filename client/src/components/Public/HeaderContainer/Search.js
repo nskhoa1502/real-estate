@@ -20,6 +20,12 @@ const Search = () => {
   const { provinces, areas, prices, categories } = useSelector(
     (state) => state.app
   );
+  const [filterText, setFilterText] = useState({
+    category: "",
+    province: "",
+    area: "",
+    price: "",
+  });
 
   const handleShowModal = (content, name) => {
     setContent(content);
@@ -36,6 +42,7 @@ const Search = () => {
           text="Phòng trọ, nhà trọ"
           IconBefore={<LuHotel />}
           bold={true}
+          filterText={filterText.category}
         />
       </span>
       <span
@@ -46,6 +53,7 @@ const Search = () => {
           text="Toàn quốc"
           IconAfter={<BsChevronRight color="#9CA3AF" />}
           IconBefore={<GrLocation />}
+          filterText={filterText.province}
         />
       </span>
       <span
@@ -56,6 +64,7 @@ const Search = () => {
           text="Chọn giá"
           IconAfter={<BsChevronRight color="#9CA3AF" />}
           IconBefore={<TbReportMoney />}
+          filterText={filterText.price}
         />
       </span>
 
@@ -67,6 +76,7 @@ const Search = () => {
           text="Chọn diện tích"
           IconAfter={<BsChevronRight color="#9CA3AF" />}
           IconBefore={<RiCrop2Line />}
+          filterText={filterText.area}
         />
       </span>
 
@@ -81,6 +91,7 @@ const Search = () => {
           content={content}
           setIsShowModal={setIsShowModal}
           name={name}
+          setFilterText={setFilterText}
         />
       )}
     </div>

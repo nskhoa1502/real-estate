@@ -158,6 +158,32 @@ const SearchModal = ({
     setIsShowModal(false);
   };
 
+  const handleSubmit = (e) => {
+    e.stopPropagation();
+
+    const rangeValue = [
+      name === "price"
+        ? mapPercentagesToPrice(Math.min(percent1, percent2))
+        : mapPercentagesToArea(Math.min(percent1, percent2)),
+      name === "price"
+        ? mapPercentagesToPrice(Math.max(percent1, percent2))
+        : mapPercentagesToArea(Math.max(percent1, percent2)),
+    ];
+
+    const codeValue = getCode(rangeValue, content);
+    const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
+      name === "price" ? "triệu" : "m"
+    }`;
+
+    console.log(textValue);
+
+    handlePriceAndAreaSubmit(e, {
+      [`${name}Range`]: rangeValue,
+      [`${name}Code`]: codeValue,
+      [name]: textValue,
+    });
+  };
+
   return (
     <div
       onClick={() => setIsShowModal(false)}
@@ -297,29 +323,7 @@ const SearchModal = ({
             type="button"
             className="w-full py-3 bg-orange-400 text-lg font-semi rounded-bl-md rounded-br-md hover:underline"
             onClick={(e) => {
-              e.stopPropagation();
-
-              const rangeValue = [
-                name === "price"
-                  ? mapPercentagesToPrice(Math.min(percent1, percent2))
-                  : mapPercentagesToArea(Math.min(percent1, percent2)),
-                name === "price"
-                  ? mapPercentagesToPrice(Math.max(percent1, percent2))
-                  : mapPercentagesToArea(Math.max(percent1, percent2)),
-              ];
-
-              const codeValue = getCode(rangeValue, content);
-              const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
-                name === "price" ? "triệu" : "m"
-              }`;
-
-              console.log(textValue);
-
-              handlePriceAndAreaSubmit(e, {
-                [`${name}Range`]: rangeValue,
-                [`${name}Code`]: codeValue,
-                [name]: textValue,
-              });
+              handleSubmit(e);
             }}
           >
             Áp dụng

@@ -22,11 +22,6 @@ const SearchModal = ({
   const [percent1, setPercent1] = useState(arrMinMax[0] || 0);
   const [percent2, setPercent2] = useState(arrMinMax[1] || 100);
 
-  // console.log(arrMinMax[0]);
-  // console.log(arrMinMax[1]);
-  // const [percent1, setPercent1] = useState(0);
-  // const [percent2, setPercent2] = useState(100);
-
   const mapPercentagesToPrice = (value) => {
     return mapPercentagesToRange(value, 0, 15, 0.5);
   };
@@ -159,7 +154,9 @@ const SearchModal = ({
       // [`${name}Rage`]: [percent1, percent2],
     }));
 
-    setArrMinMax([percent1, percent2]);
+    const minPercent = Math.min(percent1, percent2);
+    const maxPercent = Math.max(percent1, percent2);
+    setArrMinMax([minPercent, maxPercent]);
     setIsShowModal(false);
   };
 
@@ -316,17 +313,19 @@ const SearchModal = ({
 
               const rangeValue = [
                 name === "price"
-                  ? mapPercentagesToPrice(percent1)
-                  : mapPercentagesToArea(percent1),
+                  ? mapPercentagesToPrice(Math.min(percent1, percent2))
+                  : mapPercentagesToArea(Math.min(percent1, percent2)),
                 name === "price"
-                  ? mapPercentagesToPrice(percent2)
-                  : mapPercentagesToArea(percent2),
+                  ? mapPercentagesToPrice(Math.max(percent1, percent2))
+                  : mapPercentagesToArea(Math.max(percent1, percent2)),
               ];
 
               const codeValue = getCode(rangeValue, content);
               const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
                 name === "price" ? "triệu" : "m"
               }`;
+
+              console.log(textValue);
 
               handlePriceAndAreaSubmit(e, {
                 [`${name}Range`]: rangeValue,

@@ -89,7 +89,7 @@ const SearchModal = ({
     }
   };
 
-  const handleFilterSubmit = (e, value) => {
+  const handleCateAndProvSubmit = (e, value) => {
     e.stopPropagation();
 
     const queryKey =
@@ -174,6 +174,21 @@ const SearchModal = ({
     // setIsShowModal(false);
   };
 
+  const handlePriceAndAreaSubmit = (e, value) => {
+    e.stopPropagation();
+    setFilterQueries((prev) => ({
+      ...prev,
+      [`${name}Code`]: value[`${name}Code`],
+    }));
+
+    setFilterText((prev) => ({
+      ...prev,
+      [name]: value[`${name}`],
+    }));
+
+    setIsShowModal(false);
+  };
+
   return (
     <div
       onClick={() => setIsShowModal(false)}
@@ -214,7 +229,7 @@ const SearchModal = ({
                       item.code === queries[`${name}Code`] ? true : false
                     }
                     id={item.code}
-                    onClick={(e) => handleFilterSubmit(e, item.value)}
+                    onClick={(e) => handleCateAndProvSubmit(e, item.value)}
                   />
                   <label htmlFor={item.code}>{item.value}</label>
                 </span>
@@ -333,7 +348,39 @@ const SearchModal = ({
           <button
             type="button"
             className="w-full py-3 bg-orange-400 text-lg font-semi rounded-bl-md rounded-br-md hover:underline"
-            onClick={(e) => handleFilterSubmit(e)}
+            onClick={(e) =>
+              handlePriceAndAreaSubmit(e, {
+                [`${name}Code`]: {
+                  start:
+                    name === "price"
+                      ? mapPercentagesToRange(percent1, 0, 15, 0.5)
+                      : mapPercentagesToRange(percent1, 0, 90, 5),
+                  end:
+                    name === "price"
+                      ? mapPercentagesToRange(percent2, 0, 15, 0.5)
+                      : mapPercentagesToRange(percent2, 0, 90, 5),
+                },
+                [name]:
+                  name === "price"
+                    ? `Từ ${mapPercentagesToRange(
+                        percent1,
+                        0,
+                        15,
+                        0.5
+                      )} đến ${mapPercentagesToRange(
+                        percent2,
+                        0,
+                        15,
+                        0.5
+                      )} triệu`
+                    : `Từ ${mapPercentagesToRange(
+                        percent1,
+                        0,
+                        90,
+                        5
+                      )} đến ${mapPercentagesToRange(percent2, 0, 90, 5)}m`,
+              })
+            }
           >
             Áp dụng
           </button>

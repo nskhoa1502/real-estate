@@ -4,7 +4,7 @@ import icons from "../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsFilter } from "../../../redux/slices/postSlice";
-import { getCode } from "../../../utils/helper-function/getCode";
+import { getCode, transformObj } from "../../../utils/helper-function/getCode";
 
 const {
   BsChevronRight,
@@ -24,9 +24,13 @@ const Search = () => {
   );
 
   // console.log(prices);
-  console.log(getCode(prices));
-  console.log(getCode(areas));
   // console.log(areas);
+  console.log(transformObj(prices));
+  // console.log(transformObj(areas));
+
+  // console.log(getCode([6.5, 14.5], prices));
+
+  console.log(getCode([35, 75], areas));
 
   const dispatch = useDispatch();
   const [filterText, setFilterText] = useState({
@@ -41,6 +45,7 @@ const Search = () => {
   });
 
   // console.log(filterQueries);
+  // console.log(filterText);
 
   const handleShowModal = (content, name) => {
     setContent(content);

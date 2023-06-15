@@ -42,7 +42,7 @@ const CategoryPage = () => {
       <div className="w-full flex gap-3">
         {/* =========== LEFT BODY ============= */}
         <div className="w-[70%]">
-          <List categoryCode={category.code} />
+          <List category={category.code} />
           <Pagination
             key={pageNumber}
             number={pageNumber}

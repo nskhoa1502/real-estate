@@ -6,23 +6,23 @@ import { getPostsLimit } from "../../../redux/slices/postSlice";
 import { getPostsFilter } from "../../../redux/slices/postSlice";
 import { useSearchParams } from "react-router-dom";
 
-const List = () => {
+const List = ({ category }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
   const [params] = useSearchParams();
 
   const pageNumber = params.get("page") || 1;
-  // const areaCode = params.getAll("areaCode") || [];
-  // const priceCode = params.getAll("priceCode") || [];
-  const categoryCode = params.get("categoryCode") || null;
+  const areaCode = params.get("areaCode") || null;
+  const priceCode = params.get("priceCode") || null;
+  const categoryCode = params.get("categoryCode") || category || null;
   const provinceCode = params.get("provinceCode") || null;
   const areaNumber = params.getAll("areaNumber") || null;
   const priceNumber = params.getAll("priceNumber") || null;
 
   // console.log(`page `, pageNumber);
-  // console.log(`area code `, areaCode);
-  // console.log(`price code `, priceCode);
-  // console.log(`category code `, categoryCode);
+  console.log(`area code `, areaCode);
+  console.log(`price code `, priceCode);
+  console.log(`category code `, categoryCode);
   // console.log(`province code `, provinceCode);
   // console.log(`areaNumber `, areaNumber);
   // console.log(`priceNumber `, priceNumber);
@@ -30,8 +30,8 @@ const List = () => {
   useEffect(() => {
     let filterOptions = {
       page: +pageNumber,
-      // areaCode,
-      // priceCode,
+      areaCode,
+      priceCode,
       areaNumber,
       priceNumber,
     };
@@ -45,6 +45,8 @@ const List = () => {
       categoryCode ||
       areaNumber.length > 0 ||
       priceNumber.length > 0 ||
+      areaCode ||
+      priceCode ||
       provinceCode
     ) {
       console.log(filterOptions);
@@ -59,6 +61,8 @@ const List = () => {
     categoryCode,
     dispatch,
     provinceCode,
+    areaCode,
+    priceCode,
   ]);
 
   return (

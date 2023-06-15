@@ -41,7 +41,7 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
       };
 
       navigate({
-        pathname: location.pathname,
+        pathname: location?.pathname,
         search: createSearchParams(params).toString(),
       });
     },
@@ -51,7 +51,7 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
       priceCode,
       provinceCode,
       categoryCode,
-      location.pathname,
+      location?.pathname,
       areaNumber,
       priceNumber,
     ]

@@ -9,6 +9,7 @@ import {
   getProvinces,
 } from "../../../redux/slices/appSlice";
 import { getCategories } from "../../../redux/slices/appSlice";
+
 const Home = () => {
   const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured;
   const [params] = useSearchParams();

@@ -7,11 +7,13 @@ import {
 } from "react-icons/ai";
 import { BiExit, BiUserPlus } from "react-icons/bi";
 import { BsChevronRight, BsFillBookmarkStarFill } from "react-icons/bs";
-import { GrLocation, GrNext, GrLinkNext,GrLinkPrevious } from "react-icons/gr";
-import { RiCrop2Line } from "react-icons/ri";
-import { TbReportMoney } from "react-icons/tb";
+import { GrLocation, GrNext, GrLinkNext, GrLinkPrevious } from "react-icons/gr";
+import { RiCrop2Line, RiLogoutBoxRLine } from "react-icons/ri";
+import { TbReportMoney, TbPencilPlus } from "react-icons/tb";
 import { LuHotel } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
+import { BsFilePost } from "react-icons/bs";
+import { FaUserCircle } from "react-icons/fa";
 
 const icons = {
   AiOutlinePlusCircle,
@@ -30,7 +32,11 @@ const icons = {
   GrLinkNext,
   AiOutlineDoubleRight,
   GrNext,
-  GrLinkPrevious
+  GrLinkPrevious,
+  TbPencilPlus,
+  BsFilePost,
+  FaUserCircle,
+  RiLogoutBoxRLine,
 };
 
 export default icons;

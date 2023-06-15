@@ -20,9 +20,9 @@ const List = ({ category }) => {
   const priceNumber = params.getAll("priceNumber") || null;
 
   // console.log(`page `, pageNumber);
-  console.log(`area code `, areaCode);
-  console.log(`price code `, priceCode);
-  console.log(`category code `, categoryCode);
+  // console.log(`area code `, areaCode);
+  // console.log(`price code `, priceCode);
+  // console.log(`category code `, categoryCode);
   // console.log(`province code `, provinceCode);
   // console.log(`areaNumber `, areaNumber);
   // console.log(`priceNumber `, priceNumber);
@@ -49,7 +49,7 @@ const List = ({ category }) => {
       priceCode ||
       provinceCode
     ) {
-      console.log(filterOptions);
+      // console.log(filterOptions);
       dispatch(getPostsFilter(filterOptions));
     } else {
       dispatch(getPostsLimit(pageNumber));

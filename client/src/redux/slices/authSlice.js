@@ -1,12 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiLogin, apiRegister } from "../services/authService";
-
-const initialState = {
-  isLoggedIn: false,
-  token: null,
-  error: null,
-  message: null,
-};
+import { apiGetCurrent } from "../services/userService";
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -43,6 +37,27 @@ export const login = createAsyncThunk(
 //   }
 // );
 
+export const getCurrentUser = createAsyncThunk(
+  "user/get-current",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiGetCurrent(payload);
+      console.log(response);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+const initialState = {
+  isLoggedIn: false,
+  token: null,
+  error: null,
+  message: null,
+  currentData: {},
+};
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -52,6 +67,7 @@ const authSlice = createSlice({
       state.token = null;
       state.error = null;
       state.message = "Đăng xuất thành công";
+      state.currentData = {};
     },
     resetPopup: (state) => {
       state.message = null;
@@ -79,6 +95,16 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.error = "Đăng nhập thất bại";
         state.message = null;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.currentData = action.payload;
+        state.message = "Get current user successfully";
+        state.error = null;
+      })
+      .addCase(getCurrentUser.rejected, (state, action) => {
+        state.currentData = {};
+        state.message = "Get current user failed";
+        state.error = action.payload;
       });
     // .addCase(logout.fulfilled, (state) => {
     //   state.isLoggedIn = false;

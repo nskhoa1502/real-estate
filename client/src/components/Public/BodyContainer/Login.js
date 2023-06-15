@@ -112,7 +112,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm mt-5 self-center	">
+    <div className="bg-white mb-10 w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm mt-5 self-center	">
       <h3 className="font-semibold text-2xl mb-3">
         {isRegister ? "Đăng kí" : "Đăng nhập"}
       </h3>

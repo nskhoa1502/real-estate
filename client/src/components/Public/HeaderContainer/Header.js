@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import logo from "../../../assets/logoWithoutBackground.png";
 import { Button } from "../../../UI";
 import icons from "../../../utils/icon/icons";
@@ -6,8 +6,15 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { path } from "../../../utils/path/path";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, resetPopup } from "../../../redux/slices/authSlice";
+import userSettings from "../../../utils/constant/userSettings";
 
-const { AiOutlinePlusCircle, BiUserPlus, BiExit, AiOutlineHeart } = icons;
+const {
+  AiOutlinePlusCircle,
+  BiUserPlus,
+  BiExit,
+  AiOutlineHeart,
+  RiLogoutBoxRLine,
+} = icons;
 
 const Header = () => {
   const navigate = useNavigate();
@@ -18,9 +25,10 @@ const Header = () => {
     navigate(path.SIGNUP, { state: { register: true } });
   }, [navigate]);
   const headerRef = useRef();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, currentData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [searchParam] = useSearchParams();
+  const [isShowSetting, setIsShowSetting] = useState(false);
 
   const currentPage = searchParam.get("page");
 
@@ -43,7 +51,7 @@ const Header = () => {
           className="w-[240px] h-[70px] object-contain"
         />
       </Link>
-      <div className="flex items-center text-base">
+      <div className="flex items-center text-base gap-2">
         {!isLoggedIn && (
           <div className="flex items-center gap-1">
             <Button
@@ -69,22 +77,58 @@ const Header = () => {
           </div>
         )}
         {isLoggedIn && (
-          <div className="flex items-center gap-1">
-            <small>Tên đăng nhập</small>
-            <Button
-              text={"Yêu thích"}
-              textColor="text-black"
-              Icons={AiOutlineHeart}
-              order="before"
-            />
-            <Button
+          <>
+            <div className="flex items-center gap-1 relative">
+              <small>{currentData.name}</small>
+              <Button
+                text={"Yêu thích"}
+                textColor="text-black"
+                Icons={AiOutlineHeart}
+                order="before"
+              />
+              {/* <Button
               text={"Đăng xuất"}
               textColor="text-black"
               Icons={BiUserPlus}
               order="before"
               onClick={handleLogout}
-            />
-          </div>
+            /> */}
+              <Button
+                text={"Quản lý tài khoản"}
+                textColor="text-white"
+                bgColor={`bg-primaryBlue`}
+                Icons={AiOutlinePlusCircle}
+                order="after"
+                px="px-6"
+                onClick={() => setIsShowSetting((prev) => !prev)}
+              />
+              {isShowSetting && (
+                <div className="absolute top-full min-w-200 bg-white shadow-md rounded-md p-4 right-0 flex flex-col  text-blue-600">
+                  {userSettings?.map((item) => {
+                    return (
+                      <Link
+                        className="hover:text-orange-500 border-b border-gray-200 py-2 flex gap-2 items-center"
+                        key={item?.id}
+                        to={item?.path}
+                      >
+                        {item?.icon}
+                        {item?.text}
+                      </Link>
+                    );
+                  })}
+                  <div className="flex items-center justify-start gap-2">
+                    <RiLogoutBoxRLine />
+                    <span
+                      className="cursor-pointer hover:text-orange-500 py-2"
+                      onClick={handleLogout}
+                    >
+                      Đăng xuất
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
         )}
 
         <Button

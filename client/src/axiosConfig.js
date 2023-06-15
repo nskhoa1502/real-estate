@@ -9,6 +9,13 @@ instance.interceptors.request.use(
     // Do something before request is sent
 
     // Attach token to headers
+    let auth = JSON.parse(localStorage.getItem("persist:root"))?.auth;
+    let token = JSON.parse(auth)?.token?.token;
+    // console.log(token);
+
+    config.headers = {
+      Authorization: token ? `Bearer ${token}` : null,
+    };
     return config;
   },
   function (error) {

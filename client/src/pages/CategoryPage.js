@@ -23,7 +23,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const categoryObj = categories?.find(
       (category) =>
-        `/${formatVietnameseText(category.value)}` === location.pathname
+        `/${formatVietnameseText(category.value)}` === location?.pathname
     );
 
     setCategory(categoryObj);

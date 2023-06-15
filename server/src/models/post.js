@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
-      priceNumber: DataTypes.INTEGER,
+      priceNumber: DataTypes.FLOAT,
       areaNumber: DataTypes.INTEGER,
     },
     {

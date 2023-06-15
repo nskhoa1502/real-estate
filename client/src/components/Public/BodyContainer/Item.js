@@ -52,7 +52,7 @@ const Item = ({
                 <img
                   src={image}
                   alt={`Ảnh ${i + 1}`}
-                  className="w-[120px] h-[120px] object-cover"
+                  className="w-[45%] h-[140px] object-cover"
                 />
               </React.Fragment>
             ))}

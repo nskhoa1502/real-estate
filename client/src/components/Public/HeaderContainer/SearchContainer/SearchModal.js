@@ -123,7 +123,7 @@ const SearchModal = ({
 
       setFilterQueries((prev) => ({
         ...prev,
-        [queryKey]: e.target.value || null,
+        [queryKey]: e.target.value,
       }));
     }
 
@@ -134,7 +134,8 @@ const SearchModal = ({
     e.stopPropagation();
     setFilterQueries((prev) => ({
       ...prev,
-      [`${name}Code`]: value[`${name}Code`]?.map((i) => i.code),
+      // [`${name}Code`]: value[`${name}Code`]?.map((i) => i.code),
+      [`${name}Number`]: value[`${name}Number`],
     }));
 
     let textValue;
@@ -171,6 +172,7 @@ const SearchModal = ({
         : mapPercentagesToArea(Math.max(percent1, percent2)),
     ];
 
+    console.log(rangeValue);
     const codeValue = getCode(rangeValue, content);
     const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
       name === "price" ? "triệu" : `m\u00B2`
@@ -179,8 +181,8 @@ const SearchModal = ({
     // console.log(textValue);
 
     handlePriceAndAreaSubmit(e, {
-      [`${name}Range`]: rangeValue,
-      [`${name}Code`]: codeValue,
+      [`${name}Number`]: rangeValue,
+      // [`${name}Code`]: codeValue,
       [name]: textValue,
     });
   };
@@ -205,7 +207,7 @@ const SearchModal = ({
               <input
                 type="radio"
                 name={name}
-                value={undefined}
+                value={defaultText || null}
                 id="default"
                 checked={!queries[`${name}Code`] ? true : false}
                 onChange={(e) => handleCateAndProvSubmit(e)}

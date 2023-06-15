@@ -49,7 +49,7 @@ const Search = () => {
   });
 
   // console.log(filterQueries);
-  console.log(filterText);
+  // console.log(filterText);
 
   // console.log(getCode(filterQueries?.priceCode, prices));
   // console.log(getCode(filterQueries?.areaCode, areas));
@@ -70,6 +70,9 @@ const Search = () => {
       filterText.area ? `với diện tích ${filterText.area.toLowerCase()}` : ""
     }`;
 
+    // console.log(filterText);
+    console.log(filterQueries);
+
     navigate(
       {
         pathname: path.TIM_KIEM,
@@ -87,7 +90,7 @@ const Search = () => {
       location.pathname !== `/${path.TIM_KIEM}` &&
       prevPathRef.current === `/${path.TIM_KIEM}`
     ) {
-      console.log("Resetting filters...");
+      // console.log("Resetting filters...");
       setArrMinMax([]);
       setFilterText({ category: "", province: "", area: "", price: "" });
       setFilterQueries({ page: 1 });

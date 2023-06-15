@@ -12,22 +12,28 @@ const List = () => {
   const [params] = useSearchParams();
 
   const pageNumber = params.get("page") || 1;
-  const areaCode = params.getAll("areaCode") || [];
-  const priceCode = params.getAll("priceCode") || [];
+  // const areaCode = params.getAll("areaCode") || [];
+  // const priceCode = params.getAll("priceCode") || [];
   const categoryCode = params.get("categoryCode") || null;
   const provinceCode = params.get("provinceCode") || null;
+  const areaNumber = params.getAll("areaNumber") || null;
+  const priceNumber = params.getAll("priceNumber") || null;
 
   // console.log(`page `, pageNumber);
   // console.log(`area code `, areaCode);
   // console.log(`price code `, priceCode);
   // console.log(`category code `, categoryCode);
   // console.log(`province code `, provinceCode);
+  // console.log(`areaNumber `, areaNumber);
+  // console.log(`priceNumber `, priceNumber);
 
   useEffect(() => {
     let filterOptions = {
       page: +pageNumber,
-      areaCode,
-      priceCode,
+      // areaCode,
+      // priceCode,
+      areaNumber,
+      priceNumber,
     };
     if (categoryCode !== "null") {
       filterOptions.categoryCode = categoryCode;
@@ -37,8 +43,8 @@ const List = () => {
     }
     if (
       categoryCode ||
-      areaCode.length > 0 ||
-      priceCode.length > 0 ||
+      areaNumber.length > 0 ||
+      priceNumber.length > 0 ||
       provinceCode
     ) {
       console.log(filterOptions);
@@ -47,8 +53,8 @@ const List = () => {
       dispatch(getPostsLimit(pageNumber));
     }
   }, [
-    JSON.stringify(areaCode),
-    JSON.stringify(priceCode),
+    JSON.stringify(areaNumber),
+    JSON.stringify(priceNumber),
     pageNumber,
     categoryCode,
     dispatch,

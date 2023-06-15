@@ -1,4 +1,5 @@
 import db from "../models";
+import { Op } from "sequelize";
 require("dotenv").config();
 
 export const getPostsService = async () => {
@@ -68,14 +69,24 @@ export const getPostsLimitService = async (pageNumber) => {
   }
 };
 
-export const getPostsFilterService = async (pageNumber, query) => {
+export const getPostsFilterService = async (
+  pageNumber,
+  query,
+  { priceNumber, areaNumber }
+) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
     // console.log(query);
 
+    const queries = { ...query };
+    if (priceNumber && priceNumber.length > 0)
+      queries.priceNumber = { [Op.between]: priceNumber };
+    if (areaNumber && areaNumber.length > 0)
+      queries.areaNumber = { [Op.between]: areaNumber };
+
     const response = await db.Post.findAndCountAll({
-      where: query,
+      where: queries,
       raw: true,
       attributes: ["id", "title", "star", "address", "description"],
       nest: true,

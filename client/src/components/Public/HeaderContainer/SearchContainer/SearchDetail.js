@@ -11,7 +11,7 @@ const SearchDetail = () => {
   const pageNumber = params.get("page") || 1;
   const { state } = useLocation();
 
-  console.log(state);
+  //   console.log(state);
 
   return (
     // ===================== FEATURED PROVINCES ====================

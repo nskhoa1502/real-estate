@@ -19,13 +19,21 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
   const priceCode = params.getAll("priceCode");
   const provinceCode = params.get("provinceCode");
   const categoryCode = params.get("categoryCode");
+  const priceNumber = params.getAll("priceNumber");
+  const areaNumber = params.getAll("areaNumber");
 
   const navigateToPage = useCallback(
     (page, additionalParams = {}) => {
       const params = {
         page,
         ...((areaCode && areaCode.length > 0 && { areaCode: areaCode }) || []),
+        ...((areaNumber &&
+          areaNumber.length > 0 && { areaNumber: areaNumber }) ||
+          []),
         ...((priceCode && priceCode.length > 0 && { priceCode: priceCode }) ||
+          []),
+        ...((priceNumber &&
+          priceNumber.length > 0 && { priceNumber: priceNumber }) ||
           []),
         ...((provinceCode && { provinceCode: provinceCode }) || []),
         ...((categoryCode && { categoryCode: categoryCode }) || []),
@@ -44,6 +52,8 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
       provinceCode,
       categoryCode,
       location.pathname,
+      areaNumber,
+      priceNumber,
     ]
   );
 

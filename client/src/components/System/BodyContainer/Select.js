@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectAddress = ({ label, options, value, setValue, type }) => {
+const Select = ({ label, options, value, setValue, type }) => {
   return (
     <div className="flex flex-col gap-2 flex-1">
       <label htmlFor="select-address">{label}</label>
@@ -28,10 +28,19 @@ const SelectAddress = ({ label, options, value, setValue, type }) => {
               </option>
             );
           }
+          if (type === "ward") {
+            return (
+              <option value={item?.ward_id} key={item?.ward_id}>
+                {item?.ward_name}
+              </option>
+            );
+          }
+
+          return null;
         })}
       </select>
     </div>
   );
 };
 
-export default SelectAddress;
+export default Select;

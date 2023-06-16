@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { truncateString } from "../../../utils/helper-function/convert";
 import anon_avatar from "../../../assets/anon_avatar.png";
 import { extractNumbersFromId } from "../../../utils/helper-function/extractNumberId";
 

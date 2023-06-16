@@ -76,3 +76,15 @@ export const apiGetPublicDistrict = async (provinceId) => {
     throw err;
   }
 };
+export const apiGetPublicWard = async (districtId) => {
+  try {
+    const response = await axiosDefault({
+      method: "get",
+      url: `https://vapi.vnappmob.com/api/province/ward/${districtId}`,
+    });
+    // console.log(response);
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};

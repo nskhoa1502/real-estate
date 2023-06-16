@@ -35,6 +35,13 @@ const Select = ({ label, options, value, setValue, type }) => {
               </option>
             );
           }
+          if (type === "category") {
+            return (
+              <option value={item?.value} key={item?.code}>
+                {item?.value}
+              </option>
+            );
+          }
 
           return null;
         })}

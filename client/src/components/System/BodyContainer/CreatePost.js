@@ -9,7 +9,7 @@ const CreatePost = () => {
         Đăng tin mới
       </h1>
       <div className="flex gap-4">
-        <div className="py-4 flex flex-col gap-4 flex-auto">
+        <div className="py-4 flex flex-col gap-8 flex-auto">
           <Address />
           <Overview />
         </div>

@@ -5,6 +5,7 @@ import {
   apiGetPublicProvinces,
   apiGetPublicWard,
 } from "../../../redux/services/appService";
+import InputReadOnly from "./InputReadOnly";
 
 const Address = () => {
   const [provinces, setProvinces] = useState([]);
@@ -107,18 +108,7 @@ const Address = () => {
             type="ward"
           />
         </div>
-        <div className="flex flex-col w-full gap-4">
-          <label htmlFor="exact-address" className="font-medium text-xl">
-            Địa chỉ chính xác
-          </label>
-          <input
-            id="exact-address"
-            type="text"
-            readOnly
-            className="border border-gray-200 rounded-md bg-gray-100 p-2 outline-none"
-            value={exactAddress}
-          />
-        </div>
+        <InputReadOnly label="Địa chỉ chính xác" value={exactAddress} />
       </div>
     </div>
   );

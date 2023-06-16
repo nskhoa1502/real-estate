@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { InputForm, Button } from "../../../UI";
+import { Button } from "../../../UI";
+import InputForm from "./InputForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { login, register, resetPopup } from "../../../redux/slices/authSlice";

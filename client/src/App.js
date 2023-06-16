@@ -7,10 +7,22 @@ import { DetailPage, HomePage, CategoryPage, System } from "./pages";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "./redux/slices/authSlice";
+import {
+  getAreas,
+  getCategories,
+  getPrices,
+  getProvinces,
+} from "./redux/slices/appSlice";
 
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(getPrices());
+    dispatch(getAreas());
+    dispatch(getCategories());
+    dispatch(getProvinces());
+  }, [dispatch]);
 
   useEffect(() => {
     setTimeout(() => {

@@ -105,6 +105,8 @@ const authSlice = createSlice({
         state.currentData = {};
         state.message = "Get current user failed";
         state.error = action.payload;
+        state.isLoggedIn = false;
+        state.token = null;
       });
     // .addCase(logout.fulfilled, (state) => {
     //   state.isLoggedIn = false;

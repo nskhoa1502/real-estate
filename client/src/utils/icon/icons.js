@@ -7,9 +7,18 @@ import {
   AiOutlineDown,
 } from "react-icons/ai";
 import { BiExit, BiUserPlus } from "react-icons/bi";
-import { BsChevronRight, BsFillBookmarkStarFill,BsCameraFill } from "react-icons/bs";
+import {
+  BsChevronRight,
+  BsFillBookmarkStarFill,
+  BsCameraFill,
+} from "react-icons/bs";
 import { GrLocation, GrNext, GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import { RiCrop2Line, RiLogoutBoxRLine } from "react-icons/ri";
+import {
+  RiCrop2Line,
+  RiLogoutBoxRLine,
+  RiDeleteBin5Line,
+  RiDeleteBack2Line,
+} from "react-icons/ri";
 import { TbReportMoney, TbPencilPlus } from "react-icons/tb";
 import { LuHotel } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
@@ -41,7 +50,9 @@ const icons = {
   RiLogoutBoxRLine,
   AiOutlineDown,
   RxDashboard,
-  BsCameraFill
+  BsCameraFill,
+  RiDeleteBin5Line,
+  RiDeleteBack2Line,
 };
 
 export default icons;

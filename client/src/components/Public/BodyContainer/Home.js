@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { categoryFeatured } from "../../../utils/constant/constant";
 import { useSearchParams } from "react-router-dom";
 import { ItemSidebar, Province, List, Pagination, RelatedPost } from "../index";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAreas,
-  getPrices,
-  getProvinces,
-} from "../../../redux/slices/appSlice";
-import { getCategories } from "../../../redux/slices/appSlice";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { id, HOME_TITLE, HOME_DESCRIPTION } = categoryFeatured;
@@ -18,16 +12,6 @@ const Home = () => {
   const { categories } = useSelector((state) => state.app);
   const { prices, areas } = useSelector((state) => state.app);
   const { totalPage, postPerPage, count } = useSelector((state) => state.post);
-
-  const dispatch = useDispatch();
-
-  // console.log(areas);
-  useEffect(() => {
-    dispatch(getPrices());
-    dispatch(getAreas());
-    dispatch(getCategories());
-    dispatch(getProvinces());
-  }, [dispatch]);
 
   return (
     // ===================== FEATURED PROVINCES ====================

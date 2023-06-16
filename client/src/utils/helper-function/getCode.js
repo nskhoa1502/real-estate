@@ -47,3 +47,25 @@ export const getCode = (arrMinMax, priceOrAreaArr) => {
     ) || undefined
   );
 };
+
+export const generatePayloadCode = (entry, arr, type) => {
+  if (!entry) return undefined;
+  const transformedObj = transformObj(arr);
+  let payloadCode;
+  if (type === "price") {
+    const divisionEntry = (entry / 1000000).toFixed(1);
+    // console.log(transformedObj);
+    payloadCode = transformedObj?.find(
+      (item) => item?.min <= +divisionEntry && item?.max > +divisionEntry
+    )?.code;
+    // console.log(payloadCode);
+  }
+
+  if (type === "area") {
+    payloadCode = transformedObj?.find(
+      (item) => item?.min <= +entry && item?.max > +entry
+    )?.code;
+  }
+
+  return payloadCode;
+};

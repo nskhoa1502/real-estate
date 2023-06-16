@@ -12,7 +12,7 @@ const Overview = ({ payload, setPayload }) => {
   //   console.log(categories);
 
   const targets = [
-    { code: "Nam ", value: "Nam" },
+    { code: "Nam", value: "Nam" },
     { code: "Nữ", value: "Nữ" },
   ];
   // console.log(payload);

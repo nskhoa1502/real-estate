@@ -7,6 +7,7 @@ import { path } from "../../../utils/path/path";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, resetPopup } from "../../../redux/slices/authSlice";
 import userSettings from "../../../utils/constant/userSettings";
+import CurrentUser from "./CurrentUser";
 
 const {
   AiOutlinePlusCircle,
@@ -14,6 +15,8 @@ const {
   BiExit,
   AiOutlineHeart,
   RiLogoutBoxRLine,
+  AiOutlineDown,
+  RxDashboard,
 } = icons;
 
 const Header = () => {
@@ -25,7 +28,7 @@ const Header = () => {
     navigate(path.SIGNUP, { state: { register: true } });
   }, [navigate]);
   const headerRef = useRef();
-  const { isLoggedIn, currentData } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [searchParam] = useSearchParams();
   const [isShowSetting, setIsShowSetting] = useState(false);
@@ -40,6 +43,7 @@ const Header = () => {
     dispatch(logout());
 
     dispatch(resetPopup());
+    setIsShowSetting(false);
   };
 
   return (
@@ -79,7 +83,7 @@ const Header = () => {
         {isLoggedIn && (
           <>
             <div className="flex items-center gap-1 relative">
-              <small>{currentData.name}</small>
+              <CurrentUser />
               <Button
                 text={"Yêu thích"}
                 textColor="text-black"
@@ -95,10 +99,9 @@ const Header = () => {
             /> */}
               <Button
                 text={"Quản lý tài khoản"}
-                textColor="text-white"
-                bgColor={`bg-primaryBlue`}
-                Icons={AiOutlinePlusCircle}
-                order="after"
+                textColor="text-black"
+                Icons={RxDashboard}
+                order="before"
                 px="px-6"
                 onClick={() => setIsShowSetting((prev) => !prev)}
               />

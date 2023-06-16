@@ -14,3 +14,4 @@ export { default as RelatedItem } from "./SidebarContainer/RelatedItem";
 export { default as Info } from "./FooterContainer/Info";
 export { default as Contact } from "./FooterContainer/Contact";
 export { default as SearchDetail } from "./HeaderContainer/SearchContainer/SearchDetail";
+export { default as CurrentUser } from "./HeaderContainer/CurrentUser";

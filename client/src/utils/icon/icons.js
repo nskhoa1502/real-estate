@@ -4,6 +4,7 @@ import {
   AiOutlineHeart,
   AiFillHeart,
   AiOutlineDoubleRight,
+  AiOutlineDown,
 } from "react-icons/ai";
 import { BiExit, BiUserPlus } from "react-icons/bi";
 import { BsChevronRight, BsFillBookmarkStarFill } from "react-icons/bs";
@@ -14,6 +15,7 @@ import { LuHotel } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
 import { BsFilePost } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
+import { RxDashboard } from "react-icons/rx";
 
 const icons = {
   AiOutlinePlusCircle,
@@ -37,6 +39,8 @@ const icons = {
   BsFilePost,
   FaUserCircle,
   RiLogoutBoxRLine,
+  AiOutlineDown,
+  RxDashboard,
 };
 
 export default icons;

@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { path } from "./utils/path/path";
 import { Home, Login, SearchDetail } from "./components/Public";
-import { CreatePost, System } from "./components/System";
+import { CreatePost } from "./components/System";
 
-import { DetailPage, HomePage, CategoryPage } from "./pages";
+import { DetailPage, HomePage, CategoryPage, System } from "./pages";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "./redux/slices/authSlice";

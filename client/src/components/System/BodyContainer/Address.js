@@ -1,21 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SelectAddress from "./SelectAddress";
+import axios from "axios";
+import {
+  apiGetPublicDistrict,
+  apiGetPublicProvinces,
+} from "../../../redux/services/appService";
 
 const Address = () => {
+  const [provinces, setProvinces] = useState([]);
+  const [province, setProvince] = useState(null);
+  const [districts, setDistricts] = useState([]);
+  const [district, setDistrict] = useState(null);
+  useEffect(() => {
+    const fetchPublicProvinces = async () => {
+      try {
+        const res = await apiGetPublicProvinces();
+        // console.log(res.results);
+        setProvinces(res?.data?.results);
+      } catch (err) {
+        throw err;
+      }
+    };
+
+    fetchPublicProvinces();
+  }, []);
+
+  useEffect(() => {
+    setDistrict(null);
+    const fetchPublicDistrict = async () => {
+      try {
+        const res = await apiGetPublicDistrict(province);
+        // console.log(res.data);
+        setDistricts(res?.data?.results);
+      } catch (err) {
+        throw err;
+      }
+    };
+
+    province && fetchPublicDistrict();
+    !province && setDistricts([]);
+  }, [province]);
+
+  console.log(`province`, province);
+  console.log(`district`, district);
+
   return (
     <div>
       <h2 className="font-medium text-xl py-4">Địa chỉ cho thuê</h2>
       <div className="flex flex-col gap-10">
         <div className="flex items-center gap-4">
-          <SelectAddress label="Tỉnh/Thành phố" />
-          <SelectAddress label="Quận/Huyện" />
+          <SelectAddress
+            value={province?.name}
+            setValue={setProvince}
+            label="Tỉnh/Thành phố"
+            options={provinces}
+            type="province"
+          />
+          <SelectAddress
+            label="Quận/Huyện"
+            value={district?.name}
+            setValue={setDistrict}
+            options={districts}
+            type="district"
+          />
         </div>
         <div className="flex flex-col w-full gap-4">
-          <span className="font-medium text-xl">Địa chỉ chính xác</span>
+          <label htmlFor="exact-address" className="font-medium text-xl">
+            Địa chỉ chính xác
+          </label>
           <input
+            id="exact-address"
             type="text"
             readOnly
             className="border border-gray-200 rounded-md bg-gray-100 p-2 outline-none"
+            value={`${
+              district
+                ? `${
+                    districts.find((item) => item.district_id === district)
+                      ?.district_name
+                  },`
+                : ""
+            } ${
+              province
+                ? `${
+                    provinces.find((item) => item?.province_id === province)
+                      ?.province_name
+                  }`
+                : ""
+            }`}
           />
         </div>
       </div>

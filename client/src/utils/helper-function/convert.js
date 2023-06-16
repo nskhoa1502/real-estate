@@ -12,10 +12,10 @@ export function formatVietnameseText(text) {
 }
 
 export function truncateString(str, maxLength) {
-  if (str.length <= maxLength) {
+  if (str?.length <= maxLength) {
     return str;
   } else {
-    return str.slice(0, maxLength) + "...";
+    return str?.slice(0, maxLength) + "...";
   }
 }
 

@@ -15,7 +15,7 @@ const notActive =
 const active =
   "hover:bg-primaryRed px-4 bg-primaryRed inline-block h-full flex items-center justify-center";
 
-const Navigation = () => {
+const Navigation = ({ isAdmin }) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.app);
 
@@ -25,7 +25,11 @@ const Navigation = () => {
   }, [dispatch]);
 
   return (
-    <div className="w-full h-[40px] bg-primaryBlue text-white flex justify-center items-center">
+    <div
+      className={`w-full h-[40px] bg-primaryBlue text-white flex ${
+        isAdmin ? "justify-start" : "justify-center"
+      } items-center`}
+    >
       <div className="w-3/5 flex justify-start items-center text-sm font-medium h-full">
         {/* {nav?.length > 0 &&
           nav.map((item, i) => {
@@ -55,7 +59,7 @@ const Navigation = () => {
                 className="flex justify-center items-center h-full"
               >
                 <NavLink
-                  to={formatVietnameseText(item.value)}
+                  to={`/${formatVietnameseText(item.value)}`}
                   className={({ isActive }) => (isActive ? active : notActive)}
                 >
                   {item.value}

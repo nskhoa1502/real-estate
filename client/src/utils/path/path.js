@@ -9,4 +9,7 @@ export const path = {
   CHO_THUE_PHONG_TRO: "cho-thue-phong-tro",
   CHI_TIET__TITLE__POSTID: "chi-tiet/:title/:postId",
   TIM_KIEM: "tim-kiem",
+  QUAN_LY: "/quan-ly/*",
+  DANG_TIN_MOI: "dang-tin-moi",
+  QUAN_LY_TIN_DANG: "quan-ly-tin-dang",
 };

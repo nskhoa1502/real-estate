@@ -6,7 +6,7 @@ const userSettings = [
   {
     id: 1,
     text: "Đăng tin cho thuê",
-    path: "/dang-tin-moi",
+    path: "/quan-ly/dang-tin-moi",
     icon: <TbPencilPlus />,
   },
   {

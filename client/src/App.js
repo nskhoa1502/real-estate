@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { path } from "./utils/path/path";
 import { Home, Login, SearchDetail } from "./components/Public";
+import { CreatePost, System } from "./components/System";
 
 import { DetailPage, HomePage, CategoryPage } from "./pages";
 
@@ -19,6 +20,9 @@ function App() {
           <Route path={path.NHA_CHO_THUE} element={<CategoryPage />} />
           <Route path={path.TIM_KIEM} element={<SearchDetail />} />
           <Route path={path.CHI_TIET__TITLE__POSTID} element={<DetailPage />} />
+        </Route>
+        <Route path={path.QUAN_LY} element={<System />}>
+          <Route path={path.DANG_TIN_MOI} element={<CreatePost />} />
         </Route>
       </Routes>
     </div>

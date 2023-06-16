@@ -17,7 +17,7 @@ const InputForm = ({
   };
   return (
     <div>
-      <label htmlFor="phone" className="text-xs">
+      <label htmlFor={id} className="text-xs">
         {label}
       </label>
       <input

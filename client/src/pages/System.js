@@ -9,7 +9,7 @@ const System = () => {
 
   if (!isLoggedIn) return <Navigate to={`/${path.LOGIN}`} replace={true} />;
   return (
-    <div className="m-auto h-screen   flex flex-col items-center ">
+    <div className="m-auto min-h-screen h-full flex flex-col items-center ">
       <Header />
       <div className="flex  w-full  gap-6  h-full min-h-screen">
         <Sidebar />

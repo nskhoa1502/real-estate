@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { truncateString } from "../../../utils/helper-function/convert";
 import anon_avatar from "../../../assets/anon_avatar.png";
+import { extractNumbersFromId } from "../../../utils/helper-function/extractNumberId";
 
 const CurrentUser = () => {
   const { currentData } = useSelector((state) => state.auth);
@@ -18,8 +19,8 @@ const CurrentUser = () => {
         </span>
         <span>
           Mã tài khoản:{" "}
-          <span className="font-medium  w-20 ">
-            {truncateString(currentData?.id, 8)}
+          <span className="font-semibold  w-20 ">
+            {extractNumbersFromId(currentData?.id)}
           </span>
         </span>
       </div>

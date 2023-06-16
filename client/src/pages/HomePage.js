@@ -1,22 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../components/Public/HeaderContainer/Header";
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Public/HeaderContainer/Navigation";
 import { Contact, Info, Search } from "../components/Public";
-import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "../redux/slices/authSlice";
+import { useSelector } from "react-redux";
 
 // import { Search } from "../components/Public";
 const HomePage = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTimeout(() => {
-      isLoggedIn && dispatch(getCurrentUser());
-    }, 100);
-  }, [isLoggedIn]);
 
   return (
     <div className=" m-auto h-full border  flex flex-col items-center ">

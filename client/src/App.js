@@ -4,8 +4,20 @@ import { Home, Login, SearchDetail } from "./components/Public";
 import { CreatePost, System } from "./components/System";
 
 import { DetailPage, HomePage, CategoryPage } from "./pages";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "./redux/slices/authSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    setTimeout(() => {
+      isLoggedIn && dispatch(getCurrentUser());
+    }, 100);
+  }, [isLoggedIn, dispatch]);
+
   return (
     <div className=" bg-primaryWhite overflow-x-auto">
       <Routes>

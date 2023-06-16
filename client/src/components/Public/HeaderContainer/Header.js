@@ -15,7 +15,6 @@ const {
   BiExit,
   AiOutlineHeart,
   RiLogoutBoxRLine,
-  AiOutlineDown,
   RxDashboard,
 } = icons;
 

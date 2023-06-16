@@ -8,7 +8,7 @@ const InputForm = ({ label, unit, value, setValue, field, text }) => {
         <input
           type="text"
           id="title"
-          value={value}
+          value={value || ""}
           onChange={(e) =>
             setValue((prev) => ({ ...prev, [field]: e?.target?.value }))
           }

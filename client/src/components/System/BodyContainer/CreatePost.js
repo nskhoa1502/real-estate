@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Overview from "./Overview";
 import Address from "./Address";
 import icons from "../../../utils/icon/icons";
+import { apiUploadImages } from "../../../redux/services/postService";
 
 const { BsCameraFill } = icons;
 
@@ -12,16 +13,41 @@ const CreatePost = () => {
     priceCode: "",
     priceNumber: 0,
     areaNumber: 0,
-    image: "",
+    images: "",
     address: "",
-    price: "",
-    area: "",
+
     description: "",
     target: "",
     province: "",
   });
+  const [imagesPreview, setImagesPreview] = useState([]);
 
-  console.log(payload);
+  // console.log(payload);
+
+  const handleFiles = async (e) => {
+    e.stopPropagation();
+    try {
+      let files = e?.target?.files;
+      let images = [];
+      let formData = new FormData();
+      for (let file of files) {
+        formData.append("file", file);
+        formData.append(
+          "upload_preset",
+          process.env.REACT_APP_UPLOAD_ASSET_NAME
+        );
+
+        const response = await apiUploadImages(formData);
+
+        images = [...images, response.secure_url];
+      }
+      console.log(images);
+      setImagesPreview(images);
+      setPayload((prev) => ({ ...prev, images: JSON.stringify(images) }));
+    } catch (err) {
+      throw err;
+    }
+  };
   return (
     <div className="px-6">
       <h1 className="text-3xl font-medium py-4 border-b border-gray-200">
@@ -42,7 +68,28 @@ const CreatePost = () => {
                 <BsCameraFill size={60} color="blue" />
                 Thêm ảnh
               </label>
-              <input hidden type="file" id="file" />
+              <input
+                hidden
+                type="file"
+                id="file"
+                multiple
+                onChange={handleFiles}
+              />
+              <div>
+                <h3 className="font-medium">Preview</h3>
+                <div className="flex gap-3 w-full">
+                  {imagesPreview?.map((image) => {
+                    return (
+                      <img
+                        key={image}
+                        src={image}
+                        alt="preview"
+                        className="w-20 h-20 object-cover rounded-md"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </div>

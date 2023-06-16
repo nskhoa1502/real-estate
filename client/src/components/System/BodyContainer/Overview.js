@@ -7,15 +7,15 @@ import { extractCategoryCode } from "../../../utils/helper-function/convert";
 
 const Overview = ({ payload, setPayload }) => {
   const { categories } = useSelector((state) => state.app);
-  const [category, setCategory] = useState(null);
-  const [target, setTarget] = useState(null);
+
   const { currentData } = useSelector((state) => state.auth);
   //   console.log(categories);
 
   const targets = [
-    { code: "Namcd ", value: "Nam" },
+    { code: "Nam ", value: "Nam" },
     { code: "Nữ", value: "Nữ" },
   ];
+  // console.log(payload);
   return (
     <div>
       <h2 className="font-medium text-xl py-4">Thông tin mô tả</h2>
@@ -77,6 +77,7 @@ const Overview = ({ payload, setPayload }) => {
             type="target"
             value={payload?.target}
             setValue={setPayload}
+            field="target"
           />
         </div>
       </div>

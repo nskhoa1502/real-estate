@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "./Select";
 import { useSelector } from "react-redux";
 import InputReadOnly from "./InputReadOnly";
 import InputForm from "./InputForm";
+import { extractCategoryCode } from "../../../utils/helper-function/convert";
 
-const Overview = () => {
+const Overview = ({ payload, setPayload }) => {
   const { categories } = useSelector((state) => state.app);
   const [category, setCategory] = useState(null);
   const [target, setTarget] = useState(null);
   const { currentData } = useSelector((state) => state.auth);
-  console.log(categories);
+  //   console.log(categories);
 
   const targets = [
-    { code: "male", value: "Nam" },
-    { code: "female", value: "Nữ" },
+    { code: "Namcd ", value: "Nam" },
+    { code: "Nữ", value: "Nữ" },
   ];
   return (
     <div>
@@ -24,11 +25,17 @@ const Overview = () => {
             options={categories}
             label="Loại chuyên mục"
             type="category"
-            value={category}
-            setValue={setCategory}
+            value={payload?.categoryCode}
+            setValue={setPayload}
+            field="categoryCode"
           />
         </div>
-        <InputForm label="Tiêu đề" />
+        <InputForm
+          value={payload?.title}
+          setValue={setPayload}
+          label="Tiêu đề"
+          field="title"
+        />
         <div className="w-full flex flex-col gap-2">
           <label htmlFor="description">Nội dung mô tả</label>
           <textarea
@@ -37,6 +44,10 @@ const Overview = () => {
             type="text"
             id="description"
             className="w-full rounded-md outline-none border border-gray-300"
+            value={payload?.description}
+            onChange={(e) =>
+              setPayload((prev) => ({ ...prev, description: e?.target?.value }))
+            }
           />
         </div>
         <div className="w-1/2 flex flex-col gap-4">
@@ -45,14 +56,27 @@ const Overview = () => {
             label="Thông tin Điện thoại"
             value={currentData?.phone}
           />
-          <InputForm label="Giá cho thuê" unit="đồng" />
-          <InputForm label="Diện tích" unit={`m\u00B2`} />
+          <InputForm
+            text="Nhập đầy đủ số, ví dụ 1 triệu thì nhập là 1000000"
+            label="Giá cho thuê"
+            unit="đồng"
+            field="priceNumber"
+            value={payload?.priceNumber}
+            setValue={setPayload}
+          />
+          <InputForm
+            label="Diện tích"
+            unit={`m\u00B2`}
+            field="areaNumber"
+            value={payload?.areaNumber}
+            setValue={setPayload}
+          />
           <Select
             label="Đối tượng cho thuê"
             options={targets}
             type="target"
-            value={target}
-            setValue={setTarget}
+            value={payload?.target}
+            setValue={setPayload}
           />
         </div>
       </div>

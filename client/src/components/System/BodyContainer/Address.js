@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Select from "./Select";
 import {
   apiGetPublicDistrict,
@@ -7,13 +7,13 @@ import {
 } from "../../../redux/services/appService";
 import InputReadOnly from "./InputReadOnly";
 
-const Address = () => {
+const Address = ({ payload, setPayload }) => {
   const [provinces, setProvinces] = useState([]);
-  const [province, setProvince] = useState(null);
+  const [province, setProvince] = useState("");
   const [districts, setDistricts] = useState([]);
-  const [district, setDistrict] = useState(null);
+  const [district, setDistrict] = useState("");
   const [wards, setWards] = useState([]);
-  const [ward, setWard] = useState(null);
+  const [ward, setWard] = useState("");
   useEffect(() => {
     const fetchPublicProvinces = async () => {
       try {
@@ -81,6 +81,23 @@ const Address = () => {
       : ""
   }`;
 
+  useEffect(() => {
+    setPayload((prev) => ({
+      ...prev,
+      address: exactAddress,
+      province: province
+        ? provinces?.find((item) => item?.province_id === province)
+            ?.province_name
+        : "",
+    }));
+  }, [
+    province,
+    district,
+    ward,
+    exactAddress,
+    setPayload,
+    JSON.stringify(provinces),
+  ]);
   return (
     <div>
       <h2 className="font-medium text-xl py-4">Địa chỉ cho thuê</h2>
@@ -114,4 +131,4 @@ const Address = () => {
   );
 };
 
-export default Address;
+export default memo(Address);

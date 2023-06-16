@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputForm = ({ label, unit }) => {
+const InputForm = ({ label, unit, value, setValue, field, text }) => {
   return (
     <div className="w-full flex flex-col gap-2">
       <label htmlFor="Title">{label}</label>
@@ -8,6 +8,10 @@ const InputForm = ({ label, unit }) => {
         <input
           type="text"
           id="title"
+          value={value}
+          onChange={(e) =>
+            setValue((prev) => ({ ...prev, [field]: e?.target?.value }))
+          }
           className={`p-2 w-full ${
             unit ? "rounded-tl-md rounded-bl-md" : "rounded-md"
           } outline-none border border-gray-300 flex-auto h-full`}
@@ -18,6 +22,7 @@ const InputForm = ({ label, unit }) => {
           </span>
         )}
       </div>
+      <small className="opacity-70">{text}</small>
     </div>
   );
 };

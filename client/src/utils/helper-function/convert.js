@@ -94,3 +94,10 @@ export const mapRangeToPercentage = (
 
   return percentage;
 };
+
+export const extractCategoryCode = (category) => {
+  return category
+    ?.split(" ")
+    ?.map((word) => word[0].toUpperCase())
+    .join("");
+};

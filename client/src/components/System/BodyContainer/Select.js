@@ -1,13 +1,18 @@
 import React from "react";
 
-const Select = ({ label, options, value, setValue, type }) => {
+const Select = ({ label, options, value, setValue, type, field }) => {
+  const handleSelect = (e) => {
+    !field
+      ? setValue(e?.target?.value)
+      : setValue((prev) => ({ ...prev, [field]: e?.target.value }));
+  };
   return (
     <div className="flex flex-col gap-2 flex-1">
       <label htmlFor="select-address">{label}</label>
       <select
         id="select-address"
         value={value}
-        onChange={(e) => setValue(e?.target?.value)}
+        onChange={handleSelect}
         className="outline-none border border-gray-300 p-2 rounded-md w-full"
       >
         <option value="" className="">
@@ -37,14 +42,14 @@ const Select = ({ label, options, value, setValue, type }) => {
           }
           if (type === "category") {
             return (
-              <option value={item?.value} key={item?.code}>
+              <option value={item?.code} key={item?.code}>
                 {item?.value}
               </option>
             );
           }
-          if (type === "category" || type === "target") {
+          if (type === "target") {
             return (
-              <option value={item?.value} key={item?.code}>
+              <option value={item?.code} key={item?.code}>
                 {item?.value}
               </option>
             );

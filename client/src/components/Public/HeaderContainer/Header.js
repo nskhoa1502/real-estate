@@ -136,13 +136,15 @@ const Header = () => {
           </>
         )}
 
-        <Button
-          text={"Đăng tin mới"}
-          textColor="text-white"
-          bgColor={`bg-primaryRed`}
-          Icons={AiOutlinePlusCircle}
-          order="after"
-        />
+        <Link to="/quan-ly/dang-tin-moi">
+          <Button
+            text={"Đăng tin mới"}
+            textColor="text-white"
+            bgColor={`bg-primaryRed`}
+            Icons={AiOutlinePlusCircle}
+            order="after"
+          />
+        </Link>
       </div>
     </div>
   );

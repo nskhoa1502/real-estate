@@ -12,7 +12,7 @@ const userSidebar = [
   {
     id: 2,
     text: "Quản lý tin đăng",
-    path: "/quan-ly/quan-ly-bai-dang",
+    path: "/quan-ly/quan-ly-tin-dang",
     icon: <BsFilePost />,
   },
   {

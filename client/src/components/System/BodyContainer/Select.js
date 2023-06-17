@@ -86,7 +86,9 @@ const Select = ({
           return null;
         })}
       </select>
-      <small className="text-red-500">{handleErrorText()}</small>
+      {invalidFields && invalidFields?.length > 0 && (
+        <small className="text-red-500">{handleErrorText()}</small>
+      )}
     </div>
   );
 };

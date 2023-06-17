@@ -27,6 +27,34 @@ export const validateFields = (fieldsToValidate, setInvalidFields) => {
       });
       invalidCount++;
     }
+    if (field[0] === "areaNumber" && isNaN(+field[1])) {
+      newInvalidFields.push({
+        name: field[0],
+        message: "Diện tích không hợp lệ",
+      });
+      invalidCount++;
+    }
+    if (field[0] === "areaNumber" && field[1] === 0) {
+      newInvalidFields.push({
+        name: field[0],
+        message: "Chưa đặt giá trị cho trường này",
+      });
+      invalidCount++;
+    }
+    if (field[0] === "priceNumber" && isNaN(+field[1])) {
+      newInvalidFields.push({
+        name: field[0],
+        message: "Giá tiền không hợp lệ",
+      });
+      invalidCount++;
+    }
+    if (field[0] === "priceNumber" && field[1] === 0) {
+      newInvalidFields.push({
+        name: field[0],
+        message: "Chưa đặt giá trị cho trường này",
+      });
+      invalidCount++;
+    }
   }
 
   setInvalidFields(newInvalidFields);

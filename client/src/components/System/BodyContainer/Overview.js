@@ -37,6 +37,8 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
           setValue={setPayload}
           label="Tiêu đề"
           field="title"
+          invalidFields={invalidFields}
+          setInvalidFields={setInvalidFields}
         />
         <div className="w-full flex flex-col gap-2">
           <label htmlFor="description">Nội dung mô tả</label>
@@ -65,6 +67,8 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
             field="priceNumber"
             value={payload?.priceNumber}
             setValue={setPayload}
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
           <InputForm
             label="Diện tích"
@@ -72,6 +76,8 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
             field="areaNumber"
             value={payload?.areaNumber}
             setValue={setPayload}
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
           <Select
             label="Tất cả"

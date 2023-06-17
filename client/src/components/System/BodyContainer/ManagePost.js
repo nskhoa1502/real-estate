@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsAdmin } from "../../../redux/slices/postSlice";
-import moment from "moment";
-import "moment/locale/vi";
-import { convertDate } from "../../../utils/helper-function/convert";
+
+import {
+  convertDate,
+  truncateString,
+} from "../../../utils/helper-function/convert";
+import Button from "../../../UI/Button";
 
 const ManagePost = () => {
   const { currentUserPosts } = useSelector((state) => state.post);
@@ -17,8 +20,8 @@ const ManagePost = () => {
   const checkStatus = (ddmmyyyy) => {
     let todayInSeconds = new Date().getTime();
     let expiredDateInSeconds = convertDate(ddmmyyyy);
-    console.log(`today`, todayInSeconds);
-    console.log(`expired`, expiredDateInSeconds);
+    // console.log(`today`, todayInSeconds);
+    // console.log(`expired`, expiredDateInSeconds);
 
     return todayInSeconds <= expiredDateInSeconds
       ? "Đang hoạt động"
@@ -37,14 +40,15 @@ const ManagePost = () => {
       </div>
       <table className="w-full table-auto">
         <thead>
-          <tr>
-            <th className="border p-2">Mã tin</th>
-            <th className="border p-2">Ảnh đại diện</th>
-            <th className="border p-2">Tiêu đề</th>
-            <th className="border p-2">Giá</th>
-            <th className="border p-2">Ngày bắt đầu</th>
-            <th className="border p-2">Ngày hết hạn</th>
-            <th className="border p-2">Trạng thái</th>
+          <tr className="flex w-full bg-gray-300 ">
+            <th className="border flex-1 p-2">Mã tin</th>
+            <th className="border flex-1 p-2">Ảnh đại diện</th>
+            <th className="border flex-1 p-2">Tiêu đề</th>
+            <th className="border flex-1 p-2">Giá</th>
+            <th className="border flex-1 p-2">Ngày bắt đầu</th>
+            <th className="border flex-1 p-2">Ngày hết hạn</th>
+            <th className="border flex-1 p-2">Trạng thái</th>
+            <th className="border flex-1 p-2">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
@@ -62,28 +66,30 @@ const ManagePost = () => {
           {currentUserPosts?.length > 0 &&
             currentUserPosts?.map((item) => {
               return (
-                <tr key={item?.id}>
-                  <td className="border p-2 text-center">
+                <tr className="flex h-16" key={item?.id}>
+                  <td className="border flex-1 h p-2 flex items-center justify-center">
                     {item?.overviews?.code}
                   </td>
-                  <td className="border p-2 flex items-center justify-center">
+                  <td className="border p-2 flex-1 flex justify-center items-center">
                     <img
                       src={JSON.parse(item?.images?.image)[0] || ""}
                       alt="avatar-post"
                       className="w-10 h-10 object-cover rounded-md"
                     />
                   </td>
-                  <td className="border p-2 text-center">{item?.title}</td>
-                  <td className="border p-2 text-center">
+                  <td className="border flex-1 h p-2 flex items-center justify-start">
+                    {truncateString(item?.title, 70)}
+                  </td>
+                  <td className="border flex-1 h p-2 flex items-center justify-center">
                     {item?.attributes?.price}
                   </td>
-                  <td className="border p-2 text-center">
+                  <td className="border flex-1 h p-2 flex items-center justify-center">
                     {item?.overviews?.created}
                   </td>
-                  <td className="border p-2 text-center">
+                  <td className="border flex-1 h p-2 flex items-center justify-center">
                     {item?.overviews?.expired}
                   </td>
-                  <td className="border p-2 text-center">
+                  <td className="border flex-1 h p-2 flex items-center justify-center">
                     {" "}
                     {/* {moment(
                       item?.overviews?.expired?.split(" ")[3],
@@ -92,6 +98,20 @@ const ManagePost = () => {
                       .toDate()
                       .toString() || "ok"} */}
                     {checkStatus(item?.overviews?.expired?.split(" ")[3])}
+                  </td>
+                  <td className="border flex-1 h p-2 text-center flex items-center gap-3 justify-center h-full">
+                    <Button
+                      text="Sửa"
+                      bgColor={`bg-primaryBlue`}
+                      textColor={`text-white`}
+                      fullWidth={true}
+                    />
+                    <Button
+                      text="Xóa"
+                      bgColor={`bg-primaryRed`}
+                      textColor={`text-white`}
+                      fullWidth={true}
+                    />
                   </td>
                 </tr>
               );

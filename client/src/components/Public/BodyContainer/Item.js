@@ -94,7 +94,9 @@ const Item = ({
             <span className="flex-1">{attributes?.acreage}</span>
             <span className="flex-3 whitespace-nowrap text-ellipsis overflow-hidden">{`${
               addressArr[addressArr.length - 2]
-            }, ${addressArr[addressArr.length - 1]}`}</span>
+            }, ${addressArr[addressArr.length - 1]
+              .trim()
+              .replace(/^(Thành phố |Tỉnh)/, "")}`}</span>
           </div>
           <p className="text-grey-500 w-full heigh-[50px] ">
             {truncateString(

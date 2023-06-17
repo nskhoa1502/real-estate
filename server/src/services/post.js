@@ -186,7 +186,9 @@ export const createNewPostService = async (body, userId) => {
       id: attributesId,
       price:
         +body?.priceNumber < 1
-          ? `${+body?.priceNumber * 1000000} đồng/tháng`
+          ? `${(+body?.priceNumber * 1000000).toLocaleString(
+              "vi-VI"
+            )} đồng/tháng`
           : `${body?.priceNumber} triệu/tháng`,
       acreage: `${body.areaNumber} m\u00B2`,
       published: moment(new Date()).format("DD/MM/YYYY"),

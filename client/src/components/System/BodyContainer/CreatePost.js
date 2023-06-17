@@ -8,12 +8,10 @@ import {
 } from "../../../redux/services/postService";
 import Loading from "../../../UI/Loading";
 import Button from "../../../UI/Button";
-import {
-  generateLabelCode,
-  generatePayloadCode,
-  getCode,
-} from "../../../utils/helper-function/getCode";
+import { generatePayloadCode } from "../../../utils/helper-function/getCode";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const { BsCameraFill, RiDeleteBin5Line, RiDeleteBack2Line } = icons;
 
@@ -34,6 +32,7 @@ const CreatePost = () => {
   const { prices, areas, provinces, categories } = useSelector(
     (state) => state.app
   );
+  const navigate = useNavigate();
   const { currentData } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -100,9 +99,40 @@ const CreatePost = () => {
       categoryName,
     };
 
-    console.log(submitData);
-    const response = await apiCreatePost(submitData);
-    console.log(response.data);
+    // console.log(submitData);
+    try {
+      const response = await apiCreatePost(submitData);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Tạo bài đăng thành công",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setPayload({
+        categoryCode: "",
+        areaCode: "",
+        priceCode: "",
+        priceNumber: 0,
+        areaNumber: 0,
+        images: "",
+        address: "",
+
+        description: "",
+        target: "",
+        province: "",
+      });
+
+      navigate("/");
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Tạo bài đăng thất bại!",
+      });
+      throw err;
+    }
+    // console.log(response.data);
   };
   return (
     <div className="px-6">

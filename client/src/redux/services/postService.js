@@ -69,3 +69,17 @@ export const apiUploadImages = async (images) => {
     throw err;
   }
 };
+export const apiCreatePost = async (payload) => {
+  try {
+    const response = await axiosConfig({
+      method: "post",
+      url: `api/v1/post/create-new`,
+      data: payload,
+    });
+    // console.log(response.data);
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Overview from "./Overview";
 import Address from "./Address";
 import icons from "../../../utils/icon/icons";
-import { apiUploadImages } from "../../../redux/services/postService";
+import {
+  apiUploadImages,
+  apiCreatePost,
+} from "../../../redux/services/postService";
 import Loading from "../../../UI/Loading";
 import Button from "../../../UI/Button";
 import {
@@ -73,7 +76,7 @@ const CreatePost = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let priceCode = generatePayloadCode(+payload?.priceNumber, prices, "price");
     let areaCode = generatePayloadCode(+payload?.areaNumber, areas, "area");
     const districtAddress = payload?.address
@@ -83,7 +86,7 @@ const CreatePost = () => {
       (item) => item?.code === payload?.categoryCode
     )?.value;
 
-    console.log(`${categoryName} ${districtAddress}`);
+    // console.log(`${categoryName} ${districtAddress}`);
     // console.log(payload?.address.split(","));
     const submitData = {
       ...payload,
@@ -98,6 +101,8 @@ const CreatePost = () => {
     };
 
     console.log(submitData);
+    const response = await apiCreatePost(submitData);
+    console.log(response.data);
   };
   return (
     <div className="px-6">

@@ -161,6 +161,8 @@ export const createNewPostService = async (body, userId) => {
     const labelCode = generateCode(body.label);
     const hashtag = `${Math.floor(Math.random() * Math.pow(10, 6))}`;
     const currentDate = new Date();
+    const provinceValue = body?.province?.replace(/^(Thành phố |Tỉnh)/, "");
+    const provinceCode = generateCode(provinceValue);
 
     const response = await db.Post.create({
       id: uuidv4(),
@@ -175,7 +177,7 @@ export const createNewPostService = async (body, userId) => {
       imagesId,
       areaCode: body?.areaCode || null,
       priceCode: body?.priceCode || null,
-      provinceCode: body?.provinceCode || null,
+      provinceCode: provinceCode || null,
       priceNumber: body?.priceNumber,
       areaNumber: body?.areaNumber,
     });
@@ -200,15 +202,12 @@ export const createNewPostService = async (body, userId) => {
       id: overviewId,
       code: `#${hashtag}`,
       area: body?.label,
-      type: body?.cateogryName,
+      type: body?.categoryName,
       target: body?.target,
       bonus: "Tin thường",
       created: currentDate,
       expired: currentDate.setDate(currentDate.getDate() + 10),
     });
-
-    const provinceValue = body?.province?.replace(/^(Thành phố |Tỉnh )/, "");
-    const provinceCode = generateCode(provinceValue);
 
     await db.Province.findOrCreate({
       where: {

@@ -60,8 +60,11 @@ export const createNewPost = async (req, res, next) => {
     if (!categoryCode || !id || !title || !priceNumber || !areaNumber || !label)
       return createError(400, "Missing input");
 
-    const response = await service.createNewPostService(req.body, id);
-    return res.status(200).json(response);
+    const { response, message } = await service.createNewPostService(
+      req.body,
+      id
+    );
+    return res.status(200).json({ response, message });
   } catch (err) {
     next(err);
   }

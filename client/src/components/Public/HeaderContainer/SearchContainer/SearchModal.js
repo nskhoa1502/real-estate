@@ -197,7 +197,7 @@ const SearchModal = ({
           e.stopPropagation();
           setIsShowModal(true);
         }}
-        className="w-[700px] h-[500px] bg-white rounded-md border relative"
+        className="w-[700px] h-[500px] bg-white rounded-md border relative overflow-y-auto"
       >
         <SearchModalHeader setIsShowModal={setIsShowModal} />
 

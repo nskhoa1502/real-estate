@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { login, register, resetPopup } from "../../../redux/slices/authSlice";
 import Swal from "sweetalert2";
+import { validateFields } from "../../../utils/helper-function/validateField";
 
 const Login = () => {
   const location = useLocation();
@@ -69,47 +70,12 @@ const Login = () => {
 
   const validateLoginFields = ({ phone, password }) => {
     const fieldsToValidate = { phone, password };
-    return validateFields(fieldsToValidate);
+    return validateFields(fieldsToValidate, setInvalidFields);
   };
 
   const validateRegistrationFields = ({ phone, password, name }) => {
     const fieldsToValidate = { phone, password, name };
-    return validateFields(fieldsToValidate);
-  };
-
-  const validateFields = (fieldsToValidate) => {
-    let invalidCount = 0;
-    let fields = Object.entries(fieldsToValidate);
-    let newInvalidFields = [];
-
-    for (let field of fields) {
-      if (field[1].trim() === "") {
-        newInvalidFields.push({
-          name: field[0],
-          message: `Bạn không được bỏ trống trường này`,
-        });
-        invalidCount++;
-      }
-
-      if (field[0] === "password" && field[1].length < 6) {
-        newInvalidFields.push({
-          name: field[0],
-          message: "Mật khẩu phải có tối thiểu 6 ký tự",
-        });
-        invalidCount++;
-      }
-
-      if (field[0] === "phone" && isNaN(+field[1])) {
-        newInvalidFields.push({
-          name: field[0],
-          message: "Số điện thoại không hợp lệ",
-        });
-        invalidCount++;
-      }
-    }
-
-    setInvalidFields(newInvalidFields);
-    return invalidCount;
+    return validateFields(fieldsToValidate, setInvalidFields);
   };
 
   return (

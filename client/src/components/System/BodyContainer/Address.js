@@ -7,7 +7,7 @@ import {
 } from "../../../redux/services/appService";
 import InputReadOnly from "./InputReadOnly";
 
-const Address = ({ payload, setPayload }) => {
+const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const [provinces, setProvinces] = useState([]);
   const [province, setProvince] = useState("");
   const [districts, setDistricts] = useState([]);
@@ -109,6 +109,8 @@ const Address = ({ payload, setPayload }) => {
             label="Tỉnh/Thành phố"
             options={provinces}
             type="province"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
           <Select
             label="Quận/Huyện"
@@ -116,6 +118,8 @@ const Address = ({ payload, setPayload }) => {
             setValue={setDistrict}
             options={districts}
             type="district"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
           <Select
             label="Phường/Xã"
@@ -123,9 +127,15 @@ const Address = ({ payload, setPayload }) => {
             setValue={setWard}
             options={wards}
             type="ward"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
         </div>
-        <InputReadOnly label="Địa chỉ chính xác" value={exactAddress} />
+        <InputReadOnly
+          invalidFields={invalidFields}
+          label="Địa chỉ chính xác"
+          value={exactAddress}
+        />
       </div>
     </div>
   );

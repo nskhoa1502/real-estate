@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Overview from "./Overview";
 import Address from "./Address";
 import icons from "../../../utils/icon/icons";
@@ -12,6 +12,7 @@ import { generatePayloadCode } from "../../../utils/helper-function/getCode";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { validateFields } from "../../../utils/helper-function/validateField";
 
 const { BsCameraFill, RiDeleteBin5Line, RiDeleteBack2Line } = icons;
 
@@ -24,9 +25,9 @@ const CreatePost = () => {
     areaNumber: 0,
     images: "",
     address: "",
-
+    title: "",
     description: "",
-    target: "",
+    target: "Tất cả",
     province: "",
   });
   const { prices, areas, provinces, categories } = useSelector(
@@ -36,6 +37,8 @@ const CreatePost = () => {
   const { currentData } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [invalidFields, setInvalidFields] = useState([]);
+
   const handleFiles = async (e) => {
     e.stopPropagation();
     setIsLoading(true);
@@ -55,7 +58,7 @@ const CreatePost = () => {
 
         images = [...images, response.secure_url];
       }
-      console.log(images);
+      // console.log(images);
       setImagesPreview((prev) => [...prev, ...images]);
       setIsLoading(false);
       setPayload((prev) => ({
@@ -74,6 +77,10 @@ const CreatePost = () => {
       images: prev?.images?.filter((item) => item !== image),
     }));
   };
+
+  useEffect(() => {
+    console.log(invalidFields);
+  }, [JSON.stringify(invalidFields)]);
 
   const handleSubmit = async () => {
     let priceCode = generatePayloadCode(+payload?.priceNumber, prices, "price");
@@ -100,38 +107,40 @@ const CreatePost = () => {
     };
 
     // console.log(submitData);
-    try {
-      const response = await apiCreatePost(submitData);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Tạo bài đăng thành công",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      setPayload({
-        categoryCode: "",
-        areaCode: "",
-        priceCode: "",
-        priceNumber: 0,
-        areaNumber: 0,
-        images: "",
-        address: "",
+    const result = validateFields(payload, setInvalidFields);
+    // console.log(result);
 
-        description: "",
-        target: "",
-        province: "",
-      });
+    // try {
+    // const response = await apiCreatePost(submitData);
+    // Swal.fire({
+    //   position: "top-end",
+    //   icon: "success",
+    //   title: "Tạo bài đăng thành công",
+    //   showConfirmButton: false,
+    //   timer: 2000,
+    // });
+    // setPayload({
+    //   categoryCode: "",
+    //   areaCode: "",
+    //   priceCode: "",
+    //   priceNumber: 0,
+    //   areaNumber: 0,
+    //   images: "",
+    //   address: "",
+    //   description: "",
+    //   target: "",
+    //   province: "",
+    // });
+    // navigate("/");
 
-      navigate("/");
-    } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Tạo bài đăng thất bại!",
-      });
-      throw err;
-    }
+    // } catch (err) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Tạo bài đăng thất bại!",
+    //   });
+    //   throw err;
+    // }
     // console.log(response.data);
   };
   return (
@@ -141,8 +150,18 @@ const CreatePost = () => {
       </h1>
       <div className="flex gap-4">
         <div className="py-4 flex flex-col gap-8 flex-auto">
-          <Address payload={payload} setPayload={setPayload} />
-          <Overview payload={payload} setPayload={setPayload} />
+          <Address
+            invalidFields={invalidFields}
+            payload={payload}
+            setPayload={setPayload}
+            setInvalidFields={setInvalidFields}
+          />
+          <Overview
+            invalidFields={invalidFields}
+            payload={payload}
+            setPayload={setPayload}
+            setInvalidFields={setInvalidFields}
+          />
           <div className="w-full">
             <h2 className="font-medium text-xl py-4">Hình ảnh</h2>
             <small>Cập nhật hình ảnh rõ ràng sẽ cho thuê nhanh hơn</small>

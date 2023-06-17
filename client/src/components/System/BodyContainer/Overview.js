@@ -5,7 +5,7 @@ import InputReadOnly from "./InputReadOnly";
 import InputForm from "./InputForm";
 import { extractCategoryCode } from "../../../utils/helper-function/convert";
 
-const Overview = ({ payload, setPayload }) => {
+const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const { categories } = useSelector((state) => state.app);
 
   const { currentData } = useSelector((state) => state.auth);
@@ -28,6 +28,8 @@ const Overview = ({ payload, setPayload }) => {
             value={payload?.categoryCode}
             setValue={setPayload}
             field="categoryCode"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
         </div>
         <InputForm
@@ -78,6 +80,8 @@ const Overview = ({ payload, setPayload }) => {
             value={payload?.target}
             setValue={setPayload}
             field="target"
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields}
           />
         </div>
       </div>

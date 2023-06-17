@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Select = ({ label, options, value, setValue, type, field }) => {
+const Select = ({
+  label,
+  options,
+  value,
+  setValue,
+  type,
+  field,
+  invalidFields,
+  setInvalidFields,
+}) => {
   const handleSelect = (e) => {
     !field
       ? setValue(e?.target?.value)
       : setValue((prev) => ({ ...prev, [field]: e?.target.value }));
+
+    console.log(e.target.value);
   };
+
+  const handleErrorText = () => {
+    if (type === "province" || type === "district" || type === "ward") {
+      const addressInvalid = invalidFields.find(
+        (item) => item.name === "address"
+      );
+      return addressInvalid ? addressInvalid.message : "";
+    }
+
+    const fieldError = invalidFields.find((item) => item.name === field);
+
+    if (fieldError) {
+      return fieldError.message;
+    }
+
+    return "";
+  };
+
   return (
     <div className="flex flex-col gap-2 flex-1">
       <label htmlFor="select-address">{label}</label>
@@ -14,9 +43,10 @@ const Select = ({ label, options, value, setValue, type, field }) => {
         value={value}
         onChange={handleSelect}
         className="outline-none border border-gray-300 p-2 rounded-md w-full"
+        onFocus={() => setInvalidFields([])}
       >
         <option value="" className="">
-          {`--Chọn ${label}--`}
+          {field === "target" ? "Tất cả" : `--Chọn ${label}--`}
         </option>
         {options?.map((item) => {
           if (type === "province") {
@@ -58,6 +88,7 @@ const Select = ({ label, options, value, setValue, type, field }) => {
           return null;
         })}
       </select>
+      <small className="text-red-500">{handleErrorText()}</small>
     </div>
   );
 };

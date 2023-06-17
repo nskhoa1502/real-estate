@@ -52,7 +52,13 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
             onChange={(e) =>
               setPayload((prev) => ({ ...prev, description: e?.target?.value }))
             }
+            onFocus={() => setInvalidFields([])}
           />
+          <small className="text-red-500 block w-full text-center">
+            {invalidFields?.some((item) => item.name === "description") &&
+              invalidFields?.find((item) => item?.name === "description")
+                ?.message}
+          </small>
         </div>
         <div className="w-1/2 flex flex-col gap-4">
           <InputReadOnly label="Thông tin liên hệ" value={currentData?.name} />

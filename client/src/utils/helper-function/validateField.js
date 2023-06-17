@@ -4,7 +4,19 @@ export const validateFields = (fieldsToValidate, setInvalidFields) => {
   let newInvalidFields = [];
 
   for (let field of fields) {
-    if (typeof field[1] === "string" && field[1]?.trim() === "") {
+    if (field[0] === "images" && field[1]?.length === 0) {
+      newInvalidFields.push({
+        name: field[0],
+        message: "Bạn phải thêm ít nhất một ảnh",
+      });
+      invalidCount++;
+    }
+
+    if (
+      typeof field[1] === "string" &&
+      field[1]?.trim() === "" &&
+      field[0] !== "images"
+    ) {
       newInvalidFields.push({
         name: field[0],
         message: `Bạn không được bỏ trống trường này`,

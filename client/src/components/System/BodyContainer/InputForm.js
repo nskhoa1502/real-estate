@@ -21,6 +21,7 @@ const InputForm = ({
           onChange={(e) =>
             setValue((prev) => ({ ...prev, [field]: e?.target?.value }))
           }
+          onFocus={() => setInvalidFields([])}
           className={`p-2 w-full ${
             unit ? "rounded-tl-md rounded-bl-md" : "rounded-md"
           } outline-none border border-gray-300 flex-auto h-full`}
@@ -31,8 +32,8 @@ const InputForm = ({
           </span>
         )}
       </div>
-      <small className="opacity-70">{text}</small>
-      <small className="text-red-500">
+      <small className="opacity-70 whitespace-nowrap">{text}</small>
+      <small className="text-red-500 block w-full">
         {invalidFields?.some((item) => item.name === field) &&
           invalidFields?.find((item) => item?.name === field)?.message}
       </small>

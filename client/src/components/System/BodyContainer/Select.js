@@ -14,8 +14,6 @@ const Select = ({
     !field
       ? setValue(e?.target?.value)
       : setValue((prev) => ({ ...prev, [field]: e?.target.value }));
-
-    console.log(e.target.value);
   };
 
   const handleErrorText = () => {

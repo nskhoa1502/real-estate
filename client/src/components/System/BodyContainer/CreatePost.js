@@ -19,8 +19,7 @@ const { BsCameraFill, RiDeleteBin5Line, RiDeleteBack2Line } = icons;
 const CreatePost = () => {
   const [payload, setPayload] = useState({
     categoryCode: "",
-    areaCode: "",
-    priceCode: "",
+
     priceNumber: 0,
     areaNumber: 0,
     images: "",
@@ -108,40 +107,38 @@ const CreatePost = () => {
 
     // console.log(submitData);
     const result = validateFields(payload, setInvalidFields);
-    // console.log(result);
-
-    // try {
-    // const response = await apiCreatePost(submitData);
-    // Swal.fire({
-    //   position: "top-end",
-    //   icon: "success",
-    //   title: "Tạo bài đăng thành công",
-    //   showConfirmButton: false,
-    //   timer: 2000,
-    // });
-    // setPayload({
-    //   categoryCode: "",
-    //   areaCode: "",
-    //   priceCode: "",
-    //   priceNumber: 0,
-    //   areaNumber: 0,
-    //   images: "",
-    //   address: "",
-    //   description: "",
-    //   target: "",
-    //   province: "",
-    // });
-    // navigate("/");
-
-    // } catch (err) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "Tạo bài đăng thất bại!",
-    //   });
-    //   throw err;
-    // }
-    // console.log(response.data);
+    if (result === 0) {
+      try {
+        const response = await apiCreatePost(submitData);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Tạo bài đăng thành công",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setPayload({
+          categoryCode: "",
+          areaCode: "",
+          priceCode: "",
+          priceNumber: 0,
+          areaNumber: 0,
+          images: "",
+          address: "",
+          description: "",
+          target: "",
+          province: "",
+        });
+        navigate("/");
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Tạo bài đăng thất bại!",
+        });
+        throw err;
+      }
+    }
   };
   return (
     <div className="px-6">
@@ -178,7 +175,13 @@ const CreatePost = () => {
                     Thêm ảnh
                   </div>
                 )}
+                <small className="text-red-500 block w-full text-center">
+                  {invalidFields?.some((item) => item.name === "images") &&
+                    invalidFields?.find((item) => item?.name === "images")
+                      ?.message}
+                </small>
               </label>
+
               <input
                 hidden
                 type="file"

@@ -240,3 +240,48 @@ export const createNewPostService = async (body, userId) => {
     throw err;
   }
 };
+
+export const getPostsAdminService = async (pageNumber, query, id) => {
+  try {
+    const offset = pageNumber === 1 ? 0 : pageNumber - 1;
+    const limit = +process.env.LIMIT;
+    // console.log(query);
+
+    const queries = { ...query, userId: id };
+
+    const response = await db.Post.findAndCountAll({
+      where: queries,
+      raw: true,
+      attributes: ["id", "title", "star", "address", "description"],
+      nest: true,
+      include: [
+        { model: db.Image, as: "images", attributes: ["image"] },
+        {
+          model: db.Attribute,
+          as: "attributes",
+          attributes: ["price", "acreage", "published", "hashtag"],
+        },
+        {
+          model: db.User,
+          as: "user",
+          attributes: ["name", "zalo", "phone"],
+        },
+        {
+          model: db.Overview,
+          as: "overviews",
+        },
+      ],
+      order: [["createdAt", "DESC"]], // Sort by star property in descending order
+      offset: offset * limit,
+
+      limit: limit,
+    });
+
+    return {
+      response: response,
+      message: "Get posts filter successfully",
+    };
+  } catch (err) {
+    throw err;
+  }
+};

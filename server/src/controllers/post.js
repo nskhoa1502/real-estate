@@ -42,6 +42,26 @@ export const getPostsFilterLimit = async (req, res, next) => {
     next(err);
   }
 };
+export const getPostsAdmin = async (req, res, next) => {
+  const { page, ...query } = req.query;
+  const pageNumber = +page || 1;
+  const { id } = req.user;
+
+  // console.log(`this route is called`);
+
+  if (!id) return createError(400, "Could not find user with token");
+  try {
+    const { response, message } = await service.getPostsAdminService(
+      pageNumber,
+      query,
+      id
+    );
+    // console.log(message);
+    return res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const getNewPosts = async (req, res, next) => {
   try {

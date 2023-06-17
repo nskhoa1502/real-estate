@@ -6,6 +6,7 @@ import cors from "cors";
 // import { dataArea } from "./src/utils/data";
 import { getNumberFromString } from "./src/utils/common";
 import chothuephongtro from "./src/data/cho-thue-can-ho.json";
+import generateDate from "./src/utils/generateDate";
 
 // console.log(chothuephongtro[1]);
 

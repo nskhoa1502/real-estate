@@ -15,5 +15,6 @@ router.get("/new-post", postController.getNewPosts);
 router.use(verifyToken);
 
 router.post("/create-new", postController.createNewPost);
+router.get("/post-admin", postController.getPostsAdmin);
 
 export default router;

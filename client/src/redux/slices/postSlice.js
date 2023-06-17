@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   apiGetNewPosts,
+  apiGetPostsAdmin,
   apiGetPostsFilter,
   apiGetPostsLimit,
 } from "../services/postService";
 
 const initialState = {
   posts: [],
+  currentUserPosts: [],
+  currentUserPostsCount: 0,
   count: 0,
   totalPage: 0,
   postPerPage: process.env.REACT_APP_LIMIT_POST,
@@ -54,6 +57,17 @@ export const getPostsFilter = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await apiGetPostsFilter(payload);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getPostsAdmin = createAsyncThunk(
+  "post/post-admin",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiGetPostsAdmin();
       return response;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -118,6 +132,20 @@ const postSlice = createSlice({
         state.totalPage = 0;
         state.message = null;
         state.count = 0;
+      })
+      .addCase(getPostsAdmin.fulfilled, (state, action) => {
+        state.currentUserPosts = action.payload.rows;
+        state.currentUserPostsCount = action.payload.count;
+        state.totalPage = Math.ceil(+action.payload.count / state.postPerPage);
+        state.message = "Get post admin successfully";
+        state.error = null;
+      })
+      .addCase(getPostsAdmin.rejected, (state, action) => {
+        state.currentUserPosts = [];
+        state.error = action.payload;
+        state.totalPage = 0;
+        state.message = null;
+        state.currentUserPostsCount = 0;
       });
   },
 });

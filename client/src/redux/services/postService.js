@@ -83,3 +83,17 @@ export const apiCreatePost = async (payload) => {
     throw err;
   }
 };
+export const apiGetPostsAdmin = async (query) => {
+  try {
+    const response = await axiosConfig({
+      method: "get",
+      url: `api/v1/post/post-admin`,
+      params: query,
+    });
+    // console.log(response.data);
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

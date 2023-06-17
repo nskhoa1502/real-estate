@@ -101,3 +101,9 @@ export const extractCategoryCode = (category) => {
     ?.map((word) => word[0].toUpperCase())
     .join("");
 };
+
+export const convertDate = (dateString) => {
+  const [day, month, year] = dateString.split("/");
+  const date = new Date(`${+month}/${+day}/${+year}`).getTime();
+  return date;
+};

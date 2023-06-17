@@ -13,7 +13,7 @@ const System = () => {
       <Header />
       <div className="flex  w-full  gap-6  h-full min-h-screen">
         <Sidebar />
-        <div className="flex-auto bg-white shadow-md p-4">
+        <div className="flex-auto bg-white shadow-md p-4 overflow-y-auto">
           <Outlet />
         </div>
       </div>

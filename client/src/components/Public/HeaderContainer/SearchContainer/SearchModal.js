@@ -156,6 +156,10 @@ const SearchModal = ({
 
     const minPercent = Math.min(percent1, percent2);
     const maxPercent = Math.max(percent1, percent2);
+
+    // if(+minPercent === 100 && +maxPercent === 100) {
+    //   setArrMinMax()
+    // }
     setArrMinMax([minPercent, maxPercent]);
     setIsShowModal(false);
   };
@@ -163,16 +167,24 @@ const SearchModal = ({
   const handleSubmit = (e) => {
     e.stopPropagation();
 
-    const rangeValue = [
-      name === "price"
-        ? mapPercentagesToPrice(Math.min(percent1, percent2))
-        : mapPercentagesToArea(Math.min(percent1, percent2)),
-      name === "price"
-        ? mapPercentagesToPrice(Math.max(percent1, percent2))
-        : mapPercentagesToArea(Math.max(percent1, percent2)),
-    ];
+    let rangeValue;
+    if ((+percent1 === 100, +percent2 === 100)) {
+      rangeValue =
+        name === "price"
+          ? [mapPercentagesToPrice(100), 9999999]
+          : [mapPercentagesToArea(100), 9999999];
+    } else {
+      rangeValue = [
+        name === "price"
+          ? mapPercentagesToPrice(Math.min(percent1, percent2))
+          : mapPercentagesToArea(Math.min(percent1, percent2)),
+        name === "price"
+          ? mapPercentagesToPrice(Math.max(percent1, percent2))
+          : mapPercentagesToArea(Math.max(percent1, percent2)),
+      ];
+    }
 
-    console.log(rangeValue);
+    // console.log(rangeValue);
     const codeValue = getCode(rangeValue, content);
     const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
       name === "price" ? "triệu" : `m\u00B2`

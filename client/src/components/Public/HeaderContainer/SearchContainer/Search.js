@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import SearchItem from "./SearchItem";
 import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { getPostsFilter } from "../../../../redux/slices/postSlice";
 import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
 import { path } from "../../../../utils/path/path";
+import { searchTitle } from "../../../../redux/slices/appSlice";
 
 const {
   BsChevronRight,
@@ -27,6 +28,7 @@ const Search = () => {
   const [defaultText, setDefaultText] = useState("");
   const navigate = useNavigate();
   // const [arrMinMax, setArrMinMax] = useState([]);
+  const dispatch = useDispatch();
   const location = useLocation();
   const prevPathRef = useRef();
   // console.log(prices);
@@ -73,12 +75,14 @@ const Search = () => {
     // console.log(filterText);
     console.log(filterQueries);
 
+    dispatch(searchTitle(titleSearch));
+
     navigate(
       {
         pathname: path.TIM_KIEM,
         search: createSearchParams(filterQueries).toString(),
-      },
-      { state: { titleSearch: titleSearch } }
+      }
+      // { state: { titleSearch: titleSearch } }
     );
   };
 

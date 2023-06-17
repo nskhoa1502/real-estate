@@ -65,12 +65,17 @@ const initialState = {
   categories: [],
   areas: [],
   message: "",
+  searchTitle: "",
 };
 
 const appSlice = createSlice({
   name: "app",
   initialState,
-  reducers: {},
+  reducers: {
+    searchTitle: (state, action) => {
+      state.searchTitle = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPrices.fulfilled, (state, action) => {
@@ -108,4 +113,5 @@ const appSlice = createSlice({
   },
 });
 
+export const { searchTitle } = appSlice.actions;
 export default appSlice.reducer;

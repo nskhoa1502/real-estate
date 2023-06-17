@@ -14,11 +14,11 @@ const RelatedItem = ({ title, price, image, createdAt }) => {
         alt="img"
         className="w-[65px] h-[65px] object-cover rounded-md flex-none"
       />
-      <div className="flex flex-col justify-between gap-2 whitespace-normal text-ellipsis overflow-hidden">
+      <div className="flex flex-col justify-between gap-2 w-full">
         <h3 className=" text-blue-600 text-[16px]">
           {truncateString(title, 50)}
         </h3>
-        <div className="flex justify-between items-center w-full">
+        <div className=" flex items-center justify-between w-full ">
           <span className="font-medium text-sm text-green-500">{price}</span>
           <span className="font-medium text-sm text-gray-300">
             {formatTime(createdAt)}

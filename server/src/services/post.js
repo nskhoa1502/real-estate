@@ -58,7 +58,7 @@ export const getPostsLimitService = async (pageNumber) => {
           attributes: ["name", "zalo", "phone"],
         },
       ],
-      order: [["star", "DESC"]], // Sort by star property in descending order
+      order: [["createdAt", "DESC"]], // Sort by star property in descending order
       offset: offset * limit,
       limit: limit,
     });
@@ -106,7 +106,7 @@ export const getPostsFilterService = async (
           attributes: ["name", "zalo", "phone"],
         },
       ],
-      order: [["star", "DESC"]], // Sort by star property in descending order
+      order: [["createdAt", "DESC"]], // Sort by star property in descending order
       offset: offset * limit,
 
       limit: limit,

@@ -53,10 +53,24 @@ export const validateFields = (fieldsToValidate, setInvalidFields) => {
       });
       invalidCount++;
     }
+    if (field[0] === "areaNumber" && +field[1] >= 5) {
+      newInvalidFields.push({
+        name: field[0],
+        message: "Diện tích phải lớn hơn phải từ 5m\u00B2 trở lên",
+      });
+      invalidCount++;
+    }
     if (field[0] === "priceNumber" && isNaN(+field[1])) {
       newInvalidFields.push({
         name: field[0],
         message: "Giá tiền không hợp lệ",
+      });
+      invalidCount++;
+    }
+    if (field[0] === "priceNumber" && +field[1] >= 100000) {
+      newInvalidFields.push({
+        name: field[0],
+        message: `Giá tiền phải lớn hơn 100.000 đồng/tháng`,
       });
       invalidCount++;
     }

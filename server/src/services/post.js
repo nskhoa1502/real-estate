@@ -4,6 +4,7 @@ require("dotenv").config();
 import { v4 as uuidv4 } from "uuid";
 import { generateCode } from "../utils/generateCode";
 import moment from "moment";
+import generateDate from "../utils/generateDate";
 
 export const getPostsService = async () => {
   try {
@@ -160,7 +161,7 @@ export const createNewPostService = async (body, userId) => {
     const overviewId = uuidv4();
     const labelCode = generateCode(body.label);
     const hashtag = `${Math.floor(Math.random() * Math.pow(10, 6))}`;
-    const currentDate = new Date();
+    const currentDate = generateDate();
     const provinceValue = body?.province?.replace(/^(Thành phố |Tỉnh)/, "");
     const provinceCode = generateCode(provinceValue);
 
@@ -207,8 +208,8 @@ export const createNewPostService = async (body, userId) => {
       type: body?.categoryName,
       target: body?.target,
       bonus: "Tin thường",
-      created: currentDate,
-      expired: currentDate.setDate(currentDate.getDate() + 10),
+      created: currentDate.today,
+      expired: currentDate.expired,
     });
 
     await db.Province.findOrCreate({

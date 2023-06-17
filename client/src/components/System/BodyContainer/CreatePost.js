@@ -6,6 +6,7 @@ import { apiUploadImages } from "../../../redux/services/postService";
 import Loading from "../../../UI/Loading";
 import Button from "../../../UI/Button";
 import {
+  generateLabelCode,
   generatePayloadCode,
   getCode,
 } from "../../../utils/helper-function/getCode";
@@ -27,7 +28,10 @@ const CreatePost = () => {
     target: "",
     province: "",
   });
-  const { prices, areas } = useSelector((state) => state.app);
+  const { prices, areas, provinces, categories } = useSelector(
+    (state) => state.app
+  );
+  const { currentData } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const handleFiles = async (e) => {
@@ -72,14 +76,25 @@ const CreatePost = () => {
   const handleSubmit = () => {
     let priceCode = generatePayloadCode(+payload?.priceNumber, prices, "price");
     let areaCode = generatePayloadCode(+payload?.areaNumber, areas, "area");
+    const districtAddress = payload?.address
+      .split(",")
+      [payload?.address?.split(",")?.length - 2]?.trim();
+    const categoryName = categories?.find(
+      (item) => item?.code === payload?.categoryCode
+    )?.value;
 
+    console.log(`${categoryName} ${districtAddress}`);
+    // console.log(payload?.address.split(","));
     const submitData = {
       ...payload,
-      images: JSON.stringify(payload?.images),
       priceCode,
       areaCode,
-      priceNumber: +(+payload?.priceNumber / 1000000).toFixed(1),
+      priceNumber: +(payload?.priceNumber / 1000000).toFixed(1),
       areaNumber: +payload?.areaNumber,
+      userId: currentData?.id,
+      target: payload.target || "Tất cả",
+      label: `${categoryName} ${districtAddress}`,
+      categoryName,
     };
 
     console.log(submitData);

@@ -1,3 +1,4 @@
+import { createError } from "../helpers/error";
 import * as service from "../services/post";
 
 export const getPosts = async (req, res, next) => {
@@ -46,6 +47,20 @@ export const getNewPosts = async (req, res, next) => {
   try {
     const { response, message } = await service.getNewPostService();
     // console.log(message);
+    return res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+};
+export const createNewPost = async (req, res, next) => {
+  const { categoryCode, title, priceNumber, areaNumber, label } = req.body;
+  const { id } = req.user;
+
+  try {
+    if (!categoryCode || !id || !title || !priceNumber || !areaNumber || !label)
+      return createError(400, "Missing input");
+
+    const response = await service.createNewPostService(req.body, id);
     return res.status(200).json(response);
   } catch (err) {
     next(err);

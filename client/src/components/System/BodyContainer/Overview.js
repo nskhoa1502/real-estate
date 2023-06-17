@@ -72,7 +72,7 @@ const Overview = ({ payload, setPayload }) => {
             setValue={setPayload}
           />
           <Select
-            label="Đối tượng cho thuê"
+            label="Tất cả"
             options={targets}
             type="target"
             value={payload?.target}

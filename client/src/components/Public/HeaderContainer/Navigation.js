@@ -26,7 +26,7 @@ const Navigation = ({ isAdmin }) => {
 
   return (
     <div
-      className={`w-full h-[40px] bg-primaryBlue text-white flex ${
+      className={`w-full h-[40px]  bg-primaryBlue  text-white flex ${
         isAdmin ? "justify-start" : "justify-center"
       } items-center`}
     >

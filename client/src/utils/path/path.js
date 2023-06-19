@@ -12,4 +12,5 @@ export const path = {
   QUAN_LY: "/quan-ly/*",
   DANG_TIN_MOI: "dang-tin-moi",
   QUAN_LY_TIN_DANG: "quan-ly-tin-dang",
+  SUA_THONG_TIN_CA_NHAN: "sua-thong-tin-ca-nhan",
 };

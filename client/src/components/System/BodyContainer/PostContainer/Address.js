@@ -1,11 +1,11 @@
 import React, { memo, useEffect, useState } from "react";
-import Select from "./Select";
+import Select from "../Select";
 import {
   apiGetPublicDistrict,
   apiGetPublicProvinces,
   apiGetPublicWard,
 } from "../../../../redux/services/appService";
-import InputReadOnly from "./InputReadOnly";
+import InputReadOnly from "../InputReadOnly";
 import { useSelector } from "react-redux";
 
 const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {

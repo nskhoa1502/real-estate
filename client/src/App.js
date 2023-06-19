@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { path } from "./utils/path/path";
 import { Home, Login, SearchDetail } from "./components/Public";
-import { CreatePost, ManagePost } from "./components/System";
+import { CreatePost, EditAccount, ManagePost } from "./components/System";
 
 import { DetailPage, HomePage, CategoryPage, System } from "./pages";
 import { useEffect } from "react";
@@ -48,6 +48,7 @@ function App() {
         <Route path={path.QUAN_LY} element={<System />}>
           <Route path={path.DANG_TIN_MOI} element={<CreatePost />} />
           <Route path={path.QUAN_LY_TIN_DANG} element={<ManagePost />} />
+          <Route path={path.SUA_THONG_TIN_CA_NHAN} element={<EditAccount />} />
         </Route>
       </Routes>
     </div>

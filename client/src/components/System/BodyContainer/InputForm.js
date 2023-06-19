@@ -9,11 +9,18 @@ const InputForm = ({
   text,
   invalidFields,
   setInvalidFields,
+  flexDirection,
 }) => {
   return (
-    <div className="w-full flex flex-col gap-2">
-      <label htmlFor="Title">{label}</label>
-      <div className="flex items-center ">
+    <div
+      className={`w-full flex ${
+        flexDirection ? flexDirection : "flex-col"
+      } gap-2`}
+    >
+      <label className="w-[200px] flex-none" htmlFor="Title">
+        {label}
+      </label>
+      <div className="flex items-center flex-auto ">
         <input
           type="text"
           id="title"
@@ -32,11 +39,12 @@ const InputForm = ({
           </span>
         )}
       </div>
-      <small className="opacity-70 whitespace-nowrap">{text}</small>
-      <small className="text-red-500 block w-full">
-        {invalidFields?.some((item) => item.name === field) &&
-          invalidFields?.find((item) => item?.name === field)?.message}
-      </small>
+      {text && <small className="opacity-70 whitespace-nowrap">{text}</small>}
+      {invalidFields?.some((item) => item.name === field) && (
+        <small className="text-red-500 block w-full">
+          {invalidFields?.find((item) => item?.name === field)?.message}
+        </small>
+      )}
     </div>
   );
 };

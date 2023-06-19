@@ -1,8 +1,8 @@
 import React from "react";
-import Select from "./Select";
+import Select from "../Select";
 import { useSelector } from "react-redux";
-import InputReadOnly from "./InputReadOnly";
-import InputForm from "./InputForm";
+import InputReadOnly from "../InputReadOnly";
+import InputForm from "../InputForm";
 
 const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const { categories } = useSelector((state) => state.app);

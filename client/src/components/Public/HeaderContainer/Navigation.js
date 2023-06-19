@@ -19,7 +19,7 @@ const Navigation = ({ isAdmin }) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.app);
 
-  // console.log(categories);
+  console.log(categories);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -52,7 +52,7 @@ const Navigation = ({ isAdmin }) => {
           Trang Chủ
         </NavLink>
         {categories?.length > 0 &&
-          categories.map((item, i) => {
+          categories?.map((item, i) => {
             return (
               <div
                 key={item.code}

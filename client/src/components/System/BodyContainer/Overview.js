@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Select from "./Select";
 import { useSelector } from "react-redux";
 import InputReadOnly from "./InputReadOnly";
 import InputForm from "./InputForm";
-import { extractCategoryCode } from "../../../utils/helper-function/convert";
 
 const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const { categories } = useSelector((state) => state.app);

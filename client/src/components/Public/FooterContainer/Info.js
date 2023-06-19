@@ -2,14 +2,10 @@ import React, { memo } from "react";
 import { text } from "../../../utils/constant/data-info";
 import icons from "../../../utils/icon/icons";
 import { Button } from "../../../UI";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { formatVietnameseText } from "../../../utils/helper-function/convert";
 
 const Info = () => {
   const { AiFillStar } = icons;
   const star = [1, 2, 3, 4, 5];
-  const { categories } = useSelector((state) => state.app);
 
   return (
     <div className=" w-full bg-white rounded-md shadow-md flex justify-center items-center p-2 flex-col gap-3">
@@ -17,7 +13,7 @@ const Info = () => {
       <p className="text-gray-800 text-center">
         {text.description1}
         <span>
-          {categories.length > 0 &&
+          {/* {categories.length > 0 &&
             categories?.map((category) => {
               return (
                 <Link
@@ -28,7 +24,7 @@ const Info = () => {
                   {`${category.value.toLowerCase()}. `}
                 </Link>
               );
-            })}
+            })} */}
         </span>
         {text.description2}
       </p>

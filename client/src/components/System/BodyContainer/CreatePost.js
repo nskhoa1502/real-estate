@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { validateFields } from "../../../utils/helper-function/validateField";
 
-const { BsCameraFill, RiDeleteBin5Line, RiDeleteBack2Line } = icons;
+const { BsCameraFill, RiDeleteBack2Line } = icons;
 
 const CreatePost = () => {
   const [payload, setPayload] = useState({
@@ -29,9 +29,7 @@ const CreatePost = () => {
     target: "Tất cả",
     province: "",
   });
-  const { prices, areas, provinces, categories } = useSelector(
-    (state) => state.app
-  );
+  const { prices, areas, categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
   const { currentData } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -109,7 +107,7 @@ const CreatePost = () => {
     const result = validateFields(payload, setInvalidFields);
     if (result === 0) {
       try {
-        const response = await apiCreatePost(submitData);
+        await apiCreatePost(submitData);
         Swal.fire({
           position: "top-end",
           icon: "success",

@@ -4,7 +4,7 @@ import {
   mapRangeToPercentage,
 } from "../../../../utils/helper-function/convert";
 import { extractNumbers } from "../../../../utils/helper-function/extractNumbers";
-import { getCode } from "../../../../utils/helper-function/getCode";
+// import { getCode } from "../../../../utils/helper-function/getCode";
 import SearchModalHeader from "./SearchModalHeader";
 
 const SearchModal = ({
@@ -185,7 +185,7 @@ const SearchModal = ({
     }
 
     // console.log(rangeValue);
-    const codeValue = getCode(rangeValue, content);
+    // const codeValue = getCode(rangeValue, content);
     const textValue = `Từ ${rangeValue[0]} đến ${rangeValue[1]} ${
       name === "price" ? "triệu" : `m\u00B2`
     }`;

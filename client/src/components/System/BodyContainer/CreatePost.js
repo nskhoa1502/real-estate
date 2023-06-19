@@ -16,18 +16,24 @@ import { validateFields } from "../../../utils/helper-function/validateField";
 
 const { BsCameraFill, RiDeleteBack2Line } = icons;
 
-const CreatePost = () => {
-  const [payload, setPayload] = useState({
-    categoryCode: "",
+const CreatePost = ({ isEdit }) => {
+  const { editPost } = useSelector((state) => state.post);
+  console.log(editPost);
 
-    priceNumber: 0,
-    areaNumber: 0,
-    images: "",
-    address: "",
-    title: "",
-    description: "",
-    target: "Tất cả",
-    province: "",
+  const [payload, setPayload] = useState(() => {
+    const formData = {
+      categoryCode: editPost?.categoryCode || "",
+
+      priceNumber: editPost?.priceNumber * 1000000 || 0,
+      areaNumber: editPost?.areaNumber || 0,
+      images: JSON.parse(editPost?.images?.image),
+      address: "",
+      title: editPost?.title || "",
+      description: JSON.parse(editPost?.description) || "",
+      target: editPost?.overviews?.target || "",
+      province: "",
+    };
+    return formData;
   });
   const { prices, areas, categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
@@ -76,7 +82,7 @@ const CreatePost = () => {
   };
 
   useEffect(() => {
-    console.log(invalidFields);
+    // console.log(invalidFields);
   }, [JSON.stringify(invalidFields)]);
 
   const handleSubmit = async () => {
@@ -141,7 +147,7 @@ const CreatePost = () => {
   return (
     <div className="px-6">
       <h1 className="text-3xl font-medium py-4 border-b border-gray-200">
-        Đăng tin mới
+        {isEdit ? "Chỉnh sửa tin đăng" : "Đăng tin mới"}
       </h1>
       <div className="flex gap-4">
         <div className="py-4 flex flex-col gap-8 flex-auto">

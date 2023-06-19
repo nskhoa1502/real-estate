@@ -252,7 +252,7 @@ export const getPostsAdminService = async (pageNumber, query, id) => {
     const response = await db.Post.findAndCountAll({
       where: queries,
       raw: true,
-      attributes: ["id", "title", "star", "address", "description"],
+      // attributes: ["id", "title", "star", "address", "description"],
       nest: true,
       include: [
         { model: db.Image, as: "images", attributes: ["image"] },

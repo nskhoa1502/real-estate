@@ -6,18 +6,6 @@ import {
   apiGetPostsLimit,
 } from "../services/postService";
 
-const initialState = {
-  posts: [],
-  currentUserPosts: [],
-  currentUserPostsCount: 0,
-  count: 0,
-  totalPage: 0,
-  postPerPage: process.env.REACT_APP_LIMIT_POST,
-  newPosts: [],
-  error: null,
-  message: "",
-};
-
 // export const getAllPosts = createAsyncThunk(
 //   "post/all",
 //   async (payload, { rejectWithValue }) => {
@@ -74,11 +62,26 @@ export const getPostsAdmin = createAsyncThunk(
     }
   }
 );
-
+const initialState = {
+  posts: [],
+  currentUserPosts: [],
+  currentUserPostsCount: 0,
+  editPost: null,
+  count: 0,
+  totalPage: 0,
+  postPerPage: process.env.REACT_APP_LIMIT_POST,
+  newPosts: [],
+  error: null,
+  message: "",
+};
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    setEditPost: (state, action) => {
+      state.editPost = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // .addCase(getAllPosts.fulfilled, (state, action) => {
@@ -150,6 +153,6 @@ const postSlice = createSlice({
   },
 });
 
-// export const {} = postSlice.actions;
+export const { setEditPost } = postSlice.actions;
 
 export default postSlice.reducer;

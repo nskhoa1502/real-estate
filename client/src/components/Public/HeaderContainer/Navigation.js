@@ -19,7 +19,7 @@ const Navigation = ({ isAdmin }) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.app);
 
-  console.log(categories);
+  // console.log(categories);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);

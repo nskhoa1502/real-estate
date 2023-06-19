@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostsAdmin } from "../../../redux/slices/postSlice";
+import { getPostsAdmin, setEditPost } from "../../../redux/slices/postSlice";
 
 import {
   convertDate,
   truncateString,
 } from "../../../utils/helper-function/convert";
 import Button from "../../../UI/Button";
+import UpdatePost from "./UpdatePost";
 
 const ManagePost = () => {
   const { currentUserPosts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  console.log(currentUserPosts);
+
+  // const [postEdit, setPostEdit] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
+  // console.log(currentUserPosts);
 
   useEffect(() => {
     dispatch(getPostsAdmin());
@@ -105,6 +109,10 @@ const ManagePost = () => {
                       bgColor={`bg-primaryBlue`}
                       textColor={`text-white`}
                       fullWidth={true}
+                      onClick={() => {
+                        dispatch(setEditPost(item));
+                        setIsEdit(true);
+                      }}
                     />
                     <Button
                       text="Xóa"
@@ -118,6 +126,7 @@ const ManagePost = () => {
             })}
         </tbody>
       </table>
+      {isEdit && <UpdatePost setIsEdit={setIsEdit} />}
     </div>
   );
 };

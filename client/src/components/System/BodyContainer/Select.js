@@ -10,6 +10,7 @@ const Select = ({
   invalidFields,
   setInvalidFields,
 }) => {
+  // console.log(value);
   const handleSelect = (e) => {
     !field
       ? setValue(e?.target?.value)

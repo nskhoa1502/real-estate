@@ -6,14 +6,74 @@ import {
   apiGetPublicWard,
 } from "../../../redux/services/appService";
 import InputReadOnly from "./InputReadOnly";
+import { useSelector } from "react-redux";
 
 const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
+  const { editPost } = useSelector((state) => state.post);
+
   const [provinces, setProvinces] = useState([]);
   const [province, setProvince] = useState("");
+
+  // console.log(typeof province);
+  // console.log(
+  //   provinces?.find(
+  //     (province) =>
+  //       province.province_name ===
+  //       editPost?.address.split(",").slice(-1)[0].trim()
+  //   )?.province_id
+  // );
+  // console.log(editPost?.address.split(",").slice(-1)[0]);
   const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState("");
   const [wards, setWards] = useState([]);
   const [ward, setWard] = useState("");
+
+  // console.log(province);
+  useEffect(() => {
+    const foundProvince =
+      provinces.length > 0 &&
+      provinces.find((province) =>
+        editPost?.address
+          .split(",")
+          .slice(-1)[0]
+          .trim()
+          .includes(province?.province_name)
+      );
+
+    const foundProvinceId = foundProvince?.province_id;
+    setProvince(foundProvince ? foundProvinceId : "");
+  }, [provinces, editPost?.address]);
+
+  useEffect(() => {
+    const foundDistrict =
+      districts.length > 0 &&
+      districts.find((district) =>
+        editPost?.address
+          .split(",")
+          .slice(-2)[0]
+          .trim()
+          .includes(district?.district_name)
+      );
+
+    const foundDistrictId = foundDistrict?.district_id;
+    setDistrict(foundDistrict ? foundDistrictId : "");
+  }, [districts, editPost?.address]);
+
+  useEffect(() => {
+    const foundWard =
+      wards.length > 0 &&
+      wards.find((ward) =>
+        editPost?.address
+          .split(",")
+          .slice(-3)[0]
+          .trim()
+          .includes(ward?.ward_name)
+      );
+
+    const foundWardId = foundWard?.ward_id;
+    setWard(foundWard ? foundWardId : "");
+  }, [wards, editPost?.address]);
+
   useEffect(() => {
     const fetchPublicProvinces = async () => {
       try {
@@ -104,7 +164,7 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
       <div className="flex flex-col gap-10">
         <div className="flex items-center gap-4">
           <Select
-            value={province?.name}
+            value={province}
             setValue={setProvince}
             label="Tỉnh/Thành phố"
             options={provinces}
@@ -114,7 +174,7 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
           />
           <Select
             label="Quận/Huyện"
-            value={district?.name}
+            value={district}
             setValue={setDistrict}
             options={districts}
             type="district"
@@ -123,7 +183,7 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
           />
           <Select
             label="Phường/Xã"
-            value={ward?.name}
+            value={ward}
             setValue={setWard}
             options={wards}
             type="ward"

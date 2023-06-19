@@ -18,7 +18,7 @@ const userSettings = [
   {
     id: 3,
     text: "Thông tin tài khoản",
-    path: "/quan-ly/thong-tin-tai-khoan",
+    path: "/quan-ly/sua-thong-tin-ca-nhan",
     icon: <FaUserCircle />,
   },
 ];

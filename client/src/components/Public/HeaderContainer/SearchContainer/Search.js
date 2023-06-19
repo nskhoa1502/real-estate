@@ -103,7 +103,7 @@ const Search = () => {
   }, [location.pathname]);
 
   return (
-    <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-3/5 my-2 ">
+    <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-[1100px] my-2 ">
       {/* <SearchModalHeader setIsShowModal={setIsShowModal} /> */}
       <span
         onClick={() => handleShowModal(categories, `category`, "Tìm tất cả")}

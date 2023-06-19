@@ -10,15 +10,15 @@ const HomePage = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   return (
-    <div className=" m-auto h-full border  flex flex-col items-center relative">
+    <div className=" m-auto min-w-[1100px] border  flex flex-col items-center relative ">
       <Header />
       <Navigation />
 
       {isLoggedIn && <Search />}
-      <div className="w-3/5 flex flex-col items-start justify-start">
+      <div className="w-[1100px]  min-w-[1100px] flex flex-col items-start justify-start ">
         <Outlet />
       </div>
-      <div className=" w-3/5 flex flex-col gap-5">
+      <div className=" w-[1100px] flex flex-col gap-5">
         <Info />
         <Contact />
       </div>

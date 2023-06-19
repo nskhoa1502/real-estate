@@ -31,7 +31,7 @@ const CategoryPage = () => {
 
   return (
     // ===================== FEATURED PROVINCES ====================
-    <div className="my-3 w-full flex flex-col gap-5 items-center relative">
+    <div className="my-3 min-w-[1100px] flex flex-col gap-5 items-center relative">
       <Province
         id={category?.code}
         title={category?.header}

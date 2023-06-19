@@ -30,7 +30,7 @@ const Navigation = ({ isAdmin }) => {
         isAdmin ? "justify-start" : "justify-center"
       } items-center`}
     >
-      <div className="w-3/5 flex justify-start items-center text-sm font-medium h-full">
+      <div className="w-[1100px] flex justify-start items-center text-sm font-medium h-full">
         {/* {nav?.length > 0 &&
           nav.map((item, i) => {
             return (

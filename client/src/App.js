@@ -31,7 +31,7 @@ function App() {
   }, [isLoggedIn, dispatch]);
 
   return (
-    <div className=" bg-primaryWhite h-full overflow-hidden">
+    <div className=" bg-primaryWhite ">
       <Routes>
         <Route path={path.HOME} element={<HomePage />}>
           <Route path="*" element={<Home />} />

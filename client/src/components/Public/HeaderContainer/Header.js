@@ -48,7 +48,7 @@ const Header = () => {
   return (
     <div
       ref={headerRef}
-      className="w-3/5 flex items-center  bg-primaryWhite justify-between  "
+      className="w-[1100px] flex items-center  bg-primaryWhite justify-between  "
     >
       <Link to={"/"}>
         <img

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "imagesId",
         targetKey: "id",
         as: "images",
+        onDelete: "CASCADE",
       });
       Post.belongsTo(models.Attribute, {
         foreignKey: "attributesId",
@@ -23,11 +24,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "overviewId",
         targetKey: "id",
         as: "overviews",
+        onDelete: "CASCADE",
       });
       Post.belongsTo(models.User, {
         foreignKey: "userId",
         targetKey: "id",
         as: "user",
+        onDelete: "CASCADE",
       });
     }
   }

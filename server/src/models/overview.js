@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Overview.hasOne(models.Post, {
         foreignKey: "overviewId",
         as: "overviews",
+        onDelete: "CASCADE",
       });
     }
   }

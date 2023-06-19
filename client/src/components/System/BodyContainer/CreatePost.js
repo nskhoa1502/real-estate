@@ -23,24 +23,40 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
   // console.log(editPost);
 
   const [payload, setPayload] = useState(() => {
-    const formData = {
-      categoryCode: editPost?.categoryCode || "",
+    let formData = {
+      categoryCode: "",
 
-      priceNumber: editPost?.priceNumber * 1000000 || 0,
-      areaNumber: editPost?.areaNumber || 0,
-      images: editPost?.images?.image
-        ? JSON.parse(editPost?.images?.image)
-        : "",
-      address: editPost?.address || "",
-      title: editPost?.title || "",
-      description: editPost?.description
-        ? JSON.parse(editPost?.description)
-        : "",
-      target: editPost?.overviews?.target || "Tất cả",
+      priceNumber: 0,
+      areaNumber: 0,
+      images: "",
+      address: "",
+      title: "",
+      description: "",
+      target: "Tất cả",
       province: "",
     };
+
+    if (isEdit) {
+      formData = {
+        categoryCode: editPost?.categoryCode || "",
+
+        priceNumber: editPost?.priceNumber * 1000000 || 0,
+        areaNumber: editPost?.areaNumber || 0,
+        images: editPost?.images?.image
+          ? JSON.parse(editPost?.images?.image)
+          : "",
+        address: editPost?.address || "",
+        title: editPost?.title || "",
+        description: editPost?.description
+          ? JSON.parse(editPost?.description)
+          : "",
+        target: editPost?.overviews?.target || "Tất cả",
+        province: "",
+      };
+    }
     return formData;
   });
+  // console.log(payload);
   const { prices, areas, categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
   const { currentData } = useSelector((state) => state.auth);
@@ -52,9 +68,20 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    editPost?.images?.image &&
-      setImagesPreview(JSON.parse(editPost?.images?.image));
+    if (isEdit) {
+      editPost?.images?.image &&
+        setImagesPreview(JSON.parse(editPost?.images?.image));
+    } else {
+      // dispatch(setEditPost({}));
+      setImagesPreview([]);
+    }
   }, [editPost]);
+
+  useEffect(() => {
+    if (!isEdit) {
+      dispatch(setEditPost({}));
+    }
+  }, [isEdit, dispatch]);
 
   const handleFiles = async (e) => {
     e.stopPropagation();
@@ -155,6 +182,7 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
             showConfirmButton: false,
             timer: 2000,
           });
+          navigate("/");
         }
 
         setPayload({
@@ -169,7 +197,6 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
           target: "",
           province: "",
         });
-        navigate("/");
       } catch (err) {
         if (isEdit) {
           Swal.fire({

@@ -379,3 +379,20 @@ export const updatePostService = async ({
     throw err;
   }
 };
+
+export const deletePostService = async (postId) => {
+  try {
+    // console.log(`post service`, postId);
+    const response = await db.Post.destroy({
+      where: { id: postId },
+      cascade: true,
+    });
+
+    return {
+      response: response,
+      message: response[0] > 0 ? "Update post successfully" : "Delete failed",
+    };
+  } catch (err) {
+    throw err;
+  }
+};

@@ -105,3 +105,18 @@ export const updatePost = async (req, res, next) => {
     next(err);
   }
 };
+export const deletePost = async (req, res, next) => {
+  const { postId } = req.query;
+  // console.log(postId);
+
+  const { id } = req.user;
+
+  try {
+    if (!id || !postId) return createError(400, "Missing ids");
+
+    const { response, message } = await service.deletePostService(postId);
+    return res.status(200).json({ response, message });
+  } catch (err) {
+    next(err);
+  }
+};

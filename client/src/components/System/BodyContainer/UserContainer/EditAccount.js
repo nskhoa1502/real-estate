@@ -3,10 +3,18 @@ import InputReadOnly from "../InputReadOnly";
 import InputForm from "../InputForm";
 import anon_avatar from "../../../../assets/anon_avatar.png";
 import { Button } from "../../../../UI";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { extractNumbersFromId } from "../../../../utils/helper-function/extractNumberId";
 import { apiUploadImages } from "../../../../redux/services/postService";
 import Loading from "../../../../UI/Loading";
+import { apiUpdateUser } from "../../../../redux/services/userService";
+import Swal from "sweetalert2";
+import {
+  blobToBase64,
+  fileToBase64,
+} from "../../../../utils/helper-function/base64";
+import { getCurrentUser } from "../../../../redux/slices/authSlice";
+// import { validateFields } from "../../../../utils/helper-function/validateField";
 
 const EditAccount = () => {
   const [invalidFields, setInvalidFields] = useState([]);
@@ -15,43 +23,66 @@ const EditAccount = () => {
   //   console.log(currentData);
   const [payload, setPayload] = useState({
     name: currentData?.name || "",
-    avatar: currentData?.avatar ? currentData?.avatar : anon_avatar,
+    avatar: currentData?.avatar ? blobToBase64(currentData?.avatar) : "",
     fbUrl: currentData?.fbUrl || "",
     zalo: currentData?.zalo || "",
   });
+  const dispatch = useDispatch();
 
-  const handleSubmit = () => {
-    console.log(payload);
+  const handleSubmit = async () => {
+    try {
+      console.log(payload);
+      const response = await apiUpdateUser(payload);
+      Swal.fire("Done", "Chỉnh sửa thông tin thành công", "success").then(
+        () => {
+          dispatch(getCurrentUser());
+        }
+      );
+      // getCurrentUser(getCurrentUser());
+
+      // console.log(response);
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Cập nhật thông tin thất bại!",
+      });
+      throw err;
+    }
   };
 
   const handleUploadFile = async (e) => {
     const image = e?.target?.files[0];
-    e.stopPropagation();
-    setIsLoading(true);
+    const imageBase64 = await fileToBase64(image);
+    // console.log(imageBase64);
 
-    try {
-      let formData = new FormData();
-      formData.append("file", image);
-      formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
+    setPayload((prev) => ({ ...prev, avatar: imageBase64 }));
+    // e.stopPropagation();
+    // setIsLoading(true);
 
-      const response = await apiUploadImages(formData);
-      //   console.log(response);
-      setPayload((prev) => ({
-        ...prev,
-        avatar: response?.secure_url,
-      }));
-      setIsLoading(false);
+    // try {
+    //   let formData = new FormData();
+    //   formData.append("file", image);
+    //   formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
 
-      // console.log(images);
-      //   setImagesPreview((prev) => [...prev, ...images]);
+    //   const response = await apiUploadImages(formData);
+    //   //   console.log(response);
+    //   setPayload((prev) => ({
+    //     ...prev,
+    //     avatar: response?.secure_url,
+    //   }));
+    //   setIsLoading(false);
 
-      //   setPayload((prev) => ({
-      //     ...prev,
-      //     images: [...payload?.images, ...images],
-      //   }));
-    } catch (err) {
-      throw err;
-    }
+    //   // console.log(images);
+    //   //   setImagesPreview((prev) => [...prev, ...images]);
+
+    //   //   setPayload((prev) => ({
+    //   //     ...prev,
+    //   //     images: [...payload?.images, ...images],
+    //   //   }));
+    // } catch (err) {
+    //   throw err;
+    // }
   };
   return (
     <div className="flex flex-col items-center h-full">
@@ -74,7 +105,8 @@ const EditAccount = () => {
           />
           <InputForm
             label={"Tên hiển thị"}
-            setInvalidFields={setInvalidFields}
+            // invalidFields={invalidFields}
+            // setInvalidFields={setInvalidFields}
             flexDirection={`flex-row`}
             value={payload?.name}
             setValue={setPayload}
@@ -83,7 +115,8 @@ const EditAccount = () => {
 
           <InputForm
             label={"Zalo"}
-            setInvalidFields={setInvalidFields}
+            // invalidFields={invalidFields}
+            // setInvalidFields={setInvalidFields}
             flexDirection={`flex-row`}
             value={payload?.zalo}
             setValue={setPayload}
@@ -91,7 +124,8 @@ const EditAccount = () => {
           />
           <InputForm
             label={"Facebook"}
-            setInvalidFields={setInvalidFields}
+            // invalidFields={invalidFields}
+            // setInvalidFields={setInvalidFields}
             flexDirection={`flex-row`}
             value={payload?.fbUrl}
             setValue={setPayload}
@@ -113,7 +147,7 @@ const EditAccount = () => {
               {isLoading && <Loading />}
               {!isLoading && (
                 <img
-                  src={payload?.avatar}
+                  src={payload?.avatar || anon_avatar}
                   className="w-24 h-24 rounded-full object-cover"
                   alt="avatar"
                 />
@@ -124,6 +158,14 @@ const EditAccount = () => {
                 id="avatar"
                 className="my-4"
               />
+              {/* {invalidFields?.some((item) => item.name === "avatar") && (
+                <span className="text-red-500 block">
+                  {
+                    invalidFields?.find((item) => item?.name === "avatar")
+                      ?.message
+                  }
+                </span>
+              )} */}
             </div>
           </div>
           <Button

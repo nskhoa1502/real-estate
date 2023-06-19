@@ -166,11 +166,8 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
         if (isEdit) {
           await apiUpdatePost(submitData);
           Swal.fire({
-            position: "top-end",
             icon: "success",
             title: "Cập nhật bài đăng thành công",
-            showConfirmButton: false,
-            timer: 2000,
           });
           dispatch(setEditPost({}));
         } else {

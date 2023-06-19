@@ -4,7 +4,10 @@ export const validateFields = (fieldsToValidate, setInvalidFields) => {
   let newInvalidFields = [];
 
   for (let field of fields) {
-    if (field[0] === "images" && field[1]?.length === 0) {
+    if (
+      (field[0] === "images" || field[0] === "avatar") &&
+      field[1]?.length === 0
+    ) {
       newInvalidFields.push({
         name: field[0],
         message: "Bạn phải thêm ít nhất một ảnh",

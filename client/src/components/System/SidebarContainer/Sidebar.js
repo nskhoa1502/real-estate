@@ -6,6 +6,7 @@ import userSidebar from "../../../utils/constant/userSidebar";
 import { NavLink } from "react-router-dom";
 import icons from "../../../utils/icon/icons";
 import { logout } from "../../../redux/slices/authSlice";
+import { blobToBase64 } from "../../../utils/helper-function/base64";
 
 const activeStyle =
   "hover:bg-gray-300  py-2 flex gap-2 items-center font-bold ";
@@ -27,7 +28,7 @@ const Sidebar = () => {
       <div className="flex  flex-col gap-4">
         <div className="flex items-center gap-3">
           <img
-            src={anon_avatar}
+            src={blobToBase64(currentData?.avatar) || anon_avatar}
             alt="avatar"
             className="w-12 h-12 object-cover rounded-full border-2 border-white items-center"
           />

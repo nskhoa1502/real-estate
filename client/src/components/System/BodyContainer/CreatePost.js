@@ -26,7 +26,7 @@ const CreatePost = ({ isEdit }) => {
 
       priceNumber: editPost?.priceNumber * 1000000 || 0,
       areaNumber: editPost?.areaNumber || 0,
-      images: JSON.parse(editPost?.images?.image),
+      images: JSON.parse(editPost?.images?.image) || "",
       address: "",
       title: editPost?.title || "",
       description: JSON.parse(editPost?.description) || "",
@@ -38,7 +38,9 @@ const CreatePost = ({ isEdit }) => {
   const { prices, areas, categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
   const { currentData } = useSelector((state) => state.auth);
-  const [imagesPreview, setImagesPreview] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState(
+    JSON.parse(editPost?.images?.image) || []
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
 

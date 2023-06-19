@@ -14,21 +14,11 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const [provinces, setProvinces] = useState([]);
   const [province, setProvince] = useState("");
 
-  // console.log(typeof province);
-  // console.log(
-  //   provinces?.find(
-  //     (province) =>
-  //       province.province_name ===
-  //       editPost?.address.split(",").slice(-1)[0].trim()
-  //   )?.province_id
-  // );
-  // console.log(editPost?.address.split(",").slice(-1)[0]);
   const [districts, setDistricts] = useState([]);
   const [district, setDistrict] = useState("");
   const [wards, setWards] = useState([]);
   const [ward, setWard] = useState("");
 
-  // console.log(province);
   useEffect(() => {
     const foundProvince =
       provinces.length > 0 &&

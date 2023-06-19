@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 
 const ManagePost = () => {
   const { currentUserPosts, editPost } = useSelector((state) => state.post);
+  const [sortedCurrentPosts, setSortedCurrentPosts] = useState([]);
   const dispatch = useDispatch();
   const [updateData, setUpdateData] = useState(false);
 
@@ -24,6 +25,9 @@ const ManagePost = () => {
     dispatch(getPostsAdmin());
   }, [dispatch, editPost, updateData]);
 
+  useEffect(() => {
+    setSortedCurrentPosts(currentUserPosts);
+  }, [currentUserPosts]);
   useEffect(() => {
     if (Object.keys(editPost).length === 0) {
       setIsEdit(false);
@@ -73,17 +77,45 @@ const ManagePost = () => {
     }
   };
 
+  const handleFilterStatus = (statusCode) => {
+    switch (+statusCode) {
+      case 1:
+        const activePosts = currentUserPosts?.filter(
+          (post) =>
+            checkStatus(post?.overviews?.expired?.split(" ")[3]) ===
+            "Đang hoạt động"
+        );
+        setSortedCurrentPosts(activePosts);
+        break;
+      case 2:
+        const expiredPosts = currentUserPosts?.filter(
+          (post) =>
+            checkStatus(post?.overviews?.expired?.split(" ")[3]) ===
+            "Đã hết hạn"
+        );
+        setSortedCurrentPosts(expiredPosts);
+        break;
+      case 0:
+      default:
+        setSortedCurrentPosts(currentUserPosts);
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div className="border-b border-gray-200 flex items-center justify-between">
         <h1 className="text-3xl font-medium py-4">Quản lý tin đăng</h1>
         <select
-          value="Lọc theo trạng thái"
+          onChange={(e) => handleFilterStatus(+e?.target?.value)}
           className="outline-none border p-2 border-gray-200 rounded-md"
-          readOnly
+          // readOnly
+
           // defaultValue={`Lọc theo trạng thái`}
         >
-          <option value="">Lọc theo trạng thái</option>
+          <option value="0">Lọc theo trạng thái</option>
+          <option value="1">Đang hoạt động</option>
+          <option value="2">Đã hết hạn</option>
         </select>
       </div>
       <table className="w-full table-auto">
@@ -100,7 +132,7 @@ const ManagePost = () => {
           </tr>
         </thead>
         <tbody>
-          {currentUserPosts?.length === 0 && (
+          {sortedCurrentPosts?.length === 0 && (
             <tr>
               <td
                 className="border p-2 text-center text-lg text-red-500"
@@ -111,8 +143,8 @@ const ManagePost = () => {
             </tr>
           )}
 
-          {currentUserPosts?.length > 0 &&
-            currentUserPosts?.map((item) => {
+          {sortedCurrentPosts?.length > 0 &&
+            sortedCurrentPosts?.map((item) => {
               return (
                 <tr className="flex h-16" key={item?.id}>
                   <td className="border flex-1 h p-2 flex items-center justify-center">

@@ -20,48 +20,54 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const [ward, setWard] = useState("");
 
   useEffect(() => {
-    const foundProvince =
-      provinces.length > 0 &&
-      provinces.find((province) =>
-        editPost?.address
-          ?.split(",")
-          ?.slice(-1)[0]
-          ?.trim()
-          ?.includes(province?.province_name)
-      );
+    if (Object.keys(editPost).length > 0) {
+      const foundProvince =
+        provinces.length > 0 &&
+        provinces.find((province) =>
+          editPost?.address
+            ?.split(",")
+            ?.slice(-1)[0]
+            ?.trim()
+            ?.includes(province?.province_name)
+        );
 
-    const foundProvinceId = foundProvince?.province_id;
-    setProvince(foundProvince ? foundProvinceId : "");
+      const foundProvinceId = foundProvince?.province_id;
+      setProvince(foundProvince ? foundProvinceId : "");
+    }
   }, [provinces, editPost?.address]);
 
   useEffect(() => {
-    const foundDistrict =
-      districts?.length > 0 &&
-      districts?.find((district) =>
-        editPost?.address
-          ?.split(",")
-          ?.slice(-2)[0]
-          ?.trim()
-          ?.includes(district?.district_name)
-      );
+    if (Object.keys(editPost).length > 0) {
+      const foundDistrict =
+        districts?.length > 0 &&
+        districts?.find((district) =>
+          editPost?.address
+            ?.split(",")
+            ?.slice(-2)[0]
+            ?.trim()
+            ?.includes(district?.district_name)
+        );
 
-    const foundDistrictId = foundDistrict?.district_id;
-    setDistrict(foundDistrict ? foundDistrictId : "");
+      const foundDistrictId = foundDistrict?.district_id;
+      setDistrict(foundDistrict ? foundDistrictId : "");
+    }
   }, [districts, editPost?.address]);
 
   useEffect(() => {
-    const foundWard =
-      wards?.length > 0 &&
-      wards?.find((ward) =>
-        editPost?.address
-          ?.split(",")
-          ?.slice(-3)[0]
-          ?.trim()
-          ?.includes(ward?.ward_name)
-      );
+    if (Object.keys(editPost).length > 0) {
+      const foundWard =
+        wards?.length > 0 &&
+        wards?.find((ward) =>
+          editPost?.address
+            ?.split(",")
+            ?.slice(-3)[0]
+            ?.trim()
+            ?.includes(ward?.ward_name)
+        );
 
-    const foundWardId = foundWard?.ward_id;
-    setWard(foundWard ? foundWardId : "");
+      const foundWardId = foundWard?.ward_id;
+      setWard(foundWard ? foundWardId : "");
+    }
   }, [wards, editPost?.address]);
 
   useEffect(() => {

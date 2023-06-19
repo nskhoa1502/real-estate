@@ -89,8 +89,8 @@ const ManagePost = () => {
                       className="w-10 h-10 object-cover rounded-md"
                     />
                   </td>
-                  <td className="border flex-1 h p-2 flex items-center justify-start">
-                    {truncateString(item?.title, 70)}
+                  <td className="border flex-1 h p-2 flex items-center justify-start ">
+                    {truncateString(item?.title, 40)}
                   </td>
                   <td className="border flex-1 h p-2 flex items-center justify-center">
                     {item?.attributes?.price}

@@ -66,7 +66,7 @@ const initialState = {
   posts: [],
   currentUserPosts: [],
   currentUserPostsCount: 0,
-  editPost: null,
+  editPost: {},
   count: 0,
   totalPage: 0,
   postPerPage: process.env.REACT_APP_LIMIT_POST,

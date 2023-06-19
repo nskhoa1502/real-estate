@@ -285,3 +285,97 @@ export const getPostsAdminService = async (pageNumber, query, id) => {
     throw err;
   }
 };
+export const updatePostService = async ({
+  postId,
+  attributesId,
+  overviewsId,
+  imagesId,
+  ...body
+}) => {
+  try {
+    const labelCode = generateCode(body.label);
+    // const hashtag = `${Math.floor(Math.random() * Math.pow(10, 6))}`;
+    const currentDate = generateDate();
+    const provinceValue = body?.province?.replace(/^(Thành phố |Tỉnh)/, "");
+    const provinceCode = generateCode(provinceValue);
+
+    const response = await db.Post.update(
+      {
+        title: body?.title || null,
+        labelCode,
+        address: body?.address || null,
+        categoryCode: body?.categoryCode || null,
+        description: JSON.stringify(body?.description) || null,
+        overviewId: overviewsId,
+        areaCode: body?.areaCode || null,
+        priceCode: body?.priceCode || null,
+        provinceCode: provinceCode || null,
+        priceNumber: body?.priceNumber,
+        areaNumber: body?.areaNumber,
+      },
+      {
+        where: { id: postId },
+      }
+    );
+
+    await db.Attribute.update(
+      {
+        price:
+          +body?.priceNumber < 1
+            ? `${(+body?.priceNumber * 1000000).toLocaleString(
+                "vi-VI"
+              )} đồng/tháng`
+            : `${body?.priceNumber} triệu/tháng`,
+        acreage: `${body.areaNumber} m\u00B2`,
+      },
+      {
+        where: { id: attributesId },
+      }
+    );
+
+    await db.Image.update(
+      {
+        image: JSON.stringify(body?.images),
+      },
+      {
+        where: { id: imagesId },
+      }
+    );
+
+    await db.Overview.update(
+      {
+        area: body?.label,
+        type: body?.categoryName,
+        target: body?.target,
+      },
+      { where: { id: overviewsId } }
+    );
+
+    await db.Province.findOrCreate({
+      where: {
+        value: provinceValue,
+      },
+      defaults: {
+        code: provinceCode,
+        value: provinceValue,
+      },
+    });
+
+    await db.Label.findOrCreate({
+      where: {
+        code: labelCode,
+      },
+      defaults: {
+        code: labelCode,
+        value: body?.label,
+      },
+    });
+    // console.log(response);
+    return {
+      response: response,
+      message: "Update post successfully",
+    };
+  } catch (err) {
+    throw err;
+  }
+};

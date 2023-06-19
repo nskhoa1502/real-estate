@@ -5,20 +5,22 @@ import icons from "../../../utils/icon/icons";
 import {
   apiUploadImages,
   apiCreatePost,
+  apiUpdatePost,
 } from "../../../redux/services/postService";
 import Loading from "../../../UI/Loading";
 import Button from "../../../UI/Button";
 import { generatePayloadCode } from "../../../utils/helper-function/getCode";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { validateFields } from "../../../utils/helper-function/validateField";
+import { setEditPost } from "../../../redux/slices/postSlice";
 
 const { BsCameraFill, RiDeleteBack2Line } = icons;
 
-const CreatePost = ({ isEdit }) => {
+const CreatePost = ({ isEdit, setIsEdit }) => {
   const { editPost } = useSelector((state) => state.post);
-  console.log(editPost);
+  // console.log(editPost);
 
   const [payload, setPayload] = useState(() => {
     const formData = {
@@ -26,11 +28,15 @@ const CreatePost = ({ isEdit }) => {
 
       priceNumber: editPost?.priceNumber * 1000000 || 0,
       areaNumber: editPost?.areaNumber || 0,
-      images: JSON.parse(editPost?.images?.image) || "",
-      address: "",
+      images: editPost?.images?.image
+        ? JSON.parse(editPost?.images?.image)
+        : "",
+      address: editPost?.address || "",
       title: editPost?.title || "",
-      description: JSON.parse(editPost?.description) || "",
-      target: editPost?.overviews?.target || "",
+      description: editPost?.description
+        ? JSON.parse(editPost?.description)
+        : "",
+      target: editPost?.overviews?.target || "Tất cả",
       province: "",
     };
     return formData;
@@ -39,10 +45,16 @@ const CreatePost = ({ isEdit }) => {
   const navigate = useNavigate();
   const { currentData } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState(
-    JSON.parse(editPost?.images?.image) || []
+    editPost?.images?.image ? JSON.parse(editPost?.images?.image) : []
   );
   const [isLoading, setIsLoading] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    editPost?.images?.image &&
+      setImagesPreview(JSON.parse(editPost?.images?.image));
+  }, [editPost]);
 
   const handleFiles = async (e) => {
     e.stopPropagation();
@@ -91,7 +103,7 @@ const CreatePost = ({ isEdit }) => {
     let priceCode = generatePayloadCode(+payload?.priceNumber, prices, "price");
     let areaCode = generatePayloadCode(+payload?.areaNumber, areas, "area");
     const districtAddress = payload?.address
-      .split(",")
+      ?.split(",")
       [payload?.address?.split(",")?.length - 2]?.trim();
     const categoryName = categories?.find(
       (item) => item?.code === payload?.categoryCode
@@ -111,18 +123,40 @@ const CreatePost = ({ isEdit }) => {
       categoryName,
     };
 
+    if (editPost) {
+      submitData.postId = editPost?.id;
+      submitData.attributesId = editPost?.attributesId;
+      submitData.imagesId = editPost?.imagesId;
+      submitData.overviewsId = editPost?.overviews?.id;
+    }
+
     // console.log(submitData);
     const result = validateFields(payload, setInvalidFields);
+    // console.log(submitData);
+    // console.log(result);
     if (result === 0) {
       try {
-        await apiCreatePost(submitData);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Tạo bài đăng thành công",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        if (isEdit) {
+          await apiUpdatePost(submitData);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Cập nhật bài đăng thành công",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          dispatch(setEditPost({}));
+        } else {
+          await apiCreatePost(submitData);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Tạo bài đăng thành công",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+
         setPayload({
           categoryCode: "",
           areaCode: "",
@@ -137,11 +171,19 @@ const CreatePost = ({ isEdit }) => {
         });
         navigate("/");
       } catch (err) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Tạo bài đăng thất bại!",
-        });
+        if (isEdit) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Cập nhật bài đăng thất bại!",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Tạo bài đăng thất bại!",
+          });
+        }
         throw err;
       }
     }
@@ -221,7 +263,7 @@ const CreatePost = ({ isEdit }) => {
             </div>
 
             <Button
-              text="Tạo mới"
+              text={isEdit ? "Cập nhật" : "Tạo mới"}
               bgColor={"bg-primaryBlue"}
               textColor={"text-white"}
               fullWidth={true}

@@ -97,3 +97,17 @@ export const apiGetPostsAdmin = async (query) => {
     throw err;
   }
 };
+export const apiUpdatePost = async (payload) => {
+  try {
+    const response = await axiosConfig({
+      method: "put",
+      url: `api/v1/post/update`,
+      data: payload,
+    });
+    // console.log(response.data);
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};

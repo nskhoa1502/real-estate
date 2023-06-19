@@ -89,3 +89,19 @@ export const createNewPost = async (req, res, next) => {
     next(err);
   }
 };
+
+export const updatePost = async (req, res, next) => {
+  const { postId, attributesId, overviewsId, imagesId, ...body } = req.body;
+
+  const { id } = req.user;
+
+  try {
+    if (!id || !postId || !attributesId || !overviewsId || !imagesId)
+      return createError(400, "Missing inputs");
+
+    const { response, message } = await service.updatePostService(req.body);
+    return res.status(200).json({ response, message });
+  } catch (err) {
+    next(err);
+  }
+};

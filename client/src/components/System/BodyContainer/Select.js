@@ -45,7 +45,7 @@ const Select = ({
         onFocus={() => setInvalidFields([])}
       >
         <option value="" className="">
-          {field === "target" ? "Tất cả" : `--Chọn ${label}--`}
+          {`--Chọn ${label}--`}
         </option>
         {options?.map((item) => {
           if (type === "province") {

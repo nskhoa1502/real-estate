@@ -24,10 +24,10 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
       provinces.length > 0 &&
       provinces.find((province) =>
         editPost?.address
-          .split(",")
-          .slice(-1)[0]
-          .trim()
-          .includes(province?.province_name)
+          ?.split(",")
+          ?.slice(-1)[0]
+          ?.trim()
+          ?.includes(province?.province_name)
       );
 
     const foundProvinceId = foundProvince?.province_id;
@@ -36,13 +36,13 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
 
   useEffect(() => {
     const foundDistrict =
-      districts.length > 0 &&
-      districts.find((district) =>
+      districts?.length > 0 &&
+      districts?.find((district) =>
         editPost?.address
-          .split(",")
-          .slice(-2)[0]
-          .trim()
-          .includes(district?.district_name)
+          ?.split(",")
+          ?.slice(-2)[0]
+          ?.trim()
+          ?.includes(district?.district_name)
       );
 
     const foundDistrictId = foundDistrict?.district_id;
@@ -51,13 +51,13 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
 
   useEffect(() => {
     const foundWard =
-      wards.length > 0 &&
-      wards.find((ward) =>
+      wards?.length > 0 &&
+      wards?.find((ward) =>
         editPost?.address
-          .split(",")
-          .slice(-3)[0]
-          .trim()
-          .includes(ward?.ward_name)
+          ?.split(",")
+          ?.slice(-3)[0]
+          ?.trim()
+          ?.includes(ward?.ward_name)
       );
 
     const foundWardId = foundWard?.ward_id;
@@ -79,7 +79,7 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   }, []);
 
   useEffect(() => {
-    setDistrict(null);
+    setDistrict("");
     const fetchPublicDistrict = async () => {
       try {
         const res = await apiGetPublicDistrict(province);
@@ -95,7 +95,7 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   }, [province]);
 
   useEffect(() => {
-    setWard(null);
+    setWard("");
     const fetchPublicWard = async () => {
       try {
         const res = await apiGetPublicWard(district);

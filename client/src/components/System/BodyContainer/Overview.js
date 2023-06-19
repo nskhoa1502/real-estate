@@ -13,6 +13,7 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const targets = [
     { code: "Nam", value: "Nam" },
     { code: "Nữ", value: "Nữ" },
+    { code: "Tất cả", value: "Tất cả" },
   ];
   // console.log(payload);
   return (
@@ -85,7 +86,7 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
             setInvalidFields={setInvalidFields}
           />
           <Select
-            label="Tất cả"
+            label="Đối tượng"
             options={targets}
             type="target"
             value={payload?.target}

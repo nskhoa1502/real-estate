@@ -20,7 +20,7 @@ instance.interceptors.request.use(
   },
   function (error) {
     // Do something with request error
-    console.log(`Lỗi ở axios: ` + error);
+    // console.log(`Lỗi ở axios: ` + error);
     return Promise.reject(error);
   }
 );
@@ -33,7 +33,7 @@ instance.interceptors.request.use(
   },
   function (error) {
     // Do something with request error
-    console.log(`Lỗi ở axios: ` + error);
+    // console.log(`Lỗi ở axios: ` + error);
     return Promise.reject(error);
   }
 );

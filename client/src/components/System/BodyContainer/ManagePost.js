@@ -10,7 +10,7 @@ import Button from "../../../UI/Button";
 import UpdatePost from "./UpdatePost";
 
 const ManagePost = () => {
-  const { currentUserPosts } = useSelector((state) => state.post);
+  const { currentUserPosts, editPost } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
   // const [postEdit, setPostEdit] = useState(null);
@@ -20,6 +20,12 @@ const ManagePost = () => {
   useEffect(() => {
     dispatch(getPostsAdmin());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (Object.keys(editPost).length === 0) {
+      setIsEdit(false);
+    }
+  }, [editPost]);
 
   const checkStatus = (ddmmyyyy) => {
     let todayInSeconds = new Date().getTime();
@@ -36,8 +42,10 @@ const ManagePost = () => {
       <div className="border-b border-gray-200 flex items-center justify-between">
         <h1 className="text-3xl font-medium py-4">Quản lý tin đăng</h1>
         <select
-          value=""
+          value="Lọc theo trạng thái"
           className="outline-none border p-2 border-gray-200 rounded-md"
+          readOnly
+          // defaultValue={`Lọc theo trạng thái`}
         >
           <option value="">Lọc theo trạng thái</option>
         </select>

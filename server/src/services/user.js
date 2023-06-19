@@ -11,7 +11,7 @@ export const getOneUserService = async (id) => {
       },
     });
 
-    console.log(response);
+    // console.log(response);
     return { response: response, message: "Fetch current user success" };
   } catch (err) {
     throw err;

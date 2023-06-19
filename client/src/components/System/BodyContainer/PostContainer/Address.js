@@ -4,7 +4,7 @@ import {
   apiGetPublicDistrict,
   apiGetPublicProvinces,
   apiGetPublicWard,
-} from "../../../redux/services/appService";
+} from "../../../../redux/services/appService";
 import InputReadOnly from "./InputReadOnly";
 import { useSelector } from "react-redux";
 

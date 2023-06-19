@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostsAdmin, setEditPost } from "../../../redux/slices/postSlice";
+import { getPostsAdmin, setEditPost } from "../../../../redux/slices/postSlice";
 
 import {
   convertDate,
   truncateString,
-} from "../../../utils/helper-function/convert";
-import Button from "../../../UI/Button";
+} from "../../../../utils/helper-function/convert";
+import Button from "../../../../UI/Button";
 import UpdatePost from "./UpdatePost";
-import { apiDeletePost } from "../../../redux/services/postService";
+import { apiDeletePost } from "../../../../redux/services/postService";
 import Swal from "sweetalert2";
 
 const ManagePost = () => {

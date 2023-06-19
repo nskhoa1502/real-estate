@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Overview from "./Overview";
 import Address from "./Address";
-import icons from "../../../utils/icon/icons";
+import icons from "../../../../utils/icon/icons";
 import {
   apiUploadImages,
   apiCreatePost,
   apiUpdatePost,
-} from "../../../redux/services/postService";
-import Loading from "../../../UI/Loading";
-import Button from "../../../UI/Button";
-import { generatePayloadCode } from "../../../utils/helper-function/getCode";
+} from "../../../../redux/services/postService";
+import Loading from "../../../../UI/Loading";
+import Button from "../../../../UI/Button";
+import { generatePayloadCode } from "../../../../utils/helper-function/getCode";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { validateFields } from "../../../utils/helper-function/validateField";
-import { setEditPost } from "../../../redux/slices/postSlice";
+import { validateFields } from "../../../../utils/helper-function/validateField";
+import { setEditPost } from "../../../../redux/slices/postSlice";
 
 const { BsCameraFill, RiDeleteBack2Line } = icons;
 

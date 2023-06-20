@@ -36,11 +36,12 @@ export const getPostsService = async () => {
   }
 };
 
-export const getPostsLimitService = async (pageNumber, limitPost) => {
+export const getPostsLimitService = async (pageNumber, order) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
     // console.log(query);
+    // console.log(`service`, order);
 
     const response = await db.Post.findAndCountAll({
       raw: true,
@@ -59,7 +60,7 @@ export const getPostsLimitService = async (pageNumber, limitPost) => {
           attributes: ["name", "zalo", "phone"],
         },
       ],
-      order: [["createdAt", "DESC"]], // Sort by star property in descending order
+      order: [order], // Sort by star property in descending order
       offset: offset * limit,
       limit: limit,
     });
@@ -76,6 +77,7 @@ export const getPostsLimitService = async (pageNumber, limitPost) => {
 export const getPostsFilterService = async (
   pageNumber,
   query,
+  order,
   { priceNumber, areaNumber }
 ) => {
   try {
@@ -107,7 +109,7 @@ export const getPostsFilterService = async (
           attributes: ["name", "zalo", "phone"],
         },
       ],
-      order: [["createdAt", "DESC"]], // Sort by star property in descending order
+      order: [order], // Sort by star property in descending order
       offset: offset * limit,
 
       limit: limit,
@@ -157,9 +159,9 @@ export const getNewPostService = async (pageNumber, popularSort) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
-    console.log(popularSort);
+    // console.log(popularSort);
     const order = popularSort || ["createdAt", "DESC"];
-    console.log("service", order);
+    // console.log("service", order);
 
     const response = await db.Post.findAll({
       raw: true,
@@ -278,7 +280,7 @@ export const getPostsAdminService = async (pageNumber, query, id) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
-    console.log(query);
+    // console.log(query);
 
     const queries = { ...query, userId: id };
 

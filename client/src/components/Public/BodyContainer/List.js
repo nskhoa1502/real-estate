@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../../UI";
 import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,9 +9,12 @@ import { useSearchParams } from "react-router-dom";
 const List = ({ category }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
+
+  const [sort, setSort] = useState(0);
 
   const pageNumber = params.get("page") || 1;
+  // const [pageNumber, setPageNumber] = useState(params.get("page") || 1);
   const areaCode = params.get("areaCode") || null;
   const priceCode = params.get("priceCode") || null;
   const categoryCode = params.get("categoryCode") || category || null;
@@ -41,6 +44,12 @@ const List = ({ category }) => {
     if (provinceCode !== "null") {
       filterOptions.provinceCode = provinceCode;
     }
+    if (sort === 0) {
+      filterOptions.order = ["star", "DESC"];
+    }
+    if (sort === 1) {
+      filterOptions.order = ["createdAt", "DESC"];
+    }
     if (
       categoryCode ||
       areaNumber.length > 0 ||
@@ -49,10 +58,17 @@ const List = ({ category }) => {
       priceCode ||
       provinceCode
     ) {
-      // console.log(filterOptions);
+      console.log(filterOptions);
       dispatch(getPostsFilter(filterOptions));
     } else {
-      dispatch(getPostsLimit(pageNumber));
+      if (sort === 0) {
+        dispatch(getPostsLimit({ page: pageNumber, order: ["star", "DESC"] }));
+      }
+      if (sort === 1) {
+        dispatch(
+          getPostsLimit({ page: pageNumber, order: ["createdAt", "DESC"] })
+        );
+      }
     }
   }, [
     JSON.stringify(areaNumber),
@@ -63,6 +79,7 @@ const List = ({ category }) => {
     provinceCode,
     areaCode,
     priceCode,
+    sort,
   ]);
 
   return (
@@ -73,8 +90,29 @@ const List = ({ category }) => {
       </div>
       <div className="flex items-center gap-1 my-3">
         <span>Sắp xếp:</span>
-        <Button bgColor={`bg-gray-200`} text={"Mặc định"} />
-        <Button bgColor={`bg-gray-200`} text={"Mới nhất"} />
+
+        <span
+          onClick={() => {
+            setSort(0);
+            params.set("page", "1");
+          }}
+          className={`bg-gray-200 p-2 rounded-md cursor-pointer hover:underline ${
+            sort === 0 && "text-red-500"
+          }`}
+        >
+          Phổ biến
+        </span>
+        <span
+          onClick={() => {
+            setSort(1);
+            params.set("page", "1");
+          }}
+          className={`bg-gray-200 p-2 rounded-md cursor-pointer hover:underline ${
+            sort === 1 && "text-red-500"
+          }`}
+        >
+          Mới nhất
+        </span>
       </div>
       <div className="items">
         {posts?.length > 0 &&

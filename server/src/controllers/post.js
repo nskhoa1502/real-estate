@@ -11,13 +11,15 @@ export const getPosts = async (req, res, next) => {
   }
 };
 export const getPostsLimit = async (req, res, next) => {
-  const { page } = req.query;
+  const { page, order } = req.query;
   // console.log(page);
+  // console.log(`controller`, order);
   const pageNumber = +page || 0;
 
   try {
     const { response, message } = await service.getPostsLimitService(
-      pageNumber
+      pageNumber,
+      order
     );
     // console.log(message);
     return res.status(200).json(response);
@@ -26,14 +28,15 @@ export const getPostsLimit = async (req, res, next) => {
   }
 };
 export const getPostsFilterLimit = async (req, res, next) => {
-  const { page, priceNumber, areaNumber, ...query } = req.query;
+  const { page, priceNumber, areaNumber, order, ...query } = req.query;
   const pageNumber = +page || 0;
   // console.log(req.query);
-
+  // console.log(order);
   try {
     const { response, message } = await service.getPostsFilterService(
       pageNumber,
       query,
+      order,
       { priceNumber, areaNumber }
     );
     // console.log(message);
@@ -65,7 +68,7 @@ export const getPostsAdmin = async (req, res, next) => {
 
 export const getNewPosts = async (req, res, next) => {
   const popularSort = req.query?.order || null;
-  console.log(popularSort);
+  // console.log(popularSort);
   try {
     const { response, message } = await service.getNewPostService(
       1,

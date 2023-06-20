@@ -13,11 +13,12 @@ import axios from "axios";
 //     throw err;
 //   }
 // };
-export const apiGetPostsLimit = async (page) => {
+export const apiGetPostsLimit = async (query) => {
   try {
     const response = await axiosConfig({
       method: "get",
-      url: `/api/v1/post/limit?page=${page}`,
+      url: `/api/v1/post/limit`,
+      params: query,
     });
     // console.log(query);
     // console.log(response.data);

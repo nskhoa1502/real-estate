@@ -73,7 +73,7 @@ const Search = () => {
     }`;
 
     // console.log(filterText);
-    console.log(filterQueries);
+    // console.log(filterQueries);
 
     dispatch(searchTitle(titleSearch));
 

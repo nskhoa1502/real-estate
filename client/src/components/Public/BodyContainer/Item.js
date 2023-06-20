@@ -10,7 +10,7 @@ import { path } from "../../../utils/path/path";
 const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
   icons;
 
-const indexes = [0, 1, 2, 3];
+// const indexes = [0, 1, 2, 3];
 
 // ===========================
 const Item = ({
@@ -27,7 +27,9 @@ const Item = ({
 
   const filteredImages =
     images.length > 0 &&
-    images.filter((img, index) => indexes.some((i) => i === index));
+    images.filter((img, index) =>
+      [...Array(4).keys()].some((i) => i === index)
+    );
 
   const addressArr = address.split(",");
 

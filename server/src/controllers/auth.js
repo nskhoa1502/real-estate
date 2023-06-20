@@ -19,7 +19,6 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   // console.log("Gọi route ở Login");
   const { phone, password } = req.body;
-  console.log(phone, password);
   try {
     if (!phone || !password) return next(createError(400, "Bad Request"));
 

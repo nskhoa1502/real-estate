@@ -26,7 +26,7 @@ import { CiSearch } from "react-icons/ci";
 import { BsFilePost, BsStopwatch } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
-import { HiOutlineLocationMarker } from "react-icons/hi";
+import { HiOutlineLocationMarker, HiLocationMarker } from "react-icons/hi";
 
 const icons = {
   AiOutlinePlusCircle,
@@ -34,6 +34,7 @@ const icons = {
   BiUserPlus,
   HiOutlineLocationMarker,
   AiOutlineHeart,
+  HiLocationMarker,
   BsChevronRight,
   GrLocation,
   BsStopwatch,

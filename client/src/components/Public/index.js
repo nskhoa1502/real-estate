@@ -17,3 +17,4 @@ export { default as Contact } from "./FooterContainer/Contact";
 export { default as SearchDetail } from "./HeaderContainer/SearchContainer/SearchDetail";
 export { default as CurrentUser } from "./HeaderContainer/CurrentUser";
 export { default as InputForm } from "./BodyContainer/InputForm";
+export { default as Map } from "./BodyContainer/Map";

@@ -3,32 +3,56 @@ import { useParams } from "react-router-dom";
 import { apiGetPostDetail } from "../redux/services/postService";
 import ImageSlider from "../UI/ImageSlider";
 import icons from "../utils/icon/icons";
-import { convertObjToArr } from "../utils/helper-function/convert";
+import { Map } from "../components/Public";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+const { HiLocationMarker, RiCrop2Line, TbReportMoney, BsStopwatch, RiHashtag } =
+  icons;
 
-const {
-  HiOutlineLocationMarker,
-  RiCrop2Line,
-  TbReportMoney,
-  BsStopwatch,
-  RiHashtag,
-} = icons;
 const DetailPage = () => {
   const { postId } = useParams();
   const [detailPost, setDetailPost] = useState(null);
   // console.log(postId);
+
+  const [coords, setCoords] = useState(null);
 
   useEffect(() => {
     const fetchDetail = async () => {
       try {
         const response = await apiGetPostDetail(postId);
         setDetailPost(response.data.response);
-        console.log(response.data.response);
+        // console.log(response.data.response);
       } catch (err) {
         throw err;
       }
     };
     fetchDetail();
   }, [postId]);
+
+  useEffect(() => {
+    // navigator.geolocation.getCurrentPosition(({ coords }) => {
+    //   const { latitude, longitude } = coords;
+    //   setCoords({ lat: latitude, lng: longitude });
+    // });
+    const getPostCoords = async () => {
+      const formattedAddress = detailPost?.address.includes(":")
+        ? detailPost?.address.split(":")[1].trim()
+        : detailPost?.address;
+      // console.log(formattedAddress);
+      try {
+        const results = await geocodeByAddress(formattedAddress);
+        // console.log(results);
+        const { lat, lng } = await getLatLng(results[0]);
+        console.log("Successfully got latitude and longitude", { lat, lng });
+        setCoords({ lat, lng });
+      } catch (error) {
+        console.error(
+          "Error occurred while getting latitude and longitude",
+          error
+        );
+      }
+    };
+    detailPost && getPostCoords();
+  }, [detailPost]);
 
   // console.log(Object.values(detailPost?.user)?.some((item) => item !== null));
 
@@ -49,8 +73,7 @@ const DetailPage = () => {
             </span>
           </div>
           <div className="flex gap-2 items-center">
-            <HiOutlineLocationMarker color="#2563eb" />
-            <span>Địa chỉ:</span>
+            <HiLocationMarker color="#2563eb" />
             <span>{detailPost?.address}</span>
           </div>
           <div className="flex items-center justify-between">
@@ -152,6 +175,7 @@ const DetailPage = () => {
             )}
           <div className="mt-5">
             <h3 className="font-semibold text-xl">Bản đồ</h3>
+            <Map address={detailPost?.address} coords={coords} />
           </div>
         </div>
       </div>

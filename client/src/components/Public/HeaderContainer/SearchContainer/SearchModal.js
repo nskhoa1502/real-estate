@@ -168,7 +168,7 @@ const SearchModal = ({
     e.stopPropagation();
 
     let rangeValue;
-    if ((+percent1 === 100, +percent2 === 100)) {
+    if (+percent1 === 100 && +percent2 === 100) {
       rangeValue =
         name === "price"
           ? [mapPercentagesToPrice(100), 9999999]

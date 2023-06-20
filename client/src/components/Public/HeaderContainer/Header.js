@@ -108,7 +108,7 @@ const Header = () => {
                 onClick={() => setIsShowSetting((prev) => !prev)}
               />
               {isShowSetting && (
-                <div className="absolute top-full min-w-200 bg-white shadow-md rounded-md p-4 right-0 flex flex-col  text-blue-600 z-30">
+                <div className="absolute top-full min-w-200 bg-white shadow-md rounded-md p-4 right-0 flex flex-col  text-blue-600 z-50">
                   {userSettings?.map((item) => {
                     return (
                       <Link

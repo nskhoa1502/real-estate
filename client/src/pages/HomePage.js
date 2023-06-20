@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div className=" m-auto min-w-[1100px] border  flex flex-col items-center relative ">
       <Header />
-      <div className="w-full sticky top-0 z-50">
+      <div className="w-full sticky top-0 z-40">
         <Navigation />
       </div>
 

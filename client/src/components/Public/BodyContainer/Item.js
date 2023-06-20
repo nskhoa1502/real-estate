@@ -5,6 +5,7 @@ import {
   truncateString,
 } from "../../../utils/helper-function/convert";
 import { Link } from "react-router-dom";
+import { path } from "../../../utils/path/path";
 
 const { AiFillStar, AiOutlineHeart, AiFillHeart, BsFillBookmarkStarFill } =
   icons;
@@ -42,7 +43,7 @@ const Item = ({
   return (
     <div className="flex items justify-between border-t border-orange-600 ">
       <Link
-        to={`chi-tiet/${formatVietnameseText(title)}/${id}`}
+        to={`${path.CHI_TIET}${formatVietnameseText(title)}/${id}`}
         className="w-2/5 flex justify-center items-center"
       >
         <div className="flex flex-wrap gap-[2px] relative cursor-pointer py-6">
@@ -81,7 +82,13 @@ const Item = ({
                 handleStar(+star).map((star, number) => {
                   return <React.Fragment key={number}>{star}</React.Fragment>;
                 })}
-              <span className="text-lg font-bold text-red-500"> {title}</span>
+              <Link
+                to={`${path.CHI_TIET}${formatVietnameseText(title)}/${id}`}
+                className="text-lg font-bold text-red-500"
+              >
+                {" "}
+                {title}
+              </Link>
             </div>
             <div className="w-[10%] flex justify-end">
               <BsFillBookmarkStarFill size={24} color="orange" />

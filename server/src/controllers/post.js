@@ -120,3 +120,16 @@ export const deletePost = async (req, res, next) => {
     next(err);
   }
 };
+export const getOnePost = async (req, res, next) => {
+  const postId = req.params.postId;
+  // console.log(postId);
+
+  try {
+    if (!postId) return createError(400, "Missing ids");
+
+    const { response, message } = await service.getOnePostService(postId);
+    return res.status(200).json({ response, message });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -41,6 +41,20 @@ export const apiGetPostsFilter = async (query) => {
     throw err;
   }
 };
+export const apiGetPostDetail = async (postId) => {
+  try {
+    const response = await axiosConfig({
+      method: "get",
+      url: `/api/v1/post/${postId}`,
+    });
+    // console.log(response.data);
+    // console.log(query);
+
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
 export const apiGetNewPosts = async () => {
   try {
     const response = await axiosConfig({

@@ -11,6 +11,7 @@ router.get("/limit", postController.getPostsLimit);
 router.get("/filter", postController.getPostsFilterLimit);
 
 router.get("/new-post", postController.getNewPosts);
+router.get("/:postId", postController.getOnePost);
 
 router.use(verifyToken);
 

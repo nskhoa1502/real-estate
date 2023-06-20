@@ -36,7 +36,7 @@ export const getPostsService = async () => {
   }
 };
 
-export const getPostsLimitService = async (pageNumber) => {
+export const getPostsLimitService = async (pageNumber, limitPost) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
@@ -116,6 +116,32 @@ export const getPostsFilterService = async (
     return {
       response: response,
       message: "Get posts filter successfully",
+    };
+  } catch (err) {
+    throw err;
+  }
+};
+export const getOnePostService = async (postId) => {
+  try {
+    const response = await db.Post.findByPk(postId, {
+      include: [
+        { model: db.Image, as: "images", attributes: ["image"] },
+        {
+          model: db.Attribute,
+          as: "attributes",
+          attributes: ["price", "acreage", "published", "hashtag"],
+        },
+        {
+          model: db.User,
+          as: "user",
+          attributes: ["name", "zalo", "phone"],
+        },
+      ],
+    });
+
+    return {
+      response: response,
+      message: "Get post successfully",
     };
   } catch (err) {
     throw err;

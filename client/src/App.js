@@ -44,6 +44,7 @@ function App() {
           <Route path={path.NHA_CHO_THUE} element={<CategoryPage />} />
           <Route path={path.TIM_KIEM} element={<SearchDetail />} />
           <Route path={path.CHI_TIET__TITLE__POSTID} element={<DetailPage />} />
+          {/* <Route path={path.CHI_TIET_ALL} element={<DetailPage />} /> */}
           <Route path={path.LIEN_HE} element={<ContactForm />} />
         </Route>
         <Route path={path.QUAN_LY} element={<System />}>

@@ -4,12 +4,19 @@ import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "../../../redux/slices/postSlice";
 import { getPostsFilter } from "../../../redux/slices/postSlice";
-import { useSearchParams } from "react-router-dom";
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 const List = ({ category }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
   const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [sort, setSort] = useState(0);
 
@@ -22,7 +29,7 @@ const List = ({ category }) => {
   const areaNumber = params.getAll("areaNumber") || null;
   const priceNumber = params.getAll("priceNumber") || null;
   const labelCode = params.get("labelCode") || null;
-  console.log(labelCode);
+  // console.log(labelCode);
 
   // console.log(`page `, pageNumber);
   // console.log(`area code `, areaCode);
@@ -32,15 +39,28 @@ const List = ({ category }) => {
   // console.log(`areaNumber `, areaNumber);
   // console.log(`priceNumber `, priceNumber);
 
+  let filterOptions = {
+    page: +pageNumber,
+    areaCode,
+    priceCode,
+    areaNumber,
+    priceNumber,
+    labelCode,
+  };
+
+  filterOptions = Object.fromEntries(
+    Object.entries(filterOptions).filter(([_, value]) => {
+      return (
+        value !== "null" &&
+        value !== 0 &&
+        value !== null &&
+        !(Array.isArray(value) && value.length === 0)
+      );
+    })
+  );
+
+  console.log(filterOptions);
   useEffect(() => {
-    let filterOptions = {
-      page: +pageNumber,
-      areaCode,
-      priceCode,
-      areaNumber,
-      priceNumber,
-      labelCode,
-    };
     if (categoryCode !== "null") {
       filterOptions.categoryCode = categoryCode;
     }
@@ -100,6 +120,13 @@ const List = ({ category }) => {
           onClick={() => {
             setSort(0);
             params.set("page", "1");
+            navigate({
+              pathname: location?.pathname,
+              search: createSearchParams({
+                ...filterOptions,
+                page: 1,
+              }).toString(),
+            });
           }}
           className={`bg-gray-200 p-2 rounded-md cursor-pointer hover:underline ${
             sort === 0 && "text-red-500"
@@ -111,6 +138,13 @@ const List = ({ category }) => {
           onClick={() => {
             setSort(1);
             params.set("page", "1");
+            navigate({
+              pathname: location?.pathname,
+              search: createSearchParams({
+                ...filterOptions,
+                page: 1,
+              }).toString(),
+            });
           }}
           className={`bg-gray-200 p-2 rounded-md cursor-pointer hover:underline ${
             sort === 1 && "text-red-500"

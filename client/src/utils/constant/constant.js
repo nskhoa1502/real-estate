@@ -14,9 +14,10 @@ export const location = [
     id: "hcm",
     name: `Phòng trọ Hồ Chí Minh`,
     image: hcmImg,
+    provinceCode: "CA7KI",
   },
-  { id: "hn", name: `Phòng trọ Hà Nội`, image: hnImg },
-  { id: "dn", name: `Phòng trọ Đà Nẵng`, image: dnImg },
+  { id: "hn", name: `Phòng trọ Hà Nội`, image: hnImg, provinceCode: "NK5TI" },
+  { id: "dn", name: `Phòng trọ Đà Nẵng`, image: dnImg, provinceCode: "NC5EN" },
 ];
 
 export const mapDetail = [

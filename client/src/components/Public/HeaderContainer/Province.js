@@ -3,6 +3,7 @@ import { location } from "../../../utils/constant/constant";
 import ProvinceBtn from "./ProvinceBtn";
 
 const Province = ({ title, description }) => {
+  // console.log(title);
   return (
     <div className="w-full ">
       <div className="mb-5 font">
@@ -13,7 +14,11 @@ const Province = ({ title, description }) => {
       <div className="flex justify-center items-center gap-5 ">
         {location.map((item) => (
           <React.Fragment key={item.id}>
-            <ProvinceBtn image={item.image} name={item.name} />
+            <ProvinceBtn
+              image={item.image}
+              name={item.name}
+              provinceCode={item.provinceCode}
+            />
           </React.Fragment>
         ))}
       </div>

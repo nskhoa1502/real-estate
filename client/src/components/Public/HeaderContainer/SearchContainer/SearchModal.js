@@ -228,9 +228,9 @@ const SearchModal = ({
               <label htmlFor="default">{defaultText}</label>
             </span>
             {content?.length > 0 &&
-              content?.map((item) => (
+              content?.map((item, i) => (
                 <span
-                  key={item.code}
+                  key={i}
                   className="py-2 flex gap-2 icon border-b border-gray-200"
                 >
                   <input

@@ -59,7 +59,7 @@ const List = ({ category }) => {
     })
   );
 
-  console.log(filterOptions);
+  // console.log(filterOptions);
   useEffect(() => {
     if (categoryCode !== "null") {
       filterOptions.categoryCode = categoryCode;

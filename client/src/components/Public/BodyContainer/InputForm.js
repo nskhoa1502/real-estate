@@ -26,9 +26,9 @@ const InputForm = ({
         className="outline-none bg-[#e8f0fe] p-2 rounded-sm w-full "
         value={value}
         onChange={handleChange}
-        onFocus={() => setInvalidFields([])}
+        onFocus={() => setInvalidFields && setInvalidFields([])}
       />
-      {invalidFields.length > 0 &&
+      {invalidFields?.length > 0 &&
         invalidFields.some((field) => field.name === id) && (
           <small className="text-md text-red-500">
             {invalidFields.find((field) => field.name === id).message}

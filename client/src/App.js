@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { path } from "./utils/path/path";
-import { Home, Login, SearchDetail } from "./components/Public";
+import { ContactForm, Home, Login, SearchDetail } from "./components/Public";
 import { CreatePost, EditAccount, ManagePost } from "./components/System";
 
 import { DetailPage, HomePage, CategoryPage, System } from "./pages";
@@ -44,6 +44,7 @@ function App() {
           <Route path={path.NHA_CHO_THUE} element={<CategoryPage />} />
           <Route path={path.TIM_KIEM} element={<SearchDetail />} />
           <Route path={path.CHI_TIET__TITLE__POSTID} element={<DetailPage />} />
+          <Route path={path.LIEN_HE} element={<ContactForm />} />
         </Route>
         <Route path={path.QUAN_LY} element={<System />}>
           <Route path={path.DANG_TIN_MOI} element={<CreatePost />} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import anon_avatar from "../../../assets/anon_avatar.png";
 import { extractNumbersFromId } from "../../../utils/helper-function/extractNumberId";
@@ -6,10 +6,22 @@ import { blobToBase64 } from "../../../utils/helper-function/base64";
 
 const CurrentUser = () => {
   const { currentData } = useSelector((state) => state.auth);
+  const [avatarBase64, setAvatarBase64] = useState("");
+
+  useEffect(() => {
+    if (currentData?.avatar) {
+      const convertAvatarToBase64 = async () => {
+        const base64 = await blobToBase64(currentData.avatar);
+        setAvatarBase64(base64);
+      };
+      convertAvatarToBase64();
+    }
+  }, [currentData?.avatar]);
+
   return (
     <div className="flex items-center gap-2">
       <img
-        src={blobToBase64(currentData?.avatar) || anon_avatar}
+        src={avatarBase64 || anon_avatar}
         alt="avatar"
         className="w-10 object-cover rounded-full h-10  border-white border-2 shadow-md"
       />

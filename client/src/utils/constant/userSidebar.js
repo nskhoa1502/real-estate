@@ -24,7 +24,7 @@ const userSidebar = [
   {
     id: 4,
     text: "Liên hệ",
-    path: "/quan-ly/lien-he",
+    path: "/lien-he",
     icon: <FaUserCircle />,
   },
 ];

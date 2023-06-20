@@ -10,7 +10,7 @@ import { path } from "../utils/path/path";
 const HomePage = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   return (
     <div className=" m-auto min-w-[1100px] border  flex flex-col items-center relative ">

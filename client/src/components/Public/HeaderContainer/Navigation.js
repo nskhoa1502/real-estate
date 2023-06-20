@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { formatVietnameseText } from "../../../utils/helper-function/convert";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../redux/slices/appSlice";
+import { path } from "../../../utils/path/path";
 // const nav = [
 //   { name: "Trang Chủ", path: "/" },
 //   { name: "Cho thuê phòng trọ", path: "/cho-thue-phong-tro" },
@@ -67,6 +68,12 @@ const Navigation = ({ isAdmin }) => {
               </div>
             );
           })}
+        <NavLink
+          to={`/${path.LIEN_HE}`}
+          className={({ isActive }) => (isActive ? active : notActive)}
+        >
+          Liên hệ
+        </NavLink>
       </div>
     </div>
   );

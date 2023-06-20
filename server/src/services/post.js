@@ -136,6 +136,11 @@ export const getOnePostService = async (postId) => {
           as: "user",
           attributes: ["name", "zalo", "phone"],
         },
+        {
+          model: db.Overview,
+          as: "overviews",
+          // attributes: ["name", "zalo", "phone"],
+        },
       ],
     });
 

@@ -71,3 +71,22 @@ input[type="range"]::-ms-thumb {
 input[type="range"]::-ms-thumb {
   border: 1px solid rgba(112, 112, 239, 0.548);
 }
+
+button.slick-arrow::before {
+  /* background-color: yellow; */
+  color: yellow;
+  font-size: 50px;
+}
+button.slick-arrow {
+  /* background-color: yellow; */
+  font-size: 50px;
+}
+.slick-next {
+  right: 35px !important;
+  top: 45% !important;
+}
+.slick-prev {
+  left: 7px !important;
+  z-index: 30;
+  top: 45% !important;
+}

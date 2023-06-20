@@ -108,3 +108,7 @@ export const convertDate = (dateString) => {
   return date;
 };
 
+export const convertObjToArr = (object) => {
+  const arr = Object.entries(object)?.map((item) => ({ [item[0]]: item[1] }));
+  return arr;
+};

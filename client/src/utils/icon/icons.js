@@ -18,21 +18,26 @@ import {
   RiLogoutBoxRLine,
   RiDeleteBin5Line,
   RiDeleteBack2Line,
+  RiHashtag,
 } from "react-icons/ri";
 import { TbReportMoney, TbPencilPlus } from "react-icons/tb";
 import { LuHotel } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
-import { BsFilePost } from "react-icons/bs";
+import { BsFilePost, BsStopwatch } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 const icons = {
   AiOutlinePlusCircle,
   BiExit,
   BiUserPlus,
+  HiOutlineLocationMarker,
   AiOutlineHeart,
   BsChevronRight,
   GrLocation,
+  BsStopwatch,
+  RiHashtag,
   RiCrop2Line,
   TbReportMoney,
   LuHotel,

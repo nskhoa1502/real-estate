@@ -10,14 +10,15 @@ import { path } from "../utils/path/path";
 const HomePage = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
-  // console.log(location);
 
   return (
     <div className=" m-auto min-w-[1100px] border  flex flex-col items-center relative ">
       <Header />
       <Navigation />
 
-      {isLoggedIn && location.pathname !== `/${path.LIEN_HE}` && <Search />}
+      {isLoggedIn &&
+        location.pathname !== `/${path.LIEN_HE}` &&
+        !location.pathname?.includes(`${path.CHI_TIET}`) && <Search />}
       <div className="w-[1100px]  min-w-[1100px] flex flex-col items-start justify-start ">
         <Outlet />
       </div>

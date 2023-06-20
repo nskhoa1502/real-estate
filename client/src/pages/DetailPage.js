@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, createSearchParams } from "react-router-dom";
 import { apiGetPostDetail } from "../redux/services/postService";
 import ImageSlider from "../UI/ImageSlider";
 import icons from "../utils/icon/icons";
 import { Map, BoxInfo, RelatedPost } from "../components/Public";
 import { mapDetail } from "../utils/constant/constant";
+import { path } from "../utils/path/path";
+import { useDispatch } from "react-redux";
+import { searchTitle } from "../redux/slices/appSlice";
 const { HiLocationMarker, RiCrop2Line, TbReportMoney, BsStopwatch, RiHashtag } =
   icons;
 
 const DetailPage = () => {
   const { postId } = useParams();
   const [detailPost, setDetailPost] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // console.log(postId);
+  console.log(detailPost);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -28,6 +34,17 @@ const DetailPage = () => {
 
   // console.log(Object.values(detailPost?.user)?.some((item) => item !== null));
 
+  const handleFilter = () => {
+    const titleSearch = `Tìm kiếm tin đăng theo chuyên mục ${detailPost?.labelData?.value}`;
+
+    dispatch(searchTitle(titleSearch));
+    navigate({
+      pathname: `/${path.TIM_KIEM}`,
+      search: createSearchParams({
+        labelCode: detailPost?.labelData?.code,
+      }).toString(),
+    });
+  };
   return (
     <div className="w-full flex gap-4 my-10 ">
       <div className="w-[70%] shadow-md rounded-md ">
@@ -40,8 +57,11 @@ const DetailPage = () => {
           </h2>
           <div className="flex gap-2">
             <span>Chuyên mục:</span>
-            <span className="text-blue-600 underline font-medium cursor-pointer hover:text-orange-600">
-              {detailPost?.overviews?.area}
+            <span
+              className="text-blue-600 underline font-medium cursor-pointer hover:text-orange-600"
+              onClick={handleFilter}
+            >
+              {detailPost?.labelData?.value}
             </span>
           </div>
           <div className="flex gap-2 items-center">

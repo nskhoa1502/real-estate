@@ -143,6 +143,11 @@ export const getOnePostService = async (postId) => {
           as: "overviews",
           // attributes: ["name", "zalo", "phone"],
         },
+        {
+          model: db.Label,
+          as: "labelData",
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        },
       ],
     });
 

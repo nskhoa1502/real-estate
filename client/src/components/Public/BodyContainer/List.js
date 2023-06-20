@@ -21,6 +21,8 @@ const List = ({ category }) => {
   const provinceCode = params.get("provinceCode") || null;
   const areaNumber = params.getAll("areaNumber") || null;
   const priceNumber = params.getAll("priceNumber") || null;
+  const labelCode = params.get("labelCode") || null;
+  console.log(labelCode);
 
   // console.log(`page `, pageNumber);
   // console.log(`area code `, areaCode);
@@ -37,6 +39,7 @@ const List = ({ category }) => {
       priceCode,
       areaNumber,
       priceNumber,
+      labelCode,
     };
     if (categoryCode !== "null") {
       filterOptions.categoryCode = categoryCode;
@@ -56,9 +59,10 @@ const List = ({ category }) => {
       priceNumber.length > 0 ||
       areaCode ||
       priceCode ||
-      provinceCode
+      provinceCode ||
+      labelCode
     ) {
-      console.log(filterOptions);
+      // console.log(filterOptions);
       dispatch(getPostsFilter(filterOptions));
     } else {
       if (sort === 0) {
@@ -80,6 +84,7 @@ const List = ({ category }) => {
     areaCode,
     priceCode,
     sort,
+    labelCode,
   ]);
 
   return (

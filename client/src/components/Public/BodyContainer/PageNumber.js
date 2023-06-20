@@ -19,6 +19,7 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
   const priceCode = params.getAll("priceCode");
   const provinceCode = params.get("provinceCode");
   const categoryCode = params.get("categoryCode");
+  const labelCode = params.get("labelCode");
   const priceNumber = params.getAll("priceNumber");
   const areaNumber = params.getAll("areaNumber");
 
@@ -36,6 +37,7 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
           priceNumber.length > 0 && { priceNumber: priceNumber }) ||
           []),
         ...((provinceCode && { provinceCode: provinceCode }) || []),
+        ...((labelCode && { labelCode: labelCode }) || []),
         ...((categoryCode && { categoryCode: categoryCode }) || []),
         ...additionalParams,
       };

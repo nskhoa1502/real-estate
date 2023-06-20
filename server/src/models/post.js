@@ -32,6 +32,12 @@ module.exports = (sequelize, DataTypes) => {
         as: "user",
         onDelete: "CASCADE",
       });
+      Post.belongsTo(models.Label, {
+        foreignKey: "labelCode",
+        targetKey: "code",
+        as: "labelData",
+        onDelete: "CASCADE",
+      });
     }
   }
   Post.init(

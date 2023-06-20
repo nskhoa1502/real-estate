@@ -4,7 +4,12 @@ import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
 // import { getPostsFilter } from "../../../../redux/slices/postSlice";
-import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
+import {
+  useNavigate,
+  createSearchParams,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import { path } from "../../../../utils/path/path";
 import { searchTitle } from "../../../../redux/slices/appSlice";
 
@@ -30,7 +35,11 @@ const Search = () => {
   // const [arrMinMax, setArrMinMax] = useState([]);
   const dispatch = useDispatch();
   const location = useLocation();
+  // console.log(location?.state);
   const prevPathRef = useRef();
+  const [params, setParams] = useSearchParams();
+  // const labelCode = params.get("labelCode") || null;
+  // console.log(labelCode);
   // console.log(prices);
   // console.log(areas);
   // console.log(transformObj(prices));
@@ -48,6 +57,7 @@ const Search = () => {
 
   const [filterQueries, setFilterQueries] = useState({
     page: 1,
+    // labelCode: labelCode ? labelCode : null,
   });
 
   // console.log(filterQueries);

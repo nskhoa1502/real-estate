@@ -11,6 +11,8 @@ import {
   BsChevronRight,
   BsFillBookmarkStarFill,
   BsCameraFill,
+  BsDot,
+  BsFillTelephoneFill,
 } from "react-icons/bs";
 import { GrLocation, GrNext, GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import {
@@ -27,6 +29,7 @@ import { BsFilePost, BsStopwatch } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { HiOutlineLocationMarker, HiLocationMarker } from "react-icons/hi";
+import { SiZalo } from "react-icons/si";
 
 const icons = {
   AiOutlinePlusCircle,
@@ -35,7 +38,9 @@ const icons = {
   HiOutlineLocationMarker,
   AiOutlineHeart,
   HiLocationMarker,
+  BsDot,
   BsChevronRight,
+  BsFillTelephoneFill,
   GrLocation,
   BsStopwatch,
   RiHashtag,
@@ -59,6 +64,7 @@ const icons = {
   BsCameraFill,
   RiDeleteBin5Line,
   RiDeleteBack2Line,
+  SiZalo,
 };
 
 export default icons;

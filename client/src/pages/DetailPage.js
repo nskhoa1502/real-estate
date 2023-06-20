@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { apiGetPostDetail } from "../redux/services/postService";
 import ImageSlider from "../UI/ImageSlider";
 import icons from "../utils/icon/icons";
-import { Map } from "../components/Public";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { Map, BoxInfo, RelatedPost } from "../components/Public";
+import { mapDetail } from "../utils/constant/constant";
 const { HiLocationMarker, RiCrop2Line, TbReportMoney, BsStopwatch, RiHashtag } =
   icons;
 
@@ -12,8 +12,6 @@ const DetailPage = () => {
   const { postId } = useParams();
   const [detailPost, setDetailPost] = useState(null);
   // console.log(postId);
-
-  const [coords, setCoords] = useState(null);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -27,32 +25,6 @@ const DetailPage = () => {
     };
     fetchDetail();
   }, [postId]);
-
-  useEffect(() => {
-    // navigator.geolocation.getCurrentPosition(({ coords }) => {
-    //   const { latitude, longitude } = coords;
-    //   setCoords({ lat: latitude, lng: longitude });
-    // });
-    const getPostCoords = async () => {
-      const formattedAddress = detailPost?.address.includes(":")
-        ? detailPost?.address.split(":")[1].trim()
-        : detailPost?.address;
-      // console.log(formattedAddress);
-      try {
-        const results = await geocodeByAddress(formattedAddress);
-        // console.log(results);
-        const { lat, lng } = await getLatLng(results[0]);
-        console.log("Successfully got latitude and longitude", { lat, lng });
-        setCoords({ lat, lng });
-      } catch (error) {
-        console.error(
-          "Error occurred while getting latitude and longitude",
-          error
-        );
-      }
-    };
-    detailPost && getPostCoords();
-  }, [detailPost]);
 
   // console.log(Object.values(detailPost?.user)?.some((item) => item !== null));
 
@@ -175,11 +147,22 @@ const DetailPage = () => {
             )}
           <div className="mt-5">
             <h3 className="font-semibold text-xl">Bản đồ</h3>
-            <Map address={detailPost?.address} coords={coords} />
+            <Map address={detailPost?.address} />
+            <span className="text-gray-500 text-sm py-4 text-justify">
+              {mapDetail[0]}
+            </span>
+            <span className="text-gray-500 text-sm py-4 text-justify italic">{`"${detailPost?.address} - Mã tin: #${detailPost?.attributes?.hashtag}"`}</span>
+            <span className="text-gray-500 text-sm py-4 text-justify">
+              {mapDetail[1]}
+            </span>
           </div>
         </div>
       </div>
-      <div className="w-[30%]"></div>
+      <div className="w-[30%] flex flex-col gap-5">
+        <BoxInfo userData={detailPost?.user} />
+        <RelatedPost />
+        <RelatedPost newPost />
+      </div>
     </div>
   );
 };

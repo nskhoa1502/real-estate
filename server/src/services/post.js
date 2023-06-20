@@ -153,11 +153,13 @@ export const getOnePostService = async (postId) => {
   }
 };
 
-export const getNewPostService = async (pageNumber) => {
+export const getNewPostService = async (pageNumber, popularSort) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
-    // console.log(query);
+    console.log(popularSort);
+    const order = popularSort || ["createdAt", "DESC"];
+    console.log("service", order);
 
     const response = await db.Post.findAll({
       raw: true,
@@ -171,7 +173,7 @@ export const getNewPostService = async (pageNumber) => {
           attributes: ["price"],
         },
       ],
-      order: [["createdAt", "DESC"]],
+      order: [order],
       offset: 0,
 
       limit: limit,
@@ -276,7 +278,7 @@ export const getPostsAdminService = async (pageNumber, query, id) => {
   try {
     const offset = pageNumber === 1 ? 0 : pageNumber - 1;
     const limit = +process.env.LIMIT;
-    // console.log(query);
+    console.log(query);
 
     const queries = { ...query, userId: id };
 

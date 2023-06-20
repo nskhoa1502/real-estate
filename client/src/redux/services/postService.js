@@ -45,7 +45,7 @@ export const apiGetPostDetail = async (postId) => {
   try {
     const response = await axiosConfig({
       method: "get",
-      url: `/api/v1/post/${postId}`,
+      url: `/api/v1/post/post-detail/${postId}`,
     });
     // console.log(response.data);
     // console.log(query);
@@ -60,6 +60,20 @@ export const apiGetNewPosts = async () => {
     const response = await axiosConfig({
       method: "get",
       url: `/api/v1/post/new-post`,
+    });
+    // console.log(response.data);
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+export const apiGetPopularPosts = async (query) => {
+  try {
+    const response = await axiosConfig({
+      method: "get",
+      url: `/api/v1/post/new-post`,
+      params: query,
     });
     // console.log(response.data);
 

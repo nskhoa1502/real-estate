@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   apiGetNewPosts,
+  apiGetPopularPosts,
   apiGetPostsAdmin,
   apiGetPostsFilter,
   apiGetPostsLimit,
@@ -39,6 +40,17 @@ export const getNewPosts = createAsyncThunk(
     }
   }
 );
+export const getPopularPost = createAsyncThunk(
+  "post/popular-post",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await apiGetPopularPosts(payload);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const getPostsFilter = createAsyncThunk(
   "post/filter",
@@ -65,6 +77,7 @@ export const getPostsAdmin = createAsyncThunk(
 const initialState = {
   posts: [],
   currentUserPosts: [],
+  popularPosts: [],
   currentUserPostsCount: 0,
   editPost: {},
   count: 0,
@@ -118,6 +131,19 @@ const postSlice = createSlice({
       })
       .addCase(getNewPosts.rejected, (state, action) => {
         state.newPosts = [];
+        state.error = action.payload;
+        state.message = null;
+      })
+      .addCase(getPopularPost.fulfilled, (state, action) => {
+        // state.posts = action.payload.rows;
+        // state.count = action.payload.count;
+        // state.totalPage = Math.ceil(+action.payload.count / state.postPerPage);
+        // state.error = null;
+        state.popularPosts = action.payload;
+        state.message = "Get popular posts successfully";
+      })
+      .addCase(getPopularPost.rejected, (state, action) => {
+        state.popularPosts = [];
         state.error = action.payload;
         state.message = null;
       })

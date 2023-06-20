@@ -13,6 +13,7 @@ module.exports = {
         "overlay-30": "rgba(0,0,0,0.3)",
         "overlay-50": "rgba(0,0,0,0.5)",
         "overlay-70": "rgba(0,0,0,0.7)",
+        redOverlay: "rgba(223,68,68,0.2)",
       },
       maxWidth: {
         600: "600px",

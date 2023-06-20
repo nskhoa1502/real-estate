@@ -9,6 +9,7 @@ export { default as List } from "./BodyContainer/List";
 export { default as Item } from "./BodyContainer/Item";
 export { default as Pagination } from "./BodyContainer/Pagination";
 export { default as ContactForm } from "./BodyContainer/ContactForm";
+export { default as BoxInfo } from "./BodyContainer/BoxInfo";
 export { default as ItemSidebar } from "./SidebarContainer/ItemSidebar";
 export { default as RelatedPost } from "./SidebarContainer/RelatedPost";
 export { default as RelatedItem } from "./SidebarContainer/RelatedItem";

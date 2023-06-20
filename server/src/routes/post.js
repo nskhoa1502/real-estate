@@ -11,13 +11,13 @@ router.get("/limit", postController.getPostsLimit);
 router.get("/filter", postController.getPostsFilterLimit);
 
 router.get("/new-post", postController.getNewPosts);
-router.get("/:postId", postController.getOnePost);
+router.get("/post-detail/:postId", postController.getOnePost);
 
 router.use(verifyToken);
 
+router.get("/post-admin", postController.getPostsAdmin);
 router.post("/create-new", postController.createNewPost);
 router.put("/update", postController.updatePost);
 router.delete("/delete", postController.deletePost);
-router.get("/post-admin", postController.getPostsAdmin);
 
 export default router;

@@ -15,12 +15,13 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { validateFields } from "../../../../utils/helper-function/validateField";
 import { setEditPost } from "../../../../redux/slices/postSlice";
+import Map from "../../../Public/BodyContainer/Map";
+import { attention } from "../../../../utils/constant/constant";
 
 const { BsCameraFill, RiDeleteBack2Line } = icons;
 
 const CreatePost = ({ isEdit, setIsEdit }) => {
   const { editPost } = useSelector((state) => state.post);
-  // console.log(editPost);
 
   const [payload, setPayload] = useState(() => {
     let formData = {
@@ -295,9 +296,22 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
             />
           </div>
         </div>
-        <div className="w-[30%] flex-none">Bản đồ</div>
+        <div className="w-[30%] flex-none mt-10">
+          <Map address={payload?.address} />
+          <div className="mt-5 bg-orange-100 text-orange-900 rounded-md p-4">
+            <h4 className="mb-4 text-xl font-medium">Lưu ý tin đăng:</h4>
+            <ul className="text-justify">
+              {attention.map((item, index) => {
+                return (
+                  <li key={index} className="text-sm  list-disc list-inside">
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
-      <div className="h-[500px]"></div>
     </div>
   );
 };

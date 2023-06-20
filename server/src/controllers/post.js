@@ -64,8 +64,13 @@ export const getPostsAdmin = async (req, res, next) => {
 };
 
 export const getNewPosts = async (req, res, next) => {
+  const popularSort = req.query?.order || null;
+  console.log(popularSort);
   try {
-    const { response, message } = await service.getNewPostService();
+    const { response, message } = await service.getNewPostService(
+      1,
+      popularSort
+    );
     // console.log(message);
     return res.status(200).json(response);
   } catch (err) {

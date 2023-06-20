@@ -19,8 +19,8 @@ const Map = ({ address }) => {
 
   useEffect(() => {
     const getPostCoords = async () => {
-      const formattedAddress = address.includes(":")
-        ? address.split(":")[1].trim()
+      const formattedAddress = address?.includes(":")
+        ? address?.split(":")[1].trim()
         : address;
       // console.log(formattedAddress);
       try {

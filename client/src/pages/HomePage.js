@@ -14,7 +14,9 @@ const HomePage = () => {
   return (
     <div className=" m-auto min-w-[1100px] border  flex flex-col items-center relative ">
       <Header />
-      <Navigation />
+      <div className="w-full sticky top-0 z-50">
+        <Navigation />
+      </div>
 
       {isLoggedIn &&
         location.pathname !== `/${path.LIEN_HE}` &&

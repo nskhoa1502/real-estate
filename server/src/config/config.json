@@ -1,25 +1,37 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "real-estate",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "nskhoa1502",
+    "password": "2Mog3bpWsrfFbthqNirm4FILhPw1mtsY",
+    "database": "phongtro123_g1tl",
+    "host": "dpg-cibv4qp5rnuk9qagjvh0-a.singapore-postgres.render.com",
+    "dialect": "postgres",
     "logging": false,
-    "timezone": "+07:00"
+    "timezone": "+07:00",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "nskhoa1502",
+    "password": "2Mog3bpWsrfFbthqNirm4FILhPw1mtsY",
+    "database": "phongtro123_g1tl",
+    "host": "dpg-cibv4qp5rnuk9qagjvh0-a.singapore-postgres.render.com",
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "nskhoa1502",
+    "password": "2Mog3bpWsrfFbthqNirm4FILhPw1mtsY",
+    "database": "phongtro123_g1tl",
+    "host": "dpg-cibv4qp5rnuk9qagjvh0-a.singapore-postgres.render.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

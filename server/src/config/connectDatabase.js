@@ -1,10 +1,17 @@
 const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-const sequelize = new Sequelize("real-estate", "root", null, {
-  host: "localhost",
-  dialect: "mysql",
-  logging: false,
-});
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+  {
+    host: "dpg-cibv4qp5rnuk9qagjvh0-a.singapore-postgres.render.com",
+    dialect: "postgres",
+    logging: false,
+    dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
+  }
+);
 
 const connectDatabase = async () => {
   try {

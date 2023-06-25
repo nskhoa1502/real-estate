@@ -3,7 +3,7 @@ import React, { memo } from "react";
 const SearchItem = ({ IconBefore, IconAfter, text, bold, filterText }) => {
   return (
     <>
-      <div className="bg-white py-2 px-4 w-full rounded-md text-gray-500  max-[882px]:text-[8px] max-[1279px]:text-[10px] max-[1280px]:text-sm flex justify-between gap-2 items-center">
+      <div className="bg-white py-2 px-4 w-full rounded-md text-gray-500    flex justify-between gap-2 items-center text-ellipsis whitespace-nowrap overflow-hidden">
         <div className="flex items-center justify-start gap-1">
           {IconBefore}
           <span

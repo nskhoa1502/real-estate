@@ -22,7 +22,7 @@ const app = express();
 // middlewares
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "https://khoa-phongtro.netlify.app/",
     methods: ["POST", "GET", "PUT", "DELETE"],
   })
 );

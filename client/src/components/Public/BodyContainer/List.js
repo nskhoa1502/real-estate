@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../../../UI";
 import { Item } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "../../../redux/slices/postSlice";
@@ -14,7 +13,7 @@ import {
 const List = ({ category }) => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.post);
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,15 +28,6 @@ const List = ({ category }) => {
   const areaNumber = params.getAll("areaNumber") || null;
   const priceNumber = params.getAll("priceNumber") || null;
   const labelCode = params.get("labelCode") || null;
-  // console.log(labelCode);
-
-  // console.log(`page `, pageNumber);
-  // console.log(`area code `, areaCode);
-  // console.log(`price code `, priceCode);
-  // console.log(`category code `, categoryCode);
-  // console.log(`province code `, provinceCode);
-  // console.log(`areaNumber `, areaNumber);
-  // console.log(`priceNumber `, priceNumber);
 
   let filterOptions = {
     page: +pageNumber,

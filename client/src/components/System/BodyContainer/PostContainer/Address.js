@@ -116,10 +116,6 @@ const Address = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
     !district && setWards([]);
   }, [district]);
 
-  //   console.log(`province`, province);
-  //   console.log(`district`, district);
-  //   console.log(`ward`, ward);
-
   const exactAddress = `${
     ward ? `${wards.find((item) => item.ward_id === ward)?.ward_name},` : ""
   } ${

@@ -56,6 +56,7 @@ const PageNumber = ({ number, currentPage, type, endpage, category }) => {
       location?.pathname,
       areaNumber,
       priceNumber,
+      labelCode,
     ]
   );
 

@@ -76,7 +76,7 @@ const CreatePost = ({ isEdit, setIsEdit }) => {
       // dispatch(setEditPost({}));
       setImagesPreview([]);
     }
-  }, [editPost]);
+  }, [editPost, isEdit]);
 
   useEffect(() => {
     if (!isEdit) {

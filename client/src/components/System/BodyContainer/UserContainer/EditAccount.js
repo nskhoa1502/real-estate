@@ -5,7 +5,6 @@ import anon_avatar from "../../../../assets/anon_avatar.png";
 import { Button } from "../../../../UI";
 import { useDispatch, useSelector } from "react-redux";
 import { extractNumbersFromId } from "../../../../utils/helper-function/extractNumberId";
-import { apiUploadImages } from "../../../../redux/services/postService";
 import Loading from "../../../../UI/Loading";
 import { apiUpdateUser } from "../../../../redux/services/userService";
 import Swal from "sweetalert2";
@@ -14,12 +13,10 @@ import {
   fileToBase64,
 } from "../../../../utils/helper-function/base64";
 import { getCurrentUser } from "../../../../redux/slices/authSlice";
-// import { validateFields } from "../../../../utils/helper-function/validateField";
 
 const EditAccount = () => {
-  const [invalidFields, setInvalidFields] = useState([]);
   const { currentData } = useSelector((state) => state.auth);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   //   console.log(currentData);
   const [payload, setPayload] = useState({
     name: currentData?.name || "",
@@ -38,9 +35,6 @@ const EditAccount = () => {
           dispatch(getCurrentUser());
         }
       );
-      // getCurrentUser(getCurrentUser());
-
-      // console.log(response);
     } catch (err) {
       Swal.fire({
         icon: "error",
@@ -54,35 +48,8 @@ const EditAccount = () => {
   const handleUploadFile = async (e) => {
     const image = e?.target?.files[0];
     const imageBase64 = await fileToBase64(image);
-    // console.log(imageBase64);
 
     setPayload((prev) => ({ ...prev, avatar: imageBase64 }));
-    // e.stopPropagation();
-    // setIsLoading(true);
-
-    // try {
-    //   let formData = new FormData();
-    //   formData.append("file", image);
-    //   formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
-
-    //   const response = await apiUploadImages(formData);
-    //   //   console.log(response);
-    //   setPayload((prev) => ({
-    //     ...prev,
-    //     avatar: response?.secure_url,
-    //   }));
-    //   setIsLoading(false);
-
-    //   // console.log(images);
-    //   //   setImagesPreview((prev) => [...prev, ...images]);
-
-    //   //   setPayload((prev) => ({
-    //   //     ...prev,
-    //   //     images: [...payload?.images, ...images],
-    //   //   }));
-    // } catch (err) {
-    //   throw err;
-    // }
   };
   return (
     <div className="flex flex-col items-center h-full">
@@ -105,8 +72,6 @@ const EditAccount = () => {
           />
           <InputForm
             label={"Tên hiển thị"}
-            // invalidFields={invalidFields}
-            // setInvalidFields={setInvalidFields}
             flexDirection={`flex-row`}
             value={payload?.name}
             setValue={setPayload}
@@ -115,8 +80,6 @@ const EditAccount = () => {
 
           <InputForm
             label={"Zalo"}
-            // invalidFields={invalidFields}
-            // setInvalidFields={setInvalidFields}
             flexDirection={`flex-row`}
             value={payload?.zalo}
             setValue={setPayload}
@@ -124,8 +87,6 @@ const EditAccount = () => {
           />
           <InputForm
             label={"Facebook"}
-            // invalidFields={invalidFields}
-            // setInvalidFields={setInvalidFields}
             flexDirection={`flex-row`}
             value={payload?.fbUrl}
             setValue={setPayload}
@@ -158,14 +119,6 @@ const EditAccount = () => {
                 id="avatar"
                 className="my-4"
               />
-              {/* {invalidFields?.some((item) => item.name === "avatar") && (
-                <span className="text-red-500 block">
-                  {
-                    invalidFields?.find((item) => item?.name === "avatar")
-                      ?.message
-                  }
-                </span>
-              )} */}
             </div>
           </div>
           <Button

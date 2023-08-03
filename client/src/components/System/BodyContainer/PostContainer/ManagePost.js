@@ -63,7 +63,7 @@ const ManagePost = () => {
 
   const deletePost = async (postId) => {
     try {
-      const response = await apiDeletePost(postId);
+      await apiDeletePost(postId);
       setUpdateData((prev) => !prev);
       // console.log(response.data);
       Swal.fire("Xóa thành công!", "Bài đăng đã được xóa.", "success");

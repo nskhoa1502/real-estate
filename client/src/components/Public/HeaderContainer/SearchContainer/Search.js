@@ -4,12 +4,7 @@ import icons from "../../../../utils/icon/icons";
 import SearchModal from "./SearchModal";
 import { useDispatch, useSelector } from "react-redux";
 // import { getPostsFilter } from "../../../../redux/slices/postSlice";
-import {
-  useNavigate,
-  createSearchParams,
-  useLocation,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
 import { path } from "../../../../utils/path/path";
 import { searchTitle } from "../../../../redux/slices/appSlice";
 
@@ -32,21 +27,9 @@ const Search = () => {
   const [arrMinMax, setArrMinMax] = useState([]);
   const [defaultText, setDefaultText] = useState("");
   const navigate = useNavigate();
-  // const [arrMinMax, setArrMinMax] = useState([]);
   const dispatch = useDispatch();
   const location = useLocation();
-  // console.log(location?.state);
   const prevPathRef = useRef();
-  const [params, setParams] = useSearchParams();
-  // const labelCode = params.get("labelCode") || null;
-  // console.log(labelCode);
-  // console.log(prices);
-  // console.log(areas);
-  // console.log(transformObj(prices));
-  // console.log(transformObj(areas));
-
-  // console.log(getCode([6.5, 14.5], prices));
-  // console.log(getCode([35, 75], areas));
 
   const [filterText, setFilterText] = useState({
     category: "",
@@ -57,14 +40,7 @@ const Search = () => {
 
   const [filterQueries, setFilterQueries] = useState({
     page: 1,
-    // labelCode: labelCode ? labelCode : null,
   });
-
-  // console.log(filterQueries);
-  // console.log(filterText);
-
-  // console.log(getCode(filterQueries?.priceCode, prices));
-  // console.log(getCode(filterQueries?.areaCode, areas));
 
   const handleShowModal = (content, name, defaultText) => {
     setContent(content);
@@ -82,29 +58,19 @@ const Search = () => {
       filterText.area ? `với diện tích ${filterText.area.toLowerCase()}` : ""
     }`;
 
-    // console.log(filterText);
-    // console.log(filterQueries);
-
     dispatch(searchTitle(titleSearch));
 
-    navigate(
-      {
-        pathname: path.TIM_KIEM,
-        search: createSearchParams(filterQueries).toString(),
-      }
-      // { state: { titleSearch: titleSearch } }
-    );
+    navigate({
+      pathname: path.TIM_KIEM,
+      search: createSearchParams(filterQueries).toString(),
+    });
   };
 
   useEffect(() => {
-    // console.log("Current path: ", location.pathname);
-    // console.log("Previous path: ", prevPathRef.current);
-    // console.log(path.TIM_KIEM);
     if (
       location.pathname !== `/${path.TIM_KIEM}` &&
       prevPathRef.current === `/${path.TIM_KIEM}`
     ) {
-      // console.log("Resetting filters...");
       setArrMinMax([]);
       setFilterText({ category: "", province: "", area: "", price: "" });
       setFilterQueries({ page: 1 });
@@ -114,7 +80,6 @@ const Search = () => {
 
   return (
     <div className="h-[55px] border border-red-500 p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2 w-[1100px] my-2 ">
-      {/* <SearchModalHeader setIsShowModal={setIsShowModal} /> */}
       <span
         onClick={() => handleShowModal(categories, `category`, "Tìm tất cả")}
         className="flex-1 cursor-pointer"

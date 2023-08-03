@@ -22,6 +22,13 @@ const HomePage = () => {
         location.pathname !== `/${path.LIEN_HE}` &&
         !location.pathname?.includes(`${path.CHI_TIET}`) && <Search />}
       <div className="w-[1100px]  min-w-[1100px] flex flex-col items-start justify-start ">
+        <p className="text-[32px] text-red-500">
+          Trang web lập ra với mục đích học tập, không thương mại
+        </p>
+        <p className="text-[28px] text-blue-500">
+          Đăng nhập để có thể sử dụng Search, quản lý bài đăng: phone|pass :
+          123456789|123456789
+        </p>
         <Outlet />
       </div>
       <div className=" w-[1100px] flex flex-col gap-5">

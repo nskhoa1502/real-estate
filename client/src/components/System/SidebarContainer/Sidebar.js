@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import anon_avatar from "../../../assets/anon_avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { extractNumbersFromId } from "../../../utils/helper-function/extractNumberId";
@@ -18,6 +18,17 @@ const { RiLogoutBoxRLine } = icons;
 const Sidebar = () => {
   const { currentData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [avatarBase64, setAvatarBase64] = useState("");
+
+  useEffect(() => {
+    if (currentData?.avatar) {
+      const convertAvatarToBase64 = async () => {
+        const base64 = await blobToBase64(currentData?.avatar);
+        setAvatarBase64(base64);
+      };
+      convertAvatarToBase64();
+    }
+  }, [currentData?.avatar]);
 
   const handleLogout = async () => {
     dispatch(logout());
@@ -28,7 +39,7 @@ const Sidebar = () => {
       <div className="flex  flex-col gap-4">
         <div className="flex items-center gap-3">
           <img
-            src={blobToBase64(currentData?.avatar) || anon_avatar}
+            src={avatarBase64 || anon_avatar}
             alt="avatar"
             className="w-12 h-12 object-cover rounded-full border-2 border-white items-center"
           />

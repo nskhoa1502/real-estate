@@ -1,22 +1,25 @@
 # Real Estate Marketplace
 
-## Description
+## Project Description
 
-This project is a real estate marketplace built using ReactJS, ExpressJS, and MySQL database. It serves as a platform where real estate agents or sellers can post their listings to sell properties. The website offers the following features:
+Welcome to our real estate marketplace website written in ReactJS, ExpressJS, and a MySQL database. This platform serves as an avenue where real estate agents or sellers can seamlessly post their property listings for potential buyers. The website encompasses an array of exceptional features, including:
 
-1. Efficient real estate filtering based on location, price, and acreage.
-2. A comprehensive post management system.
+1. **Efficient Real Estate Filtering:** Experience streamlined property searches through intelligent filters based on location, price, and acreage.
+2. **Comprehensive Post Management System:** Empower sellers with a sophisticated system to manage and update their property listings.
 
-## Technologies
+## Technology Stack
 
-- React
-- Node.js
-- MySQL with Sequelize ORM
+Our platform harnesses the power of cutting-edge technologies to ensure an immersive user experience and robust functionality:
 
-## Demo
+- **React:** Enabling an interactive and intuitive front-end interface.
+- **Node.js:** Driving the backend operations for seamless server-side processes.
+- **MySQL with Sequelize ORM:** Ensuring a secure and efficient database management system.
 
-Visit the live demo of the Real Estate Marketplace at:
+## Live Demo
+
+Please make sure to visit Real Estate Marketplace demo at:
 
 [https://khoa-phongtro.netlify.app/](https://khoa-phongtro.netlify.app/)
 
-We need to initiate a server bootup, which may take approximately one minute. Please expect a brief waiting period while the server starts up. This is because the server is free and requires initialization to ensure smooth operation.
+Please allow for approximately one minute for the server initialization process during the initial bootup. This brief waiting period ensures optimal performance, as we utilize a meticulously configured free server.
+

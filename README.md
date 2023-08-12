@@ -9,8 +9,6 @@ Welcome to our real estate marketplace website written in ReactJS, ExpressJS, an
 
 ## Technology Stack
 
-Our platform harnesses the power of cutting-edge technologies to ensure an immersive user experience and robust functionality:
-
 - **React:** Enabling an interactive and intuitive front-end interface.
 - **Node.js:** Driving the backend operations for seamless server-side processes.
 - **MySQL with Sequelize ORM:** Ensuring a secure and efficient database management system.

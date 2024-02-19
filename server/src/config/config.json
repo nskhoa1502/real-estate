@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "nskhoa1502",
-    "password": "NJ33VxqiOhgBoxdJtwrBgBhwDrLMU1qU",
-    "database": "phongtro123_8lym",
-    "host": "dpg-ckbupimct0pc738hg3b0-a.singapore-postgres.render.com",
+    "username": "phongtro123_f5ax_user",
+    "password": "qufTauVSoJNtcyf3hon5qQny5uj3PPGg",
+    "database": "phongtro123_f5ax",
+    "host": "dpg-cn9k7p6n7f5s73fnahv0-a.singapore-postgres.render.com",
     "dialect": "postgres",
     "logging": false,
     "timezone": "+07:00",
@@ -15,17 +15,17 @@
     }
   },
   "test": {
-    "username": "nskhoa1502",
-    "password": "NJ33VxqiOhgBoxdJtwrBgBhwDrLMU1qU",
-    "database": "phongtro123_8lym",
-    "host": "dpg-ckbupimct0pc738hg3b0-a.singapore-postgres.render.com",
+    "username": "phongtro123_f5ax_user",
+    "password": "qufTauVSoJNtcyf3hon5qQny5uj3PPGg",
+    "database": "phongtro123_f5ax",
+    "host": "dpg-cn9k7p6n7f5s73fnahv0-a.singapore-postgres.render.com",
     "dialect": "postgres"
   },
   "production": {
-    "username": "nskhoa1502",
-    "password": "NJ33VxqiOhgBoxdJtwrBgBhwDrLMU1qU",
-    "database": "phongtro123_8lym",
-    "host": "dpg-ckbupimct0pc738hg3b0-a.singapore-postgres.render.com",
+    "username": "phongtro123_f5ax_user",
+    "password": "qufTauVSoJNtcyf3hon5qQny5uj3PPGg",
+    "database": "phongtro123_f5ax",
+    "host": "dpg-cn9k7p6n7f5s73fnahv0-a.singapore-postgres.render.com",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
